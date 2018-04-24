@@ -1,2 +1,7 @@
 /Sprite.class
 /Tile.class
+/Moveable.class
+/Static.class
+/UnMoveable.class
+/Game.class
+/Level.class
