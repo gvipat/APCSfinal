@@ -2,18 +2,26 @@ import java.awt.Color;
 
 public class Engine
 {
-    Color[][] level;
+    Color[][] stage;
     
     private int camera;
     
     private boolean LEVEL_COMPLETE = true;
     
+    private final int WINDOW_WIDTH = 800;
+    
+    private final int WINDOW_HEIGHT = 600;
+    
     private final int FPS = 60;
+    
+    Picture image = new Picture(WINDOW_HEIGHT, WINDOW_HEIGHT);
+    
+    PictureFrame frame = new PictureFrame(image);
     
     public Engine(Sprite[] sprites)
     {
         camera = 0;
-        level = new Color[600][/*TODO find number for level length*/];
+        stage = new Color[WINDOW_HEIGHT][/*TODO find number for level length*/];
         for (Sprite s : sprites)
         {
             addSprite(s);
@@ -41,7 +49,14 @@ public class Engine
     
     private void draw()
     {
-        
+        Color[][] onScreenImage = new Color[WINDOW_HEIGHT][WINDOW_WIDTH];
+        for (int row = 0; row < stage.length; row++)
+        {
+            for (int col = camera; col < camera + WINDOW_WIDTH; col++)
+            {
+                
+            }
+        }
     }
     
     private void pause(long time)
