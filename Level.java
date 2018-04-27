@@ -2,7 +2,7 @@
 public class Level
 {
     private static final Sprite[][] sprites = {};
-    private static int level = 0;
+    public static int level = 0;
     
     public Level()
     {
