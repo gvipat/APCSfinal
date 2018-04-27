@@ -19,7 +19,7 @@ public class Window extends JFrame
         super.add( label );
     }
     
-    public void updaeImage(Color[][] pixels)
+    public void updateImage(Color[][] pixels)
     {
         image.setImage( new Image() );
     }
