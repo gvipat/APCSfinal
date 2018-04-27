@@ -21,7 +21,7 @@ public class Window extends JFrame
     
     public void updateImage(Color[][] pixels)
     {
-        image.setImage( new Image() );
+        //image.setImage( new Image() );
     }
     
     
