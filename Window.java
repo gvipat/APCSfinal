@@ -8,6 +8,12 @@ public class Window extends JPanel
     {
         super.setSize( width, height );
         super.setVisible( true );
+        super.add( label );
+    }
+    
+    public void updaeImage(Color[][] pixels)
+    {
+        //image.setImage( new Image() );
     }
     
     
