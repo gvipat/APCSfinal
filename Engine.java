@@ -54,7 +54,7 @@ public class Engine
         {
             for (int col = camera; col < camera + WINDOW_WIDTH; col++)
             {
-                
+                //send draw message
             }
         }
     }
