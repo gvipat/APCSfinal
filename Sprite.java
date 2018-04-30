@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public abstract class Sprite
+public abstract class Sprite implements Comparable
 {
     private int xPos;
     
@@ -11,6 +11,8 @@ public abstract class Sprite
     private int height;
     
     private Color color;
+
+    public int compareValue = 0;
     
     public int getX() {return xPos;}
     
@@ -29,5 +31,10 @@ public abstract class Sprite
         this.width = width;
         this.height = height;
         this.color = color;
+    }
+
+    public int compareTo(Sprite other)
+    {
+        return compareValue - other.compareValue;
     }
 }
