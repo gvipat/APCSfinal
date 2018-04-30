@@ -1,27 +1,34 @@
-import java.awt.Color;
-import java.awt.Image;
+import java.awt.*;
+import java.util.PriorityQueue;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+public class Window extends JPanel
+{        
+    private PriorityQueue<Sprite> sprites;
+    private JFrame frame;
 
-public class Window extends JFrame
-{    
-    private ImageIcon image = new ImageIcon();
-    
-    private JLabel label = new JLabel(image);
-    
-    public Window(int height, int width)
+    public Window(int height, int width, PriorityQueue<Sprite> sprites)
     {
+        frame = new JFrame("Level " + (Level.level + 1));
+        frame.add(this);
+        frame.setSize( width + 16, height + 38 );
+        frame.setVisible(true);
+        System.out.println( super.getSize().toString() );
+        this.sprites = sprites;
         super.setSize( width, height );
-        super.setTitle( "Level " + Level.level );
+        super.setBackground(Color.BLACK);
         super.setVisible( true );
-        super.add( label );
     }
     
-    public void updaeImage(Color[][] pixels)
+    public void paintComponent(Graphics g)
     {
-        //image.setImage( new Image() );
+        super.paintComponent(g);
+        for (Sprite s : sprites)
+        {
+            g.setColor(s.getColor());
+            g.drawRect(s.getX() - Engine.camera, s.getY() - Engine.camera,
+                s.getWidth(), s.getHeight());
+        }
     }
     
     

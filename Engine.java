@@ -1,28 +1,40 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.PriorityQueue;
+
+import javax.swing.Timer;
 
 public class Engine
 {
     Color[][] stage;
     
-    private int camera;
+    public static int camera;
     
-    private boolean LEVEL_COMPLETE = true;
+    private boolean COMPLETED_LEVEL = true;
     
     private final int WINDOW_WIDTH = 800;
     
     private final int WINDOW_HEIGHT = 600;
     
     private final int FPS = 60;
+
+    private Timer timer;
+
+    private PriorityQueue<Sprite> sprites;
+    //Sprite types will override their compare value specified in the sprite class.
+    //This will allow sprites to be drawn 
+
+    private Level level;
     
-    Picture image = new Picture(WINDOW_HEIGHT, WINDOW_HEIGHT);
-    
-    PictureFrame frame = new PictureFrame(image);
-    
-    public Engine(Sprite[] sprites)
+    public Engine(Level lev)
     {
+        level = lev;
+        Sprite[] levelSprites = lev.getSprites();
+        sprites = new PriorityQueue<Sprite>(levelSprites.length);
         camera = 0;
         stage = new Color[WINDOW_HEIGHT][/*TODO find number for level length*/];
-        for (Sprite s : sprites)
+        for (Sprite s : levelSprites)
         {
             addSprite(s);
         }
@@ -30,16 +42,24 @@ public class Engine
     
     private void addSprite(Sprite sprite)
     {
-        
+        sprites.add(sprite);
     }
     
-    private void run()
+    public void run()
     {
-        while (move() != LEVEL_COMPLETE)
+        timer = new Timer(Math.round(( 1 / FPS ) * 1000), new ActionListener()
         {
-            draw();
-            pause( Math.round(( 1 / FPS ) * 1000));            
-        }
+        
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (move() != COMPLETED_LEVEL)
+                {
+                    levelComplete();
+                }
+            }
+        });
+        timer.start();
     }
     
     private boolean move()
@@ -47,29 +67,10 @@ public class Engine
         return false;
     }
     
-    private void draw()
+    private void levelComplete()
     {
-        Color[][] onScreenImage = new Color[WINDOW_HEIGHT][WINDOW_WIDTH];
-        for (int row = 0; row < stage.length; row++)
-        {
-            for (int col = camera; col < camera + WINDOW_WIDTH; col++)
-            {
-                
-            }
-        }
+        timer.stop();
+        level.nextLevel();
     }
-    
-    private void pause(long time)
-    {
-        try
-        {
-            Thread.sleep( time );
-        }
-        catch(Exception ex)
-        {
-            
-        }
-    }
-    
     
 }

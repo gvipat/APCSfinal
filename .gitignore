@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Sprite.class
 /Tile.class
 /Moveable.class
@@ -27,3 +28,19 @@
 /PictureFrame.class
 /Pixel.class
 /SimplePicture.class
+=======
+/Sprite.class
+/Tile.class
+/Moveable.class
+/Static.class
+/UnMoveable.class
+/Game.class
+/Level.class
+/Game$1.class
+/TitleAcceptedListener.class
+/TitleAccepted.class
+/TestOutput.class
+/RevisedPicture.class
+/Window.class
+/Engine$1.class
+>>>>>>> branch 'master' of https://github.com/gvipat/APCSfinal.git
