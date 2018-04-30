@@ -11,7 +11,8 @@ public class Game
     
     private static void playGame()
     {
-        
+        Level level = new Level();
+        level.play();
     }
     
     private static void openTitleScreen()
