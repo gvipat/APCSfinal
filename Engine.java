@@ -64,6 +64,16 @@ public class Engine
     
     private boolean move()
     {
+        for (Sprite s : sprites)
+        {
+            if (s instanceof Moveable)
+            {
+                if (((Moveable)s).move() == COMPLETED_LEVEL)
+                {
+                    return true;
+                }           
+            }
+        }
         return false;
     }
     

@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public abstract class Sprite implements Comparable
+public abstract class Sprite implements Comparable<Sprite>
 {
     private int xPos;
     
