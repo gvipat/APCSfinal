@@ -6,14 +6,17 @@ public class Window extends JPanel
 {        
     private PriorityQueue<Sprite> sprites;
     private JFrame frame;
+    private Engine engine;
 
-    public Window(int height, int width, PriorityQueue<Sprite> sprites)
+    public Window(int height, int width, PriorityQueue<Sprite> sprites, Engine engine)
     {
         frame = new JFrame("Level " + (Level.level + 1));
         this.setPreferredSize(new Dimension(width, height));
         super.setBackground(Color.BLACK);
         frame.add(this);
         frame.pack();
+        frame.setResizable(false);
+        super.add()
         super.setVisible( true );
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,3 +39,5 @@ public class Window extends JPanel
     
     
 }
+
+private class KeyboardInputListener extends 

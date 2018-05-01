@@ -10,6 +10,6 @@ public class PlayerSprite extends Moveable
     public boolean move()
     {
         addGravity();
-        
+        return false;
     }
 }
