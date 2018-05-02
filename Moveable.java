@@ -40,8 +40,12 @@ public abstract class Moveable extends Sprite
     {
         if (verticalVelocity < MAX_V_VELOCITY )
         {
-            verticalVelocity += 0.1;
-            System.out.println(verticalVelocity);
+            verticalVelocity += 0.05;
+            if (DecimalRounder.roundToHundreths(verticalVelocity) == 0.0)
+            {
+                verticalVelocity += 0.05;
+            }
+            verticalVelocity = DecimalRounder.roundToHundreths(verticalVelocity);
         }
     }
 }

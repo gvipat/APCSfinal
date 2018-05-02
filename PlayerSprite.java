@@ -2,6 +2,9 @@ import java.awt.Color;
 
 public class PlayerSprite extends Moveable
 {
+
+    private boolean jumpFlag = false;
+
     public PlayerSprite(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);
@@ -10,14 +13,24 @@ public class PlayerSprite extends Moveable
     public boolean move()
     {
         super.addGravity();
-        setX(getX() + getHVelocity());
-        setY(getY() + getVVelocity());
-        if (getY() > 400)
+        if (getY() + getHVelocity() > 400)
         {
             setVVelocity(0);
             setY(400);
         }
+        checkJump();
+        setX(getX() + getHVelocity());
+        setY(getY() + getVVelocity());
         return false;
+    }
+
+    private void checkJump()
+    {
+        if (jumpFlag == true && DecimalRounder.roundToHundreths(getVVelocity()) == 0.0)
+        {
+            setVVelocity(-Moveable.MAX_V_VELOCITY);
+            jumpFlag = false;
+        }
     }
 
     public void rightKeyPressed()
@@ -38,10 +51,7 @@ public class PlayerSprite extends Moveable
 
     public void upKeyPressed()
     {
-        if (getVVelocity() < 0 && getVVelocity() > -0.1)
-        {
-            setVVelocity(-Moveable.MAX_V_VELOCITY);
-        }
+        jumpFlag = true;
     }
 
     public void rightKeyReleased()
@@ -56,6 +66,9 @@ public class PlayerSprite extends Moveable
 
     public void upKeyReleased()
     {
-
+        if (jumpFlag == true && !(DecimalRounder.roundToHundreths(getVVelocity()) == 0.0))
+        {
+            jumpFlag = false;
+        }
     }
 }
