@@ -17,6 +17,10 @@ public abstract class Sprite implements Comparable<Sprite>
     public int getX() {return xPos;}
     
     public int getY() {return yPos;}
+
+    public void setX(double newX) {xPos = (int)Math.round(newX);}
+    
+    public void setY(double newY) {yPos = (int)Math.round(newY);}
     
     public int getWidth() {return width;}
     

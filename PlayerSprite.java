@@ -9,7 +9,53 @@ public class PlayerSprite extends Moveable
 
     public boolean move()
     {
-        addGravity();
+        super.addGravity();
+        setX(getX() + getHVelocity());
+        setY(getY() + getVVelocity());
+        if (getY() > 400)
+        {
+            setVVelocity(0);
+            setY(400);
+        }
         return false;
+    }
+
+    public void rightKeyPressed()
+    {
+        if (getHVelocity() < Moveable.MAX_H_VELOCITY)
+        {
+            setHVelocity(getHVelocity() + 1);
+        }
+    }
+
+    public void leftKeyPressed()
+    {
+        if (getHVelocity() > -Moveable.MAX_H_VELOCITY)
+        {
+            setHVelocity(getHVelocity() - 1);
+        }
+    }
+
+    public void upKeyPressed()
+    {
+        if (getVVelocity() == 0 && lastV == 0)
+        {
+            setVVelocity(-Moveable.MAX_V_VELOCITY);
+        }
+    }
+
+    public void rightKeyReleased()
+    {
+        setHVelocity(0);
+    }
+
+    public void leftKeyReleased()
+    {
+        setHVelocity(0);
+    }
+
+    public void upKeyReleased()
+    {
+
     }
 }

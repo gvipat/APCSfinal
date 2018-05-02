@@ -16,11 +16,13 @@ public class Engine
     
     private final int WINDOW_HEIGHT = 600;
     
-    private final int FPS = 60;
+    private final int FPS = 30;
 
     private Timer timer;
 
     private Window window;
+
+    private PlayerSprite player;
 
     private PriorityQueue<Sprite> sprites;
     //Sprite types will override their compare value specified in the sprite class.
@@ -44,6 +46,10 @@ public class Engine
     private void addSprite(Sprite sprite)
     {
         sprites.add(sprite);
+        if (sprite instanceof PlayerSprite)
+        {
+            player = (PlayerSprite)sprite;
+        }
     }
     
     public void run()
@@ -54,7 +60,7 @@ public class Engine
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (move() != COMPLETED_LEVEL)
+                if (move() == COMPLETED_LEVEL)
                 {
                     levelComplete();
                 }
@@ -72,41 +78,24 @@ public class Engine
                 if (((Moveable)s).move() == COMPLETED_LEVEL)
                 {
                     return true;
-                }           
+                }   
+                window.getFrame().repaint(); 
             }
         }
         return false;
     }
 
-    public void rightKeyPressed()
-    {
+    public void rightKeyPressed()    {player.rightKeyPressed();}
 
-    }
+    public void leftKeyPressed()    {player.leftKeyPressed();}
 
-    public void leftKeyPressed()
-    {
+    public void upKeyPressed()    {player.upKeyPressed();}
 
-    }
+    public void rightKeyReleased()    {player.rightKeyReleased();}
 
-    public void upKeyPressed()
-    {
+    public void leftKeyReleased()    {player.leftKeyReleased();}
 
-    }
-
-    public void rightKeyReleased()
-    {
-
-    }
-
-    public void leftKeyReleased()
-    {
-
-    }
-
-    public void upKeyReleased()
-    {
-
-    }
+    public void upKeyReleased()    {player.upKeyReleased();}
     
     private void levelComplete()
     {

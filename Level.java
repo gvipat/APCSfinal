@@ -1,7 +1,8 @@
+import java.awt.Color;
 
 public class Level
 {
-    private static final Sprite[][] sprites = {};
+    private static final Sprite[][] sprites = {{new PlayerSprite(5, 5, 20, 20, Color.BLUE)}};
     public static int level = 0;
     private Engine engine;
     

@@ -2,9 +2,9 @@ import java.awt.Color;
 
 public abstract class Moveable extends Sprite
 {
-    private int horizontalVelocity;
+    private double horizontalVelocity;
 
-    private int verticalVelocity;
+    private double verticalVelocity;
 
     public static final int MAX_V_VELOCITY = 5;
 
@@ -17,30 +17,31 @@ public abstract class Moveable extends Sprite
         super(x, y, width, height, color);
     }
 
-    private int getHVelocity()
+    public double getHVelocity()
     {
         return horizontalVelocity;
     }
 
-    public int getVVelocity()
+    public double getVVelocity()
     {
         return verticalVelocity;
     }
-    public void setHVelocity(int newVelocity)
+    public void setHVelocity(double newVelocity)
     {
         horizontalVelocity = newVelocity;
     }
 
-    public void setVVelocity(int newVelocity)
+    public void setVVelocity(double newVelocity)
     {
         verticalVelocity = newVelocity;
     }
 
     public void addGravity()
     {
-        if (verticalVelocity < MAX_V_VELOCITY)
+        if (verticalVelocity < MAX_V_VELOCITY )
         {
             verticalVelocity++;
+            System.out.println(verticalVelocity);
         }
     }
 }
