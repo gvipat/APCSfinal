@@ -38,7 +38,7 @@ public class PlayerSprite extends Moveable
 
     public void upKeyPressed()
     {
-        if (getVVelocity() == 0 && lastV == 0)
+        if (getVVelocity() < 0 && getVVelocity() > -0.1)
         {
             setVVelocity(-Moveable.MAX_V_VELOCITY);
         }

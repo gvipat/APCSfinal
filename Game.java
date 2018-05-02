@@ -25,6 +25,8 @@ public class Game
         {
             public void actionPerformed(ActionEvent e)
             {
+                window.setEnabled(false);
+                window.setVisible(false);
                playGame();
             }
         });
