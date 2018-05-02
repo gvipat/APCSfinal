@@ -12,6 +12,7 @@ public class Level
     
     public Level(Level last)
     {
+        this();
         //same as default constructor but closes out the previous level
     }
     

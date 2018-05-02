@@ -7,7 +7,7 @@ public class TestOutput
 {
     public static void main( String args[] )
     {
-        Window window = new Window(600, 800, new PriorityQueue<Sprite>());
+        //Window window = new Window(600, 800, new PriorityQueue<Sprite>());
 //        PictureFrame testFrame = new PictureFrame();
 //        Picture testPicture = new Picture( 800, 600 );
 //        testFrame.setPicture( testPicture );

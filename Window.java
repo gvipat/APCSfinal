@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import java.util.PriorityQueue;
 import javax.swing.*;
 
@@ -16,7 +17,7 @@ public class Window extends JPanel
         frame.add(this);
         frame.pack();
         frame.setResizable(false);
-        super.add()
+        super.addKeyListener(new KeyboardInputListener());
         super.setVisible( true );
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +38,44 @@ public class Window extends JPanel
     }
     
     
-    
-}
+    private class KeyboardInputListener implements KeyListener
+    {
+        public void keyTyped(KeyEvent e)
+        {
 
-private class KeyboardInputListener extends 
+        }
+
+        public void keyPressed(KeyEvent e)
+        {
+            switch (e.getKeyCode())
+            {
+                case KeyEvent.VK_RIGHT:
+                    engine.rightKeyPressed();
+                    break;
+                case KeyEvent.VK_LEFT:
+                    engine.leftKeyPressed();
+                    break;
+                case KeyEvent.VK_UP:
+                    engine.upKeyPressed();
+                    break;
+            }
+        }
+
+        public void keyReleased(KeyEvent e)
+        {
+            switch (e.getKeyCode())
+            {
+                case KeyEvent.VK_RIGHT:
+                    engine.rightKeyReleased();
+                    break;
+                case KeyEvent.VK_LEFT:
+                    engine.leftKeyReleased();
+                    break;
+                case KeyEvent.VK_UP:
+                    engine.upKeyReleased();
+                    break;
+            }
+        }
+    }
+
+}

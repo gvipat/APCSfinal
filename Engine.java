@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.PriorityQueue;
-
 import javax.swing.Timer;
 
 public class Engine
@@ -20,6 +19,8 @@ public class Engine
     private final int FPS = 60;
 
     private Timer timer;
+
+    private Window window;
 
     private PriorityQueue<Sprite> sprites;
     //Sprite types will override their compare value specified in the sprite class.
@@ -47,9 +48,9 @@ public class Engine
     
     public void run()
     {
+        window = new Window(WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this);
         timer = new Timer(Math.round(( 1 / FPS ) * 1000), new ActionListener()
         {
-        
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -76,10 +77,41 @@ public class Engine
         }
         return false;
     }
+
+    public void rightKeyPressed()
+    {
+
+    }
+
+    public void leftKeyPressed()
+    {
+
+    }
+
+    public void upKeyPressed()
+    {
+
+    }
+
+    public void rightKeyReleased()
+    {
+
+    }
+
+    public void leftKeyReleased()
+    {
+
+    }
+
+    public void upKeyReleased()
+    {
+
+    }
     
     private void levelComplete()
     {
         timer.stop();
+        //TODO close out window
         level.nextLevel();
     }
     
