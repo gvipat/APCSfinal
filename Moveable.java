@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Point;
 
 public abstract class Moveable extends Sprite
 {
@@ -15,6 +16,8 @@ public abstract class Moveable extends Sprite
     public Moveable(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);
+
+
     }
 
     public float getHVelocity()
@@ -47,5 +50,20 @@ public abstract class Moveable extends Sprite
             }
             verticalVelocity = DecimalRounder.roundToHundreths(verticalVelocity);
         }
+    }
+
+    public Point getGetTopLeftCorner()
+    {
+        return new Point(getX() , getY());
+    }
+
+    public Point getGeTopRightCorner()
+    {
+        return new Point(getX() + getWidth() - 1, getY());
+    }
+
+    public Point getGetTopRightCorner()
+    {
+        return new Point( getX() , getY() + getHeight() - 1 );
     }
 }
