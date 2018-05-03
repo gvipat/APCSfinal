@@ -11,6 +11,8 @@ public class Engine
     public static int camera;
     
     private boolean COMPLETED_LEVEL = true;
+
+    private final int CAMERA_THRESHOLD = 800/3;
     
     private final int WINDOW_WIDTH = 800;
     
@@ -78,11 +80,21 @@ public class Engine
                 if (((Moveable)s).move() == COMPLETED_LEVEL)
                 {
                     return true;
-                }   
-                window.getFrame().repaint(); 
+                }
+                checkForCollisions();
             }
         }
+        if (player.getX() > CAMERA_THRESHOLD)
+        {
+            camera = player.getX() - CAMERA_THRESHOLD; 
+        }
+        window.getFrame().repaint(); 
         return false;
+    }
+
+    private void checkForCollisions()
+    {
+
     }
 
     public void rightKeyPressed()    {player.rightKeyPressed();}

@@ -35,7 +35,7 @@ public class Window extends JPanel
         for (Sprite s : sprites)
         {
             g.setColor(s.getColor());
-            g.fillRect(s.getX() - Engine.camera, s.getY() - Engine.camera,
+            g.fillRect(s.getX() - Engine.camera, s.getY(),
                 s.getWidth(), s.getHeight());
         }
     }
