@@ -14,9 +14,9 @@ public class Engine
 
     private final int CAMERA_THRESHOLD = 800/3;
     
-    private final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_WIDTH = 800;
     
-    private final int WINDOW_HEIGHT = 600;
+    public static final int WINDOW_HEIGHT = 600;
     
     private final int FPS = 30;
 
@@ -97,6 +97,11 @@ public class Engine
 
     }
 
+    public void removeSprite(Sprite toBeRemoved)
+    {
+        sprites.remove(toBeRemoved);
+    }
+
     public void rightKeyPressed()    {player.rightKeyPressed();}
 
     public void leftKeyPressed()    {player.leftKeyPressed();}
@@ -113,6 +118,8 @@ public class Engine
     {
         timer.stop();
         //TODO close out window
+        window.setVisible(false);
+        window.setEnabled(false);
         level.nextLevel();
     }
     
