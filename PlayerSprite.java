@@ -2,7 +2,6 @@ import java.awt.Color;
 
 public class PlayerSprite extends Moveable
 {
-
     private boolean jumpFlag = false;
 
     public PlayerSprite(int x, int y, int width, int height, Color color)
