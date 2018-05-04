@@ -16,8 +16,7 @@ public abstract class Moveable extends Sprite
     public Moveable(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);
-
-
+        this.compareValue++;
     }
 
     public float getHVelocity()

@@ -8,6 +8,7 @@ public class PlayerSprite extends Moveable
     public PlayerSprite(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);
+        this.compareValue++;
     }
 
     public boolean move()
