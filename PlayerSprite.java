@@ -4,8 +4,6 @@ public class PlayerSprite extends Moveable
 {
     private boolean inJump = false;
 
-    private boolean applyGravity = true;
-
     public PlayerSprite(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);

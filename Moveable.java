@@ -10,6 +10,8 @@ public abstract class Moveable extends Sprite
 
     public static final int MAX_H_VELOCITY = 2;
 
+    private boolean applyGravity = true;
+
     private enum CollisionType {NO_COLLISION, HORIZONTAL_COLLISION, VERTICAL_COLLISION};
 
     public abstract boolean move();
