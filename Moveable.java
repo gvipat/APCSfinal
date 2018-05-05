@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Point;
 
 public abstract class Moveable extends Sprite
 {
@@ -10,6 +9,8 @@ public abstract class Moveable extends Sprite
     public static final int MAX_V_VELOCITY = 5;
 
     public static final int MAX_H_VELOCITY = 2;
+
+    private enum CollisionType {NO_COLLISION, HORIZONTAL_COLLISION, VERTICAL_COLLISION};
 
     public abstract boolean move();
 
@@ -51,18 +52,10 @@ public abstract class Moveable extends Sprite
         }
     }
 
-    public Point getGetTopLeftCorner()
+    private CollisionType checkCollision()
     {
-        return new Point(getX() , getY());
-    }
 
-    public Point getGeTopRightCorner()
-    {
-        return new Point(getX() + getWidth() - 1, getY());
-    }
 
-    public Point getGetTopRightCorner()
-    {
-        return new Point( getX() , getY() + getHeight() - 1 );
+        return CollisionType.NO_COLLISION;
     }
 }

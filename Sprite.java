@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Point;
 
 public abstract class Sprite implements Comparable<Sprite>
 {
@@ -40,5 +41,25 @@ public abstract class Sprite implements Comparable<Sprite>
     public int compareTo(Sprite other)
     {
         return compareValue - other.compareValue;
+    }
+
+    public Point getGetTopLeftCorner()
+    {
+        return new Point(getX() , getY());
+    }
+
+    public Point getGetTopRightCorner()
+    {
+        return new Point(getX() + getWidth() - 1, getY());
+    }
+
+    public Point getGetBotLeftCorner()
+    {
+        return new Point( getX() , getY() + getHeight() - 1 );
+    }
+
+    public Point getGetBotRightCorner()
+    {
+        return new Point( getX() + getWidth() - 1 , getY() + getHeight() - 1 );
     }
 }
