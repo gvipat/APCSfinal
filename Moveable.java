@@ -56,8 +56,10 @@ public abstract class Moveable extends Sprite
 
     private CollisionType checkCollision()
     {
-
-
+        for (Sprite s : Engine.sprites)
+        {
+            
+        }
         return CollisionType.NO_COLLISION;
     }
 }

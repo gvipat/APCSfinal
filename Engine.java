@@ -26,7 +26,7 @@ public class Engine
 
     private PlayerSprite player;
 
-    private PriorityQueue<Sprite> sprites;
+    public static PriorityQueue<Sprite> sprites;
     //Sprite types will override their compare value specified in the sprite class.
     //This will allow sprites to be drawn 
 
