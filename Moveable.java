@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Point;
 
 public abstract class Moveable extends Sprite
 {
@@ -12,7 +13,10 @@ public abstract class Moveable extends Sprite
 
     private boolean applyGravity = true;
 
-    private enum CollisionType {NO_COLLISION, HORIZONTAL_COLLISION, VERTICAL_COLLISION};
+    private enum CollisionType {NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND,
+                                HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY};
+
+    private enum CornerType {TR_BL, TR_BR, TL_BR, TL_BL, BL_TR, BR_TR, BR_TL, BL_TL, DONT};
 
     public abstract boolean move();
 
@@ -58,8 +62,49 @@ public abstract class Moveable extends Sprite
     {
         for (Sprite s : Engine.sprites)
         {
-            //collide here
+            if (s != this)
+            {
+                switch (checkCorners(this, s))
+                {
+                    case TR_BL:
+
+                        break;
+                    case TR_BR:
+
+                        break;
+                    case TL_BR:
+
+                        break;
+                    case TL_BL:
+
+                        break;
+                    case BL_TR:
+
+                        break;
+                    case BR_TR:
+
+                        break;
+                    case BR_TL:
+
+                        break;
+                    case BL_TL:
+
+                        break;
+                    case DONT:
+                        break;
+                }
+            }
         }
         return CollisionType.NO_COLLISION;
+    }
+
+    //enums: {TR_BL, TR_BR, TL_BR, TL_BL, BL_TR, BR_TR, BR_TL, BL_TL}
+    private CornerType checkCorners(Sprite og, Sprite other)
+    {
+        Point[] corners = new Point[8];
+        for (Point p : corners)
+        {
+            
+        }
     }
 }
