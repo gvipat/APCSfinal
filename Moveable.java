@@ -58,7 +58,7 @@ public abstract class Moveable extends Sprite
     {
         for (Sprite s : Engine.sprites)
         {
-            
+            //collide here
         }
         return CollisionType.NO_COLLISION;
     }
