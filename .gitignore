@@ -44,3 +44,12 @@
 /Window.class
 /Engine$1.class
 >>>>>>> branch 'master' of https://github.com/gvipat/APCSfinal.git
+/DecimalRounder.class
+/EnemySprite.class
+/GroundSprite.class
+/Moveable$CollisionType.class
+/Moveable$CornerType.class
+/PlayerSprite.class
+/Window$leftKeyListener.class
+/Window$rightKeyListener.class
+/Window$upKeyListener.class

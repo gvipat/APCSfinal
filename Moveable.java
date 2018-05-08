@@ -97,14 +97,92 @@ public abstract class Moveable extends Sprite
         }
         return CollisionType.NO_COLLISION;
     }
-
-    //enums: {TR_BL, TR_BR, TL_BR, TL_BL, BL_TR, BR_TR, BR_TL, BL_TL}
-    private CornerType checkCorners(Sprite og, Sprite other)
+  private double[] getDiag(Point a, Point b)
     {
-        Point[] corners = new Point[8];
-        for (Point p : corners)
-        {
-            
-        }
+        double [] temp = new double [3];
+        double x =  (a.getX() - b.getX()) * (a.getX() - b.getX());
+        double y = (a.getY() - b.getY()) * (a.getY() - b.getY());   
+        temp[0] = Math.sqrt( x + y );
+        temp[1] = Math.sqrt(x);
+        temp[2] = Math.sqrt(x);
+        return temp;
+    }   
+    //enums: {TR_BL/, TR_BR/, TL_BR/, TL_BL/, BL_TR/, BR_TR/, BR_TL/, BL_TL/}
+    private Object[] checkCorners(Sprite og, Sprite other)
+    {
+          CornerType cornerTemp = CornerType.TR_BL;
+          double mindistance = getDiag(og.getGetTopRightCorner(), other.getGetBotLeftCorner()) [0];
+          
+          double temp  =  getDiag(og.getGetTopRightCorner(), other.getGetBotRightCorner()) [0];
+
+          
+          if (temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.TR_BR;
+              
+          }
+          
+          temp = getDiag(og.getGetTopLeftCorner(), other.getGetBotRightCorner()) [0];
+          if(temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.TL_BR;
+          }
+          
+          temp = getDiag(og.getGetTopLeftCorner(), other.getGetBotLeftCorner()) [0];
+          if(temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.TL_BL;
+          }
+          
+          temp = getDiag(og.getGetBotLeftCorner(), other.getGetTopRightCorner()) [0];
+          if(temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.BL_TR;
+          }
+          
+          temp = getDiag(og.getGetBotRightCorner(), other.getGetTopRightCorner()) [0];
+          if(temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.BR_TR;
+          }
+          
+          temp = getDiag(og.getGetBotRightCorner(), other.getGetTopLeftCorner()) [0];
+          if(temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.BR_TL;
+          }
+          
+          temp = getDiag(og.getGetBotLeftCorner(), other.getGetTopLeftCorner()) [0];
+          if(temp < mindistance)
+          {
+              mindistance = temp;
+              cornerTemp =  CornerType.BL_TL;
+          }
+          
+          return new Object[cornerTemp, ];
+          
+         
+          
+          
+          
+       
     }
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
