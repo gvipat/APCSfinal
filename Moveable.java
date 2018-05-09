@@ -223,7 +223,7 @@ public abstract class Moveable extends Sprite
         return CollisionType.NO_COLLISION;
     }
 
-
+    // NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY,
     private CollisionType checkCollision_OneMoveable( Moveable thing, Sprite ground )
     {
         Object[] temp = checkCorners( thing, ground );
@@ -236,7 +236,19 @@ public abstract class Moveable extends Sprite
         {
             HCollision = false;
         }
-
+        
+        if (thing.getVVelocity() == 0)
+        {
+            thing.setHVelocity( (Float)temp[1] );
+            return CollisionType.HORIZONTAL_GROUND;
+        }
+        
+        if (thing.getHVelocity() == 0)
+        {   
+            applyGravity = false;
+            thing.setVVelocity( (Float)temp[2] );
+            return CollisionType.VERTICAL_GROUND;
+        }
         switch ( (CornerType)temp[0] )
         {
             case TR_BL:
