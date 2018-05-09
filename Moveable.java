@@ -64,32 +64,91 @@ public abstract class Moveable extends Sprite
         {
             if (s != this)
             {
-                switch (checkCorners(this, s))
+                double[] temp = checkCorners(this, s);
+                boolean temp x_is_greater;
+                if(temp[1] + getHVelocity > temp[2] + getVVelocity){ // YOU SHOUDL REALLY LOOK AT THIS CHARLIE I MNOT SURE IF THIS IS RIGHT TAKE A LOOK AT this charlie
+                    x_is_greater = true;
+                }
+
+                else{
+                    x_is_greater = false;
+                }
+
+                switch (temp[0])
                 {
                     case TR_BL:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case TR_BR:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
+
                     case TL_BR:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case TL_BL:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case BL_TR:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case BR_TR:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case BR_TL:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case BL_TL:
+                    if(x_is_greater){
 
+                    }
+                    else{
+
+                    }
                         break;
+
                     case DONT:
                         break;
                 }
@@ -108,6 +167,7 @@ public abstract class Moveable extends Sprite
         return temp;
     }   
     //enums: {TR_BL/, TR_BR/, TL_BR/, TL_BL/, BL_TR/, BR_TR/, BR_TL/, BL_TL/}
+    // Object array contains 3 vals, type of collision, minimum x, and minimum y
     private Object[] checkCorners(Sprite og, Sprite other)
     {
           CornerType cornerTemp = CornerType.TR_BL;
@@ -118,7 +178,7 @@ public abstract class Moveable extends Sprite
           {
               mindistance = temp;
               cornerTemp =  CornerType.TR_BR;
-              
+            
           }
           
           temp = getDiag(og.getGetTopLeftCorner(), other.getGetBotRightCorner() ;
