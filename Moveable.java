@@ -164,7 +164,7 @@ public abstract class Moveable extends Sprite
           }
           
           return new Object[cornerTemp, mindistance[1], mindistanc[2]];
-          
+       
     }
     
     
