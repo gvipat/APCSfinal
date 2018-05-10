@@ -21,7 +21,7 @@ public abstract class Moveable extends Sprite
 
 
     private enum CornerType {
-        TR_BL, TR_BR, TL_BR, TL_BL, BL_TR, BR_TR, BR_TL, BL_TL, DONT
+        TR_BL, TR_BR, TL_BR, TL_BL, BL_TR, BR_TR, BR_TL, BL_TL, PERF_CNTCT
     };
 
 
@@ -224,122 +224,98 @@ public abstract class Moveable extends Sprite
     }
 
     // NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY,
-    private CollisionType checkCollision_OneMoveable( Moveable thing, Sprite ground )
+    private CollisionType checkCollision_OneMoveable( Moveable mover, Sprite ground )
     {
-        Object[] temp = checkCorners( thing, ground );
-        boolean HCollision;
-        if ( thing.getHVelocity() >= (Double)temp[1] )
+        Object[] temp = checkCorners( mover, ground );
+
+        if (mover.getVVelocity() == 0)
         {
-            HCollision = true;
-        }
-        else
-        {
-            HCollision = false;
-        }
-        
-        if (thing.getVVelocity() == 0)
-        {
-            thing.setHVelocity( (Float)temp[1] );
+            mover.setHVelocity( (Float)temp[1] * (mover.getHVelocity() / Math.abs(mover.getHVelocity())));
             return CollisionType.HORIZONTAL_GROUND;
         }
         
-        if (thing.getHVelocity() == 0)
+        if (mover.getHVelocity() == 0)
         {   
             applyGravity = false;
-            thing.setVVelocity( (Float)temp[2] );
+            mover.setVVelocity( (Float)temp[2] * (mover.getVVelocity() / Math.abs(mover.getVVelocity())));
             return CollisionType.VERTICAL_GROUND;
         }
+
         switch ( (CornerType)temp[0] )
         {
-            case TR_BL:
-                if ( HCollision )
-                {
+            case TR_BL: //doned
+            int hSign = Math.abs(mover.getHVelocity()) / mover.getHVelocity();
+            int vSign = Math.abs(mover.getVVelocity()) / mover.getVVelocity();
 
-                }
-                else
-                {
-
-                }
-                break;
-
-            case TR_BR:
-                if ( HCollision )
-                {
-
-                }
-                else
-                {
-
-                }
+                    if(mover.getHVelocity() - mover.getWidth() > (double)temp[1]){ ///////maybe minus 1
+                        mover.setHVelocity((float)temp[1] + mover.getWidth());
+                        double slope = Math.abs(mover.getVVelocity() / mover.getHVelocity()); 
+                        mover.setVVelocity(hSign*(float)(slope*mover.getHVelocity()));
+                    return CollisionType.HORIZONTAL_GROUND;
+                    }
+                    if(mover.getVVelocity() > (double)temp[2]){
+                        mover.setVVelocity(vSign*(float)temp[2]);
+                        double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity()); 
+                        mover.setHVelocity((float)(slope_inverted*getHVelocity()));
+                    return CollisionType.VERTICAL_GROUND;
+                    }
                 break;
 
             case TL_BR:
-                if ( HCollision )
-                {
+            int hSign = Math.abs(mover.getHVelocity()) / mover.getHVelocity();
+            int vSign = Math.abs(mover.getVVelocity()) / mover.getVVelocity();
 
-                }
-                else
-                {
-
-                }
-                break;
-
-            case TL_BL:
-                if ( HCollision )
-                {
-
-                }
-                else
-                {
-
-                }
+                if(Math.abs(mover.getHVelocity()) - mover.getWidth() > (double)temp[1]){ ///////maybe minus 1
+                        mover.setHVelocity(hSign*((float)temp[1] + mover.getWidth()));
+                        double slope = Math.abs(mover.getVVelocity() / mover.getHVelocity()); 
+                        mover.setVVelocity(vSign*(float)(slope*mover.getHVelocity()));
+                    return CollisionType.HORIZONTAL_GROUND;
+                    }
+                    if(Math.abs(mover.getVVelocity()) > (double)temp[2]){
+                        mover.setVVelocity(vSign*(float)temp[2]);
+                        double slope_inverted = Math.abs(.getHVelocity() / mover.getVVelocity()); 
+                        mover.setHVelocity(hSign*(float)(slope_inverted*getHVelocity()));
+                    return CollisionType.VERTICAL_GROUND;
+                    }
                 break;
 
             case BL_TR:
-                if ( HCollision )
-                {
+            int hSign = Math.abs(mover.getHVelocity()) / mover.getHVelocity();
+            int vSign = Math.abs(mover.getVVelocity()) / mover.getVVelocity();
 
-                }
-                else
-                {
-
-                }
-                break;
-
-            case BR_TR:
-                if ( HCollision )
-                {
-
-                }
-                else
-                {
-
-                }
+                if(Math.abs(mover.getHVelocity()) - mover.getWidth() > (double)temp[1]){ ///////maybe minus 1
+                        mover.setHVelocity(hSign*((float)temp[1] + mover.getWidth()));
+                        double slope = Math.abs(mover.getVVelocity() / mover.getHVelocity()); 
+                        mover.setVVelocity(vSign*(float)(slope*Math.abs(mover.getHVelocity()));
+                    return CollisionType.HORIZONTAL_GROUND;
+                    }
+                    if(Math.abs(mover.getVVelocity()) > (double)temp[2]){
+                        mover.setVVelocity(vSign*(float)temp[2]);
+                        double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity()); 
+                        mover.setHVelocity(hSign*(float)(slope_inverted*Math.abs(getHVelocity())));
+                    return CollisionType.VERTICAL_GROUND;
+                    }
                 break;
 
             case BR_TL:
-                if ( HCollision )
-                {
+            int hSign = Math.abs(mover.getHVelocity()) / mover.getHVelocity();
+            int vSign = Math.abs(mover.getVVelocity()) / mover.getVVelocity();
 
-                }
-                else
-                {
-
-                }
+                if(Math.abs(mover.getHVelocity()) - mover.getWidth() > (double)temp[1]){ ///////maybe minus 1
+                        mover.setHVelocity(hSign*((float)temp[1] + mover.getWidth()));
+                        double slope = Math.abs(mover.getVVelocity() / mover.getHVelocity()); 
+                        mover.setVVelocity(vSign*(float)(slope*Math.abs(mover.getHVelocity()));
+                    return CollisionType.HORIZONTAL_GROUND;
+                    }
+                    if(Math.abs(mover.getVVelocity()) > (double)temp[2]){
+                        mover.setVVelocity(vSign*(float)temp[2]);
+                        double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity()); 
+                        mover.setHVelocity(hSign*(float)(slope_inverted*Math.abs(getHVelocity())));
+                    return CollisionType.VERTICAL_GROUND;
+                    }
                 break;
 
-            case BL_TL:
-                if ( HCollision )
-                {
-
-                }
-                else
-                {
-
-                }
-                break;
-
-            case DONT:
+                case PERF_CNTCT:
                 break;
         }
 
@@ -419,10 +395,14 @@ public abstract class Moveable extends Sprite
         double b = mindistance[2];
         CornerType c = cornerTemp;
 
+        if(a == 0 || b==0){
+            c = CornerType.PERF_CNTCT;
+        }
+
         Object[] thing = new Object[3];
         thing[0] = c;
-        thing[1] = a;
-        thing[2] = b;
+        thing[1] = Math.abs(a);
+        thing[2] = Math.abs(b);
 
         return thing; /////////////////////////////////////////////////////////////////////////////////////// POSSIBLE
                       /////////////////////////////////////////////////////////////////////////////////////// ERROR
