@@ -13,6 +13,12 @@ public abstract class Sprite implements Comparable<Sprite>
     
     private Color color;
 
+    private boolean death; 
+    
+    private enum ContactType { PLAYER_GROUND, PLAYER_ENEMY, ENEMY_GROUND }; // not sure if we need ENEMY_GROUND because they only move in 2D
+    
+    private ContactType contact;
+    
     public int compareValue = 0;
     
     public int getX() {return xPos;}
@@ -28,6 +34,28 @@ public abstract class Sprite implements Comparable<Sprite>
     public int getHeight() {return height;}
     
     public Color getColor() {return color;}
+    
+    public void setDeath(boolean die) {death = die;}
+    
+    public boolean getDeath() {return death;}
+    
+    public void setContact(String con) 
+    {
+        if (con.equals( "PLAYER_GROUND" ))
+        {
+            contact = ContactType.PLAYER_GROUND;
+        }
+        else if (con.equals( "PLAYER_ENEMY" ))
+        {
+            contact = ContactType.PLAYER_ENEMY;
+        }
+        else if (con.equals( "PLAYER_GROUND" ))
+        {
+            contact = ContactType.PLAYER_GROUND;
+        }   
+    }
+    
+    public ContactType getContact() {return contact;}
     
     public Sprite(int x, int y, int width, int height, Color color)
     {

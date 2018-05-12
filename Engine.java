@@ -82,6 +82,12 @@ public class Engine
                     return true;
                 }
                 checkForCollisions();
+                
+                if (s.getDeath())///////////////////////////////////NOT SURE IF RIGHT PLACE TO PUT//////////////MAKE SURE TO CHECK LATER!!!!!!
+                {
+                    removeSprite(s);
+                }
+                
             }
         }
         if (player.getX() > CAMERA_THRESHOLD)

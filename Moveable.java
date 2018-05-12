@@ -19,10 +19,9 @@ public abstract class Moveable extends Sprite
 
 
     private enum CollisionType {
-        NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY
+        NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY, CONTACT
     };
-
-
+    
     private enum CornerType {
         TR_BL, TR_BR, TL_BR, TL_BL, BL_TR, BR_TR, BR_TL, BL_TL, PERF_CNTCT
     };
@@ -103,13 +102,17 @@ public abstract class Moveable extends Sprite
 
                     if ( s instanceof EnemySprite && this instanceof PlayerSprite )
                     {
+                        this.setContact( "PLAYER_ENEMY" );
                         list.add( checkCollision_BothMoveable( (PlayerSprite)this, (EnemySprite)s ));
                     }
-
+                    
+                    s.setContact( "PLAYER_ENEMY" );
                     list.add( checkCollision_BothMoveable( (PlayerSprite)s, (EnemySprite)this ));
 
                 }
-                list.add( checkCollision_OneMoveable( this, (GroundSprite)s ) );
+                
+                this.setContact( "PLAYER_GROUND" );
+                list.add( checkCollision_OneMoveable( this, (GroundSprite)s ) ); 
                 
             }
         }
@@ -117,7 +120,7 @@ public abstract class Moveable extends Sprite
     }
 
     //NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY
-    private CollisionType checkCollision_BothMoveable( PlayerSprite player, EnemySprite enemy )
+    private CollisionType checkCollision_BothMoveable( PlayerSprite player, EnemySprite enemy ) /////////ACTUALLY I DON'T NEED TO GET RID OF TEMP BECAUSE TEMP IS NEVER ADDED TO PRIORITY QUEUE AND RENDERED
     {
         Object[] temp = checkCorners( player, enemy );
         Sprite tempSprite = new GroundSprite( Math.round( enemy.getX() + enemy.getHVelocity() ),
@@ -125,6 +128,7 @@ public abstract class Moveable extends Sprite
         CollisionType playerTempCollision = checkCollision_OneMoveable(player, tempSprite);
         if (playerTempCollision == CollisionType.HORIZONTAL_GROUND )
         {
+            
             return CollisionType.HORIZONTAL_ENEMY;
         }
         else if (playerTempCollision == CollisionType.VERTICAL_GROUND)
