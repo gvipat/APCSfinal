@@ -15,7 +15,7 @@ public class PlayerSprite extends Moveable
     {
         checkJump();
         LinkedList<CollisionType> collideTypes = super.checkCollision();
-        //System.out.println(collideTypes.toString());
+        System.out.println(collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
         {
             super.applyGravity = false;

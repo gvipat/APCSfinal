@@ -157,7 +157,8 @@ public abstract class Moveable extends Sprite
             return CollisionType.HORIZONTAL_GROUND;
         }
         
-        if (mover.getHVelocity() == 0)
+        System.out.println( "a = " + temp[1] + "** b =" + temp[2] + "*************" );
+        if (DecimalRounder.roundToHundreths( mover.getHVelocity() ) == 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2])
         {   
             applyGravity = false;
             mover.setVVelocity( (Float)temp[2] * (mover.getVVelocity() / Math.abs(mover.getVVelocity())));
@@ -168,6 +169,10 @@ public abstract class Moveable extends Sprite
         int vSign; 
         switch ( (CornerType)temp[0] ) 
         {
+            case PERF_CNTCT:
+            {
+                return CollisionType.CONTACT;
+            }
             case TR_BL: //doned
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
@@ -240,8 +245,8 @@ public abstract class Moveable extends Sprite
                     }
                 break;
 
-                case PERF_CNTCT:
-                break;
+                
+                
         }
 
         return CollisionType.NO_COLLISION;
@@ -255,7 +260,7 @@ public abstract class Moveable extends Sprite
         double y = ( a.getY() - b.getY() ) * ( a.getY() - b.getY() );
         temp[0] = Math.sqrt( x + y );
         temp[1] = Math.sqrt( x );
-        temp[2] = Math.sqrt( x );
+        temp[2] = Math.sqrt( y );
         return temp;
     }
 
@@ -320,7 +325,7 @@ public abstract class Moveable extends Sprite
         double b = mindistance[2];
         CornerType c = cornerTemp;
 
-        if(a == 0 || b==0){
+        if(DecimalRounder.roundToTenths((float)a) == 0 || DecimalRounder.roundToTenths((float)b)==0){
             c = CornerType.PERF_CNTCT;
         }
 
