@@ -128,5 +128,10 @@ public class Engine
         window.setEnabled(false);
         level.nextLevel();
     }
+
+    public static void restart()
+    {
+        Level.restart();
+    }
     
 }

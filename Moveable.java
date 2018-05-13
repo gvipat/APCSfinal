@@ -15,6 +15,8 @@ public abstract class Moveable extends Sprite
 
     public boolean applyGravity = true;
 
+    public Sprite enemyToKill = null;
+
 
     public enum CollisionType {
         NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY, CONTACT
@@ -139,6 +141,7 @@ public abstract class Moveable extends Sprite
             }
             if (player.getVVelocity() < 0)
             {
+                Engine.sprites.remove(enemy);
                 return CollisionType.OVER_ENEMY;
             }
         }

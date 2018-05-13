@@ -21,13 +21,36 @@ public class PlayerSprite extends Moveable
             super.applyGravity = false;
             setVVelocity(0);
         }
+        if (collideTypes.contains(CollisionType.NO_COLLISION))
+        {
+            super.applyGravity = true;
+        }
+        if (collideTypes.contains(CollisionType.HORIZONTAL_GROUND))
+        {
+            setHVelocity(0);
+        }
+        if (collideTypes.contains(CollisionType.HORIZONTAL_ENEMY))
+        {
+            kms();
+        }
+        if (collideTypes.contains(CollisionType.UNDER_ENEMY))
+        {
+            kms();
+        }
+        if (collideTypes.contains(CollisionType.OVER_ENEMY))
+        {
+            //killed in collision
+        }
         super.addGravity();
         setX(getX() + getHVelocity());
         setY(getY() + getVVelocity());
         return false;
     }
 
-
+    private void kms()
+    {
+        Engine.restart();
+    }
 
     private void checkJump()
     {

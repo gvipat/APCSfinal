@@ -37,4 +37,9 @@ public class Level
         level++;
         Level next = new Level(this);
     }
+
+    public static void restart()
+    {
+        Level same = new Level();
+    }
 }
