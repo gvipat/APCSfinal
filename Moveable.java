@@ -61,7 +61,7 @@ public abstract class Moveable extends Sprite
 
     public void addGravity()
     {
-        if ( verticalVelocity < MAX_V_VELOCITY )
+        if ( applyGravity && verticalVelocity < MAX_V_VELOCITY )
         {
             verticalVelocity += 0.05;
             if ( DecimalRounder.roundToHundreths( verticalVelocity ) == 0.0 )
@@ -157,22 +157,26 @@ public abstract class Moveable extends Sprite
             return CollisionType.HORIZONTAL_GROUND;
         }
         
-        System.out.println( "a = " + temp[1] + "** b =" + temp[2] + "*************" );
+        //System.out.println( "a = " + temp[1] + "** b =" + temp[2] + "*************" );
         if (DecimalRounder.roundToHundreths( mover.getHVelocity() ) == 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2])
         {   
+            
             applyGravity = false;
             mover.setVVelocity( (Float)temp[2] * (mover.getVVelocity() / Math.abs(mover.getVVelocity())));
             return CollisionType.VERTICAL_GROUND;
         }
 
         int hSign;
-        int vSign; 
+        int vSign;
+        
+        
+        System.out.println( (CornerType) temp[0] + "contact type" );
         switch ( (CornerType)temp[0] ) 
         {
             case PERF_CNTCT:
-            {
+                
                 return CollisionType.CONTACT;
-            }
+            
             case TR_BL: //doned
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
@@ -325,8 +329,11 @@ public abstract class Moveable extends Sprite
         double b = mindistance[2];
         CornerType c = cornerTemp;
 
-        if(DecimalRounder.roundToTenths((float)a) == 0 || DecimalRounder.roundToTenths((float)b)==0){
+        
+        if(DecimalRounder.roundToTenths((float)a) == 1 || DecimalRounder.roundToTenths((float)b)==1){
+            //System.out.println( "perfect contacting" );
             c = CornerType.PERF_CNTCT;
+            System.out.println( "check corners: perf_cnct" );
         }
 
         Object[] thing = new Object[3];
