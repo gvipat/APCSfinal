@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.LinkedList;
 
 public class PlayerSprite extends Moveable
 {
@@ -13,7 +14,13 @@ public class PlayerSprite extends Moveable
     public boolean move()
     {
         checkJump();
-
+        LinkedList<CollisionType> collideTypes = super.checkCollision();
+        //System.out.println(collideTypes.toString());
+        if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
+        {
+            super.applyGravity = false;
+            setVVelocity(0);
+        }
         super.addGravity();
         setX(getX() + getHVelocity());
         setY(getY() + getVVelocity());

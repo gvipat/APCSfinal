@@ -13,12 +13,10 @@ public abstract class Moveable extends Sprite
 
     public static final int MAX_H_VELOCITY = 2;
 
-    private boolean applyGravity = true;
-    
-    private LinkedList<CollisionType> list;
+    public boolean applyGravity = true;
 
 
-    private enum CollisionType {
+    public enum CollisionType {
         NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY, CONTACT
     };
     
@@ -77,13 +75,15 @@ public abstract class Moveable extends Sprite
 
     // NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY,
     // UNDER_ENEMY, OVER_ENEMY
-    private LinkedList<CollisionType> checkCollision() ////////////////////////////////////////////////////////////////////// ADD
+    public LinkedList<CollisionType> checkCollision() ////////////////////////////////////////////////////////////////////// ADD
                                            ////////////////////////////////////////////////////////////////////// LATER,
                                            ////////////////////////////////////////////////////////////////////// collision
                                            ////////////////////////////////////////////////////////////////////// flag
                                            ////////////////////////////////////////////////////////////////////// for
                                            ////////////////////////////////////////////////////////////////////// sprite
     {
+        LinkedList<CollisionType> list = new LinkedList<CollisionType>();
+
         for ( Sprite s : Engine.sprites )
         {
             if ( s != this )
@@ -151,7 +151,7 @@ public abstract class Moveable extends Sprite
     {
         Object[] temp = checkCorners( mover, ground );
 
-        if (mover.getVVelocity() == 0)
+        if (DecimalRounder.roundToHundreths(mover.getHVelocity()) == 0 && Math.abs(mover.getHVelocity()) > (Float)temp[1])
         {
             mover.setHVelocity( (Float)temp[1] * (mover.getHVelocity() / Math.abs(mover.getHVelocity())));
             return CollisionType.HORIZONTAL_GROUND;
@@ -326,8 +326,8 @@ public abstract class Moveable extends Sprite
 
         Object[] thing = new Object[3];
         thing[0] = c;
-        thing[1] = Math.abs(a);
-        thing[2] = Math.abs(b);
+        thing[1] = (float)Math.abs(a);
+        thing[2] = (float)Math.abs(b);
 
         return thing; /////////////////////////////////////////////////////////////////////////////////////// POSSIBLE
                       /////////////////////////////////////////////////////////////////////////////////////// ERROR
