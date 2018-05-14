@@ -5,7 +5,7 @@ public class Level
     private static final Sprite[][] sprites = 
 
 
-    {{new PlayerSprite(5, 5, 20, 20, Color.BLUE), new GroundSprite(0, 500, 1000, 40)}};
+    {{new PlayerSprite(5, 5, 20, 20, Color.BLUE), new GroundSprite(0, 500, 1000, 40), new CornerSprite(1001,500,20,20,true )}};
     
     
     public static int level = 0;

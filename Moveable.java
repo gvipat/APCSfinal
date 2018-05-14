@@ -113,7 +113,23 @@ public abstract class Moveable extends Sprite
 
                 }
                 
-                this.setContact( "PLAYER_GROUND" );
+                if(s instanceof CornerSprite)
+                {
+                    CornerSprite tempCorner = (CornerSprite)(s);
+                    int trcx = tempCorner.getGetTopRightCorner();
+                    if(tempCorner.isRightSide() && (this.getX() > ))
+                    {
+                        list.add(CollisionType.NO_COLLISION);
+                        return list;
+                    }
+                    if(!tempCorner.isRightSide() && (this.getX() < tempCorner.getTopgetGetTopLeftCorner().getX))
+                    {
+                        list.add(CollisionType.NO_COLLISION);
+                        return list;
+                    }
+
+                }
+
                 list.add( checkCollision_OneMoveable( this, (GroundSprite)s ) ); 
                 
             }
@@ -335,11 +351,21 @@ public abstract class Moveable extends Sprite
        if(DecimalRounder.roundToTenths((float)a) == 1 || DecimalRounder.roundToTenths((float)b)==1){
            //System.out.println( "perfect contacting" );
            
+           
+               c = CornerType.PERF_CNTCT;
+           
+           //System.out.println( "check corners: perf_cnct" );
+           
+        //    if (a > b)
+        //    {
+        //        applyGravity  = true;
+        //    }
+       }
         
-        if ((DecimalRounder.roundToTenths((float)b)==1 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
-        {
-            c = CornerType.PERF_CNTCT;
-        }
+        // if ((DecimalRounder.roundToTenths((float)b)==1 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
+        // {
+        //     c = CornerType.PERF_CNTCT;
+        // }
 
         Object[] thing = new Object[3];
         thing[0] = c;
