@@ -116,13 +116,13 @@ public abstract class Moveable extends Sprite
                 if(s instanceof CornerSprite)
                 {
                     CornerSprite tempCorner = (CornerSprite)(s);
-                    int trcx = tempCorner.getGetTopRightCorner();
-                    if(tempCorner.isRightSide() && (this.getX() > ))
+                    
+                    if(tempCorner.isRightSide() && (this.getX() > tempCorner.getTopRightCorner().getX()  ))
                     {
                         list.add(CollisionType.NO_COLLISION);
                         return list;
                     }
-                    if(!tempCorner.isRightSide() && (this.getX() < tempCorner.getTopgetGetTopLeftCorner().getX))
+                    if(!tempCorner.isRightSide() && (this.getX() < (int) tempCorner.getTopLeftCorner().getX()))
                     {
                         list.add(CollisionType.NO_COLLISION);
                         return list;
@@ -292,9 +292,9 @@ public abstract class Moveable extends Sprite
     private Object[] checkCorners( Sprite og, Sprite other )
     {
         CornerType cornerTemp = CornerType.TR_BL;
-        double[] mindistance = getDiag( og.getGetTopRightCorner(), other.getGetBotLeftCorner() );
+        double[] mindistance = getDiag( og.getTopRightCorner(), other.getBotLeftCorner() );
 
-        double[] temp = getDiag( og.getGetTopRightCorner(), other.getGetBotRightCorner() );
+        double[] temp = getDiag( og.getTopRightCorner(), other.getBotRightCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;
@@ -302,42 +302,42 @@ public abstract class Moveable extends Sprite
 
         }
 
-        temp = getDiag( og.getGetTopLeftCorner(), other.getGetBotRightCorner() );
+        temp = getDiag( og.getTopLeftCorner(), other.getBotRightCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;
             cornerTemp = CornerType.TL_BR;
         }
 
-        temp = getDiag( og.getGetTopLeftCorner(), other.getGetBotLeftCorner() );
+        temp = getDiag( og.getTopLeftCorner(), other.getBotLeftCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;
             cornerTemp = CornerType.TL_BL;
         }
 
-        temp = getDiag( og.getGetBotLeftCorner(), other.getGetTopRightCorner() );
+        temp = getDiag( og.getBotLeftCorner(), other.getTopRightCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;
             cornerTemp = CornerType.BL_TR;
         }
 
-        temp = getDiag( og.getGetBotRightCorner(), other.getGetTopRightCorner() );
+        temp = getDiag( og.getBotRightCorner(), other.getTopRightCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;
             cornerTemp = CornerType.BR_TR;
         }
 
-        temp = getDiag( og.getGetBotRightCorner(), other.getGetTopLeftCorner() );
+        temp = getDiag( og.getBotRightCorner(), other.getTopLeftCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;
             cornerTemp = CornerType.BR_TL;
         }
 
-        temp = getDiag( og.getGetBotLeftCorner(), other.getGetTopLeftCorner() );
+        temp = getDiag( og.getBotLeftCorner(), other.getTopLeftCorner() );
         if ( temp[0] < mindistance[0] )
         {
             mindistance = temp;

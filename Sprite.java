@@ -71,22 +71,22 @@ public abstract class Sprite implements Comparable<Sprite>
         return compareValue - other.compareValue;
     }
 
-    public Point getGetTopLeftCorner()
+    public Point getTopLeftCorner()
     {
         return new Point(getX() , getY());
     }
 
-    public Point getGetTopRightCorner()
+    public Point getTopRightCorner()
     {
         return new Point(getX() + getWidth() - 1, getY());
     }
 
-    public Point getGetBotLeftCorner()
+    public Point getBotLeftCorner()
     {
         return new Point( getX() , getY() + getHeight() - 1 );
     }
 
-    public Point getGetBotRightCorner()
+    public Point getBotRightCorner()
     {
         return new Point( getX() + getWidth() - 1 , getY() + getHeight() - 1 );
     }
