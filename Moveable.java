@@ -130,7 +130,6 @@ public abstract class Moveable extends Sprite
         CollisionType playerTempCollision = checkCollision_OneMoveable(player, tempSprite);
         if (playerTempCollision == CollisionType.HORIZONTAL_GROUND )
         {
-            
             return CollisionType.HORIZONTAL_ENEMY;
         }
         else if (playerTempCollision == CollisionType.VERTICAL_GROUND)
@@ -333,19 +332,9 @@ public abstract class Moveable extends Sprite
         CornerType c = cornerTemp;
 
         
-//        if(DecimalRounder.roundToTenths((float)a) == 1 || DecimalRounder.roundToTenths((float)b)==1){
-//            //System.out.println( "perfect contacting" );
-//            
-//            
-//                c = CornerType.PERF_CNTCT;
-//            
-//            //System.out.println( "check corners: perf_cnct" );
-//            
-//            if (a > b)
-//            {
-//                applyGravity  = true;
-//            }
-//        }
+       if(DecimalRounder.roundToTenths((float)a) == 1 || DecimalRounder.roundToTenths((float)b)==1){
+           //System.out.println( "perfect contacting" );
+           
         
         if ((DecimalRounder.roundToTenths((float)b)==1 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
         {
