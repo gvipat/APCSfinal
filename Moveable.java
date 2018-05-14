@@ -348,24 +348,25 @@ public abstract class Moveable extends Sprite
         CornerType c = cornerTemp;
 
         
-       if(DecimalRounder.roundToTenths((float)a) == 1 || DecimalRounder.roundToTenths((float)b)==1){
-           //System.out.println( "perfect contacting" );
+    //    if(DecimalRounder.roundToTenths((float)a) == 1 || DecimalRounder.roundToTenths((float)b)==1){
+    //        //System.out.println( "perfect contacting" );
            
            
-               c = CornerType.PERF_CNTCT;
+    //            c = CornerType.PERF_CNTCT;
            
-           //System.out.println( "check corners: perf_cnct" );
+    //        //System.out.println( "check corners: perf_cnct" );
            
-        //    if (a > b)
-        //    {
-        //        applyGravity  = true;
-        //    }
-       }
+    //     //    if (a > b)
+    //     //    {
+    //     //        applyGravity  = true;
+    //     //    }
+    //    }
         
-        // if ((DecimalRounder.roundToTenths((float)b)==1 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
-        // {
-        //     c = CornerType.PERF_CNTCT;
-        // }
+        System.out.println(DecimalRounder.roundToTenths((float)b));
+        if ((DecimalRounder.roundToTenths((float)b)==0 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
+        {
+            c = CornerType.PERF_CNTCT;
+        }
 
         Object[] thing = new Object[3];
         thing[0] = c;
