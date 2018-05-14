@@ -61,6 +61,15 @@ public class JUGame
     @Test
     public void engineRunTest()
     {
-        engine.run();
+        
     }
+    
+    @Test
+    public void engineRemoveSprite()
+    {
+        
+    }
+    
+    
+    //
 }
