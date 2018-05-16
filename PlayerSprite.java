@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class PlayerSprite extends Moveable
 {
-    private boolean inJump = false;
+    private boolean jumpKeyPressed = false;
 
     public PlayerSprite(int x, int y, int width, int height, Color color)
     {
@@ -13,7 +13,6 @@ public class PlayerSprite extends Moveable
 
     public boolean move()
     {
-        checkJump();
         LinkedList<CollisionType> collideTypes = super.checkCollision();
         System.out.println(collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
@@ -41,24 +40,31 @@ public class PlayerSprite extends Moveable
         {
             //killed in collision
         }
+        if (collideTypes.contains(CollisionType.CONTACT))
+        {
+            if (jumpKeyPressed)
+            {
+                addJump();
+            }
+        }
         super.addGravity();
         setX(getX() + getHVelocity());
         setY(getY() + getVVelocity());
+        if (getY() > Engine.WINDOW_HEIGHT)
+        {
+            kms();
+        }
         return false;
     }
 
     private void kms()
     {
-        Engine.restart();
+        isDead = true;
     }
 
-    private void checkJump()
+    private void addJump()
     {
-        if (inJump == true && DecimalRounder.roundToHundreths(getVVelocity()) == 0.0)
-        {
-            setVVelocity(-Moveable.MAX_V_VELOCITY);
-            inJump = false;
-        }
+        setVVelocity(-5);
     }
 
     public void rightKeyPressed()
@@ -79,7 +85,7 @@ public class PlayerSprite extends Moveable
 
     public void upKeyPressed()
     {
-        inJump = true;
+        jumpKeyPressed = true;
     }
 
     public void rightKeyReleased()
@@ -94,9 +100,9 @@ public class PlayerSprite extends Moveable
 
     public void upKeyReleased()
     {
-        if (inJump == true && !(DecimalRounder.roundToHundreths(getVVelocity()) == 0.0))
+        if (jumpKeyPressed == true && !(DecimalRounder.roundToHundreths(getVVelocity()) == 0.0))
         {
-            inJump = false;
+            jumpKeyPressed = false;
         }
     }
 }

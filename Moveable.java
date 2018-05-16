@@ -17,6 +17,8 @@ public abstract class Moveable extends Sprite
 
     public Sprite enemyToKill = null;
 
+    public boolean isDead = false;
+
 
     public enum CollisionType {
         NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY, CONTACT

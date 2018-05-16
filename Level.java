@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Level
 {
-    private static final Sprite[][] sprites = 
+    private final Sprite[][] sprites = 
 
 
 {{new PlayerSprite(5, 5, 20, 20, Color.BLUE), new GroundSprite(0, 500, 1000, 40), /*new CornerSprite(1001,500,20,20,true )*/}};
@@ -16,11 +16,6 @@ public class Level
         engine = new Engine(this);
     }
     
-    public Level(Level last)
-    {
-        this();
-        //same as default constructor but closes out the previous level
-    }
     
     public void play()
     {
@@ -35,11 +30,13 @@ public class Level
     public void nextLevel()
     {
         level++;
-        Level next = new Level(this);
+        engine = new Engine(this);
+        play();
     }
 
-    public static void restart()
+    public void restart()
     {
-        Level same = new Level();
+        engine = new Engine(this);
+        play();
     }
 }

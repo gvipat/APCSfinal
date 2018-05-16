@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.PriorityQueue;
+
+import javax.swing.JButton;
+import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
 public class Engine
@@ -81,11 +84,18 @@ public class Engine
                 {
                     return true;
                 }
-                checkForCollisions();
                 
-                if (s.getDeath())///////////////////////////////////NOT SURE IF RIGHT PLACE TO PUT//////////////MAKE SURE TO CHECK LATER!!!!!!
+                if (((Moveable)s).isDead)
                 {
-                    removeSprite(s);
+                    if (s == player)
+                    {
+                        timer.stop();
+                        openDeathScreen();
+                    }
+                    else
+                    {
+                        removeSprite(s);
+                    }
                 }
                 
             }
@@ -94,13 +104,8 @@ public class Engine
         {
             camera = player.getX() - CAMERA_THRESHOLD; 
         }
-        window.getFrame().repaint(); 
+        window.getFrame().repaint();
         return false;
-    }
-
-    private void checkForCollisions()
-    {
-
     }
 
     public void removeSprite(Sprite toBeRemoved)
@@ -122,16 +127,45 @@ public class Engine
     
     private void levelComplete()
     {
-        timer.stop();
-        //TODO close out window
-        window.setVisible(false);
-        window.setEnabled(false);
+        kill();
         level.nextLevel();
     }
 
-    public static void restart()
+    private void openDeathScreen()
     {
-        Level.restart();
+        JPopupMenu exitOption = new JPopupMenu();
+        JButton exit = new JButton("Exit");
+        exit.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        });
+        exitOption.add(exit);
+
+        JButton restart = new JButton("Restart");
+        exit.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                kill();
+                level.restart();
+            }
+        });
+        exitOption.add(restart);
+        exitOption.setAlignmentX((float)0.5);
+        exitOption.setVisible(true);
+        
+    }
+
+    public void kill()
+    {
+        timer.stop();
+        window.setVisible(false);
+        window.setEnabled(false);
     }
     
 }
