@@ -34,4 +34,9 @@ public class EnemySprite extends Moveable
     {
         
     }
+
+    public Sprite copy()
+    {
+        return new EnemySprite(getX(), getY(), getWidth(), getHeight(), getColor());
+    }
 }

@@ -105,4 +105,9 @@ public class PlayerSprite extends Moveable
             jumpKeyPressed = false;
         }
     }
+
+    public Sprite copy()
+    {
+        return new PlayerSprite(getX(), getY(), getWidth(), getHeight(), getColor());
+    }
 }

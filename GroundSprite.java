@@ -11,4 +11,9 @@ public class GroundSprite extends Sprite
     {
         super(x, y, width, height, color);
     }
+
+    public Sprite copy()
+    {
+        return new GroundSprite(getX(), getY(), getWidth(), getHeight(), getColor());
+    }
 }

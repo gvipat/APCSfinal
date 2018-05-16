@@ -27,7 +27,7 @@ public class Game
             {
                 window.setEnabled(false);
                 window.setVisible(false);
-               playGame();
+                playGame();
             }
         });
         window.add( playButton );

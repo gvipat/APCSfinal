@@ -180,11 +180,14 @@ public abstract class Moveable extends Sprite
         //System.out.println( "a = " + temp[1] + "** b =" + temp[2] + "*************" );
         if (DecimalRounder.roundToHundreths( mover.getHVelocity() ) == 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2]  )
         {   
+            if(mover.getY() < ground.getY() )
+            {
+                applyGravity = false;
+                mover.setVVelocity( (Float)temp[2] * (mover.getVVelocity() / Math.abs(mover.getVVelocity())));
+                System.out.println( "STRAIGHT VERTICAL"  + "unabs y distance " + temp[3]);
+                return CollisionType.VERTICAL_GROUND;
+            }
             
-            applyGravity = false;
-            mover.setVVelocity( (Float)temp[2] * (mover.getVVelocity() / Math.abs(mover.getVVelocity())));
-            System.out.println( "STRAIGHT VERTICAL"  + "unabs y distance " + temp[3]);
-            return CollisionType.VERTICAL_GROUND;
         }
 
         int hSign;
@@ -194,11 +197,14 @@ public abstract class Moveable extends Sprite
         System.out.println( (CornerType) temp[0] + "contact type" );
         switch ( (CornerType)temp[0] ) 
         {
+            System.out.println("a");
             case PERF_CNTCT:
-                
+
+            System.out.println("b");
                 return CollisionType.CONTACT;
             
             case TR_BL: //doned
+            System.out.println("c");
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
 
@@ -217,6 +223,8 @@ public abstract class Moveable extends Sprite
                 break;
 
             case TL_BR:
+
+            System.out.println("d");
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign =  (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
 
@@ -235,6 +243,8 @@ public abstract class Moveable extends Sprite
                 break;
 
             case BL_TR:///////////////////////////////////////////////////////////////////////////////////////////////////PROBLEM HERE!!!!!!!!!!!!!!!!!!!!!!!!
+
+            System.out.println("e");
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
 
@@ -255,6 +265,8 @@ public abstract class Moveable extends Sprite
                 break;
 
             case BR_TL:
+
+            System.out.println("f");
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
 
@@ -276,6 +288,8 @@ public abstract class Moveable extends Sprite
                 
         }
 
+        
+            System.out.println("g");
         return CollisionType.NO_COLLISION;
     }
 

@@ -91,4 +91,6 @@ public abstract class Sprite implements Comparable<Sprite>
         return new Point( getX() + getWidth() - 1 , getY() + getHeight() - 1 );
     }
 
+    public abstract Sprite copy();
+
 }

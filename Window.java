@@ -109,4 +109,25 @@ public class Window extends JPanel
         }
     }
 
+    @Override
+    public void setEnabled(boolean enabled)
+    {
+        super.setEnabled(enabled);
+        frame.setEnabled(enabled);
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        super.setVisible(visible);
+        frame.setVisible(false);
+    }
+
+    public void dispose()
+    {
+        frame.dispose();
+    }
+
+
+
 }

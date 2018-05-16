@@ -146,19 +146,21 @@ public class Engine
         exitOption.add(exit);
 
         JButton restart = new JButton("Restart");
-        exit.addActionListener(new ActionListener()
+        restart.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 kill();
+                exitOption.setVisible(false);
+                exitOption.setEnabled(false);
                 level.restart();
             }
         });
         exitOption.add(restart);
-        exitOption.setAlignmentX((float)0.5);
+        exitOption.setAlignmentX((float)100);
         exitOption.setVisible(true);
-        
+
     }
 
     public void kill()
@@ -166,6 +168,7 @@ public class Engine
         timer.stop();
         window.setVisible(false);
         window.setEnabled(false);
+        window.dispose();
     }
     
 }
