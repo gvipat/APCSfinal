@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.LinkedList;
 public class EnemySprite extends Moveable
 {
     private int originalX;
@@ -18,6 +19,16 @@ public class EnemySprite extends Moveable
         if (getX() <= Engine.camera + Engine.WINDOW_WIDTH)
         {
             super.addGravity();
+            LinkedList<CollisionType> collideTypes = checkCollision();
+            if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
+            {
+                super.applyGravity = false;
+                setVVelocity(0);
+            }
+            if (collideTypes.contains(CollisionType.NO_COLLISION))
+            {
+                super.applyGravity = true;
+            }
             setX(getX() + getHVelocity());
             setY(getY() + getVVelocity());
         }
@@ -32,7 +43,7 @@ public class EnemySprite extends Moveable
 
     private void removeMe()
     {
-        
+        isDead = true;
     }
 
     public Sprite copy()
