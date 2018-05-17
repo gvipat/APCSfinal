@@ -53,6 +53,10 @@ public class Window extends JPanel
             {
                 engine.upKeyPressed();
             }
+            else if (e.getKeyCode() == KeyEvent.VK_Q) //TODO REMOVE WHEN DONE DEBUGGING
+            {
+                System.exit(0);
+            }
             //System.out.println(e.getKeyCode());
         }
 

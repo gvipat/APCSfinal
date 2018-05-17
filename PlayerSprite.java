@@ -5,6 +5,10 @@ public class PlayerSprite extends Moveable
 {
     private boolean jumpKeyPressed = false;
 
+    private boolean rightKeyPressed = false;
+
+    private boolean leftKeyPressed = false;
+
     public PlayerSprite(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);
@@ -13,6 +17,8 @@ public class PlayerSprite extends Moveable
 
     public boolean move()
     {
+        addLeft();
+        addRight();
         LinkedList<CollisionType> collideTypes = super.checkCollision();
         System.out.println(collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
@@ -21,7 +27,7 @@ public class PlayerSprite extends Moveable
             super.applyGravity = false;
             setVVelocity(0);
         }
-        if (collideTypes.contains(CollisionType.NO_COLLISION))
+        else if (collideTypes.contains(CollisionType.NO_COLLISION))
         {
             super.applyGravity = true;
         }
@@ -41,41 +47,22 @@ public class PlayerSprite extends Moveable
         {
             //killed in collision
         }
-
-
-
         if (collideTypes.contains(CollisionType.CONTACT))
         {
-            if(this.getHVelocity() ==0 && jumpKeyPressed)
+            if (jumpKeyPressed)
             {
                 addJump();
-                System.out.println("forced jump");
-
-            }
-            else if (jumpKeyPressed)
-            {
-                addJump();
-                System.out.println("addjump    1");
-                //return false;
             }
             else if (this.getVVelocity() > 0)
             {
                 this.setVVelocity(0);
                 applyGravity = false;
-//                return false;
-                //System.out.println("contact grav change");
-
             }
-
-//            if (jumpKeyPressed)
-//            {
-//
-//                addJump();
-//                applyGravity = true;
-//                System.out.println("addjump 2");
-//            }
-
-
+            else if (this.getVVelocity() < 0)
+            {
+                setVVelocity(0);
+                applyGravity = true;
+            }
         }
         super.addGravity();
         setX(getX() + getHVelocity());
@@ -92,25 +79,38 @@ public class PlayerSprite extends Moveable
         isDead = true;
     }
 
-    private void addJump()
+    private void addRight()
     {
-        System.out.println("adding jump");setVVelocity(-5);
-    }
-
-    public void rightKeyPressed()
-    {
-        if (getHVelocity() < Moveable.MAX_H_VELOCITY)
+        if ( rightKeyPressed && getHVelocity() < Moveable.MAX_H_VELOCITY)
         {
             setHVelocity(getHVelocity() + 1);
         }
     }
 
-    public void leftKeyPressed()
+    private void addLeft()
     {
-        if (getHVelocity() > -Moveable.MAX_H_VELOCITY)
+        if (leftKeyPressed && getHVelocity() > -Moveable.MAX_H_VELOCITY)
         {
+            System.out.println("i work ***************************************************************");
             setHVelocity(getHVelocity() - 1);
         }
+    }
+
+    private void addJump()
+    {
+        System.out.println("adding jump");
+        setVVelocity(-5);
+        applyGravity = true;
+    }
+
+    public void rightKeyPressed()
+    {
+        rightKeyPressed = true;
+    }
+
+    public void leftKeyPressed()
+    {
+        leftKeyPressed = true;
     }
 
     public void upKeyPressed()
@@ -120,11 +120,13 @@ public class PlayerSprite extends Moveable
 
     public void rightKeyReleased()
     {
+        rightKeyPressed = false;
         setHVelocity(0);
     }
 
     public void leftKeyReleased()
     {
+        leftKeyPressed = false;
         setHVelocity(0);
     }
 

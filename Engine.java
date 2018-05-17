@@ -7,20 +7,21 @@ import javax.swing.JButton;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
+
 public class Engine
 {
     Color[][] stage;
-    
+
     public static int camera;
-    
+
     private boolean COMPLETED_LEVEL = true;
 
-    private final int CAMERA_THRESHOLD = 800/3;
-    
+    private final int CAMERA_THRESHOLD = 800 / 3;
+
     public static final int WINDOW_WIDTH = 800;
-    
+
     public static final int WINDOW_HEIGHT = 600;
-    
+
     private final int FPS = 30;
 
     private Timer timer;
@@ -30,145 +31,178 @@ public class Engine
     private PlayerSprite player;
 
     public static PriorityQueue<Sprite> sprites;
-    //Sprite types will override their compare value specified in the sprite class.
-    //This will allow sprites to be drawn 
+    // Sprite types will override their compare value specified in the sprite
+    // class.
+    // This will allow sprites to be drawn
 
     private Level level;
-    
-    public Engine(Level lev)
+
+
+    public Engine( Level lev )
     {
         level = lev;
         Sprite[] levelSprites = lev.getSprites();
-        sprites = new PriorityQueue<Sprite>(levelSprites.length);
+        sprites = new PriorityQueue<Sprite>( levelSprites.length );
         camera = 0;
-        stage = new Color[WINDOW_HEIGHT][/*TODO find number for level length*/];
-        for (Sprite s : levelSprites)
+        stage = new Color[WINDOW_HEIGHT][/* TODO find number for level length */];
+        for ( Sprite s : levelSprites )
         {
-            addSprite(s);
+            addSprite( s );
         }
     }
-    
-    private void addSprite(Sprite sprite)
+
+
+    private void addSprite( Sprite sprite )
     {
-        sprites.add(sprite);
-        if (sprite instanceof PlayerSprite)
+        sprites.add( sprite );
+        if ( sprite instanceof PlayerSprite )
         {
             player = (PlayerSprite)sprite;
         }
     }
-    
+
+
     public void run()
     {
-        window = new Window(WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this);
-        timer = new Timer(Math.round(( 1 / FPS ) * 1000), new ActionListener()
+        window = new Window( WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this );
+        timer = new Timer( Math.round( ( 1 / FPS ) * 1000 ), new ActionListener()
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed( ActionEvent e )
             {
-                if (move() == COMPLETED_LEVEL)
+                if ( move() == COMPLETED_LEVEL )
                 {
                     levelComplete();
                 }
             }
-        });
+        } );
         timer.start();
     }
-    
+
+
     private boolean move()
     {
-        for (Sprite s : sprites)
+        for ( Sprite s : sprites )
         {
-            if (s instanceof Moveable)
+            if ( s instanceof Moveable )
             {
-                if (((Moveable)s).move() == COMPLETED_LEVEL)
+                if ( ( (Moveable)s ).move() == COMPLETED_LEVEL )
                 {
                     return true;
                 }
-                
-                if (((Moveable)s).isDead)
+
+                if ( ( (Moveable)s ).isDead )
                 {
-                    if (s == player)
+                    if ( s == player )
                     {
                         timer.stop();
                         openDeathScreen();
                     }
                     else
                     {
-                        removeSprite(s);
+                        removeSprite( s );
                     }
                 }
-                
+
             }
         }
-        if (player.getX() > CAMERA_THRESHOLD)
+        if ( player.getX() > CAMERA_THRESHOLD )
         {
-            camera = player.getX() - CAMERA_THRESHOLD; 
+            camera = player.getX() - CAMERA_THRESHOLD;
         }
         window.getFrame().repaint();
         return false;
     }
 
-    public void removeSprite(Sprite toBeRemoved)
+
+    public void removeSprite( Sprite toBeRemoved )
     {
-        sprites.remove(toBeRemoved);
+        sprites.remove( toBeRemoved );
     }
 
-    public void rightKeyPressed()    {player.rightKeyPressed();}
 
-    public void leftKeyPressed()    {player.leftKeyPressed();}
+    public void rightKeyPressed()
+    {
+        player.rightKeyPressed();
+    }
 
-    public void upKeyPressed()    {player.upKeyPressed();}
 
-    public void rightKeyReleased()    {player.rightKeyReleased();}
+    public void leftKeyPressed()
+    {
+        player.leftKeyPressed();
+    }
 
-    public void leftKeyReleased()    {player.leftKeyReleased();}
 
-    public void upKeyReleased()    {player.upKeyReleased();}
-    
+    public void upKeyPressed()
+    {
+        player.upKeyPressed();
+    }
+
+
+    public void rightKeyReleased()
+    {
+        player.rightKeyReleased();
+    }
+
+
+    public void leftKeyReleased()
+    {
+        player.leftKeyReleased();
+    }
+
+
+    public void upKeyReleased()
+    {
+        player.upKeyReleased();
+    }
+
+
     private void levelComplete()
     {
         kill();
         level.nextLevel();
     }
 
+
     private void openDeathScreen()
     {
         JPopupMenu exitOption = new JPopupMenu();
-        JButton exit = new JButton("Exit");
-        exit.addActionListener(new ActionListener()
+        JButton exit = new JButton( "Exit" );
+        exit.addActionListener( new ActionListener()
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed( ActionEvent e )
             {
-                System.exit(0);
+                System.exit( 0 );
             }
-        });
-        exitOption.add(exit);
+        } );
+        exitOption.add( exit );
 
-        JButton restart = new JButton("Restart");
-        restart.addActionListener(new ActionListener()
+        JButton restart = new JButton( "Restart" );
+        restart.addActionListener( new ActionListener()
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed( ActionEvent e )
             {
                 kill();
-                exitOption.setVisible(false);
-                exitOption.setEnabled(false);
+                exitOption.setVisible( false );
+                exitOption.setEnabled( false );
                 level.restart();
             }
-        });
-        exitOption.add(restart);
-        exitOption.setAlignmentX((float)100);
-        exitOption.setVisible(true);
+        } );
+        exitOption.add( restart );
+        exitOption.setAlignmentX( (float)100 );
+        exitOption.setVisible( true );
 
     }
+
 
     public void kill()
     {
         timer.stop();
-        window.setVisible(false);
-        window.setEnabled(false);
+        window.setVisible( false );
+        window.setEnabled( false );
         window.dispose();
     }
-    
+
 }
