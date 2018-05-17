@@ -1,5 +1,8 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
+import javax.swing.*;
 
 public class Level
 {
@@ -37,8 +40,29 @@ public class Level
     public void nextLevel()
     {
         level++;
-        engine = new Engine(this);
-        play();
+        if (level < sprites.length)
+        {
+            engine = new Engine(this);
+            play();
+        }
+        else
+        {
+            JFrame frame = new JFrame("You Win!");
+            JLabel label = new JLabel("You Win!");
+            JButton button = new JButton("Exit");
+            frame.add(label);
+            frame.add(button);
+            button.addActionListener(new ActionListener(){
+            
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            frame.setVisible(true);
+            button.setVisible(true);
+            label.setVisible(true);
+        }
     }
 
     public void restart()
