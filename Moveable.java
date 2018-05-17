@@ -179,7 +179,11 @@ public abstract class Moveable extends Sprite
         
         //System.out.println( "a = " + temp[1] + "** b =" + temp[2] + "*************" );
         if (DecimalRounder.roundToHundreths( mover.getHVelocity() ) == 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2]  )
-        {   
+        {
+            if (!((mover.getX() - ground.getX()) < ground.getWidth() && (mover.getX() - ground.getX()) > -mover.getWidth()))
+            {
+                return CollisionType.NO_COLLISION;
+            }   //Roshan explains
             if(mover.getY() < ground.getY() )
             {
                 applyGravity = false;
@@ -306,6 +310,8 @@ public abstract class Moveable extends Sprite
 
             case BL_TR:///////////////////////////////////////////////////////////////////////////////////////////////////PROBLEM HERE!!!!!!!!!!!!!!!!!!!!!!!!
 
+            
+
             System.out.println("\t\t\t\te");
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
@@ -324,6 +330,7 @@ public abstract class Moveable extends Sprite
                         System.out.println( "BL_TR vertical ground **********" );
                     return CollisionType.VERTICAL_GROUND;
                     }
+
                 break;
 
             case BR_TL:
