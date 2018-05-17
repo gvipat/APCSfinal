@@ -17,6 +17,7 @@ public class PlayerSprite extends Moveable
         System.out.println(collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
         {
+            System.out.println("inside player's move et vvelociy 0");
             super.applyGravity = false;
             setVVelocity(0);
         }
@@ -40,12 +41,41 @@ public class PlayerSprite extends Moveable
         {
             //killed in collision
         }
+
+
+
         if (collideTypes.contains(CollisionType.CONTACT))
         {
-            if (jumpKeyPressed)
+            if(this.getHVelocity() ==0 && jumpKeyPressed)
             {
                 addJump();
+                System.out.println("forced jump");
+
             }
+            else if (jumpKeyPressed)
+            {
+                addJump();
+                System.out.println("addjump    1");
+                //return false;
+            }
+            else if (this.getVVelocity() > 0)
+            {
+                this.setVVelocity(0);
+                applyGravity = false;
+//                return false;
+                //System.out.println("contact grav change");
+
+            }
+
+//            if (jumpKeyPressed)
+//            {
+//
+//                addJump();
+//                applyGravity = true;
+//                System.out.println("addjump 2");
+//            }
+
+
         }
         super.addGravity();
         setX(getX() + getHVelocity());
@@ -64,7 +94,7 @@ public class PlayerSprite extends Moveable
 
     private void addJump()
     {
-        setVVelocity(-5);
+        System.out.println("adding jump");setVVelocity(-5);
     }
 
     public void rightKeyPressed()

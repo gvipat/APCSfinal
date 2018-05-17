@@ -79,64 +79,55 @@ public abstract class Moveable extends Sprite
 
     // NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY,
     // UNDER_ENEMY, OVER_ENEMY
-    public LinkedList<CollisionType> checkCollision() ////////////////////////////////////////////////////////////////////// ADD
-                                           ////////////////////////////////////////////////////////////////////// LATER,
-                                           ////////////////////////////////////////////////////////////////////// collision
-                                           ////////////////////////////////////////////////////////////////////// flag
-                                           ////////////////////////////////////////////////////////////////////// for
-                                           ////////////////////////////////////////////////////////////////////// sprite
+    public LinkedList<CollisionType> checkCollision()
     {
         LinkedList<CollisionType> list = new LinkedList<CollisionType>();
 
-        for ( Sprite s : Engine.sprites )
-        {
-            if ( s != this )
-            {
+        for (Sprite s : Engine.sprites) {
+            if (s != this) {
+                //if (Math.abs(this.getX() - s.getX()) < 4 * MAX_H_VELOCITY + 1 || Math.abs(this.getY() - s.getY()) < 2 * MAX_V_VELOCITY + 1) {
 
-                // boolean bothMoveable = false;
+                    // boolean bothMoveable = false;
 
-                if ( s instanceof Moveable && this instanceof Moveable )
-                {
+                    if (s instanceof Moveable && this instanceof Moveable) {
 
-                    if ( s instanceof EnemySprite && this instanceof EnemySprite )
-                    {
-                       //do nothing
-                    }
-                    // bothMoveable = true;
+                        if (s instanceof EnemySprite && this instanceof EnemySprite) {
+                            //do nothing
+                        }
+                        // bothMoveable = true;
 
-                    if ( s instanceof EnemySprite && this instanceof PlayerSprite )
-                    {
-                        this.setContact( "PLAYER_ENEMY" );
-                        list.add( checkCollision_BothMoveable( (PlayerSprite)this, (EnemySprite)s ));
-                    }
-                    
-                    s.setContact( "PLAYER_ENEMY" );
-                    list.add( checkCollision_BothMoveable( (PlayerSprite)s, (EnemySprite)this ));
+                        if (s instanceof EnemySprite && this instanceof PlayerSprite) {
+                            this.setContact("PLAYER_ENEMY");
+                            list.add(checkCollision_BothMoveable((PlayerSprite) this, (EnemySprite) s));
+                        }
 
-                }
-                
-                if(s instanceof CornerSprite)
-                {
-                    CornerSprite tempCorner = (CornerSprite)(s);
-                    
-                    if(tempCorner.isRightSide() && (this.getX() > tempCorner.getTopRightCorner().getX()  ))
-                    {
-                        list.add(CollisionType.NO_COLLISION);
-                        return list;
-                    }
-                    if(!tempCorner.isRightSide() && (this.getX() < (int) tempCorner.getTopLeftCorner().getX()))
-                    {
-                        list.add(CollisionType.NO_COLLISION);
-                        return list;
+                        s.setContact("PLAYER_ENEMY");
+                        list.add(checkCollision_BothMoveable((PlayerSprite) s, (EnemySprite) this));
+
                     }
 
+                    if (s instanceof CornerSprite) {
+                        CornerSprite tempCorner = (CornerSprite) (s);
+
+                        if (tempCorner.isRightSide() && (this.getX() > tempCorner.getTopRightCorner().getX())) {
+                            list.add(CollisionType.NO_COLLISION);
+                            return list;
+                        }
+                        if (!tempCorner.isRightSide() && (this.getX() < (int) tempCorner.getTopLeftCorner().getX())) {
+                            list.add(CollisionType.NO_COLLISION);
+                            return list;
+                        }
+
+                    }
+
+                    list.add(checkCollision_OneMoveable(this, (GroundSprite) s));
                 }
 
-                list.add( checkCollision_OneMoveable( this, (GroundSprite)s ) ); 
-                
             }
-        }
-        return list;
+
+        //}
+            return list;
+
     }
 
     //NO_COLLISION, HORIZONTAL_GROUND, VERTICAL_GROUND, HORIZONTAL_ENEMY, UNDER_ENEMY, OVER_ENEMY
@@ -198,7 +189,7 @@ public abstract class Moveable extends Sprite
         int vSign;
         
         
-        System.out.println( (CornerType) temp[0] + "contact type" );
+        System.out.println( (CornerType) temp[0] + "corner type" );
         switch ( (CornerType)temp[0] ) 
         {
             case PERF_CNTCT:
@@ -216,14 +207,15 @@ public abstract class Moveable extends Sprite
                             mover.setVVelocity(hSign*(Float)(slope*mover.getHVelocity()));
                         return CollisionType.HORIZONTAL_GROUND;
                         }
-                        if(hSign != 0  && mover.getVVelocity() > (Float)temp[2])// weird now because can't have an if statement on hsign
-                        { 
-                            //applyGravity = false;
-                            
+                        if(mover.getHVelocity() != 0  && mover.getVVelocity() > (Float)temp[2])// weird now because can't have an if statement on hsign
+                        {
+
+                            applyGravity = false;
                             mover.setVVelocity(vSign*(Float)temp[2]);
                             double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity()); 
                             //mover.setHVelocity((float)(slope_inverted*getHVelocity()));
                             mover.setHVelocity(0);
+
                         return CollisionType.VERTICAL_GROUND;
                         }
                     break;   
@@ -238,14 +230,16 @@ public abstract class Moveable extends Sprite
                             mover.setVVelocity(hSign*(Float)(slope*mover.getHVelocity()));
                         return CollisionType.HORIZONTAL_GROUND;
                         }
-                        if(hSign != 0  && mover.getVVelocity() > (Float)temp[2])// weird now because can't have an if statement on hsign
-                        { 
-                            //applyGravity = false;
+                        if(mover.getHVelocity() != 0  && mover.getVVelocity() > (Float)temp[2])// weird now because can't have an if statement on hsign
+                        {
+
+                            applyGravity = false;
                             mover.setVVelocity(vSign*(Float)temp[2]);
                             double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity()); 
                             //mover.setHVelocity((float)(slope_inverted*getHVelocity()));
                             mover.setHVelocity(0);
-                        return CollisionType.VERTICAL_GROUND;
+
+                            return CollisionType.VERTICAL_GROUND;
                         }
                     break;   
 //            case TL_BL:
@@ -339,6 +333,7 @@ public abstract class Moveable extends Sprite
                 hSign = (int) (Math.abs(mover.getHVelocity()) / mover.getHVelocity());
                 vSign = (int) (Math.abs(mover.getVVelocity()) / mover.getVVelocity());
 
+
                 if(vSign > 0 && Math.abs(mover.getHVelocity()) - mover.getWidth() > (Float)temp[1])
                 { ///////maybe minus 1
                         mover.setHVelocity(hSign*((Float)temp[1] + mover.getWidth()));
@@ -346,13 +341,17 @@ public abstract class Moveable extends Sprite
                         mover.setVVelocity(vSign*(float)(slope*Math.abs(mover.getHVelocity())));
                     return CollisionType.HORIZONTAL_GROUND;
                 }
+                if (mover.getX() > ground.getX()-MAX_H_VELOCITY && mover.getX() < ground.getX() + MAX_H_VELOCITY)
+                {
                     if(hSign > 0 && Math.abs(mover.getVVelocity()) > (Float)temp[2])
                     {
                         mover.setVVelocity(vSign*(Float)temp[2]);
-                        double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity()); 
+                        double slope_inverted = Math.abs(mover.getHVelocity() / mover.getVVelocity());
                         mover.setHVelocity(hSign*(float)(slope_inverted*Math.abs(getHVelocity())));
-                    return CollisionType.VERTICAL_GROUND;
+                        return CollisionType.VERTICAL_GROUND;
                     }
+                }
+
                 break;
 
                 
@@ -454,8 +453,8 @@ public abstract class Moveable extends Sprite
     //    }
         
         //System.out.println(DecimalRounder.roundToTenths((float)b));
-        //if ((DecimalRounder.roundToTenths((float)b)==0 || DecimalRounder.roundToTenths((float)b)==1 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
-        if ((int)b == 0 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) 
+        // ((DecimalRounder.roundToTenths((float)b)==0 || DecimalRounder.roundToTenths((float)b)==1 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth()) )
+        if ((int)b == 0 && (og.getX() - other.getX()) < other.getWidth() && (og.getX() - other.getX()) > -og.getWidth())
         {
             c = CornerType.PERF_CNTCT;
         }
