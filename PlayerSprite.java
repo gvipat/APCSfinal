@@ -67,25 +67,22 @@ public class PlayerSprite extends Moveable
 
         if(collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND))
         {
-
             if(this.getHVelocity() > 0)
             {
-                System.out.println("INSIDE SETTING RIGHT KEY FALSE");
-//                rightKeyPressed = false;
+                rightKeyPressed = false;
+                addLeft();
             }
             else if(this.getHVelocity() < 0)
             {
-                //leftKeyPressed = false;
+                leftKeyPressed = false;
+                addRight();
             }
-            this.setHVelocity(0);
-
         }
         else
         {
-            addLeft();
             addRight();
+            addLeft();
         }
-
         super.addGravity();
         setX(getX() + getHVelocity());
         setY(getY() + getVVelocity());
