@@ -4,6 +4,16 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import javax.swing.*;
 
+/**
+ *  A class that prepre
+ *
+ *  @author  Roshan
+ *  @version May 18, 2018
+ *  @author  Period: TODO
+ *  @author  Assignment: APCSfinal
+ *
+ *  @author  Sources: TODO
+ */
 public class Level
 {
     private final Sprite[][] sprites = 
