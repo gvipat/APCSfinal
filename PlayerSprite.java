@@ -17,8 +17,6 @@ public class PlayerSprite extends Moveable
 
     public boolean move()
     {
-        addLeft();
-        addRight();
         LinkedList<CollisionType> collideTypes = super.checkCollision();
         System.out.println(collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
@@ -57,13 +55,37 @@ public class PlayerSprite extends Moveable
             {
                 this.setVVelocity(0);
                 applyGravity = false;
+                jumpKeyPressed = false;
             }
             else if (this.getVVelocity() < 0)
             {
                 setVVelocity(0);
                 applyGravity = true;
+                jumpKeyPressed = false;
             }
         }
+
+        if(collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND))
+        {
+
+            if(this.getHVelocity() > 0)
+            {
+                System.out.println("INSIDE SETTING RIGHT KEY FALSE");
+//                rightKeyPressed = false;
+            }
+            else if(this.getHVelocity() < 0)
+            {
+                //leftKeyPressed = false;
+            }
+            this.setHVelocity(0);
+
+        }
+        else
+        {
+            addLeft();
+            addRight();
+        }
+
         super.addGravity();
         setX(getX() + getHVelocity());
         setY(getY() + getVVelocity());
