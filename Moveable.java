@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import javax.lang.model.util.ElementScanner6;
+
 
 public abstract class Moveable extends Sprite
 {
@@ -27,7 +29,9 @@ public abstract class Moveable extends Sprite
         HORIZONTAL_ENEMY,
         UNDER_ENEMY,
         OVER_ENEMY,
-        CONTACT, STRAIGHT_HORIZONTAL_GROUND
+        CONTACT,
+        STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT,
+        STRAIGHT_HORIZONTAL_GROUND_FROM_RIGHT,
     };
 
 
@@ -217,7 +221,16 @@ public abstract class Moveable extends Sprite
             System.out.println("\t\t\t straight horizontal");
             //mover.setHVelocity(0);
             mover.setHVelocity((Float)temp[1] * ( mover.getHVelocity() / Math.abs( mover.getHVelocity() ) ) );
-            return CollisionType.STRAIGHT_HORIZONTAL_GROUND;
+            System.out.println(mover.getHVelocity() + "***************************");
+            mover.setX(mover.getX() + mover.getHVelocity());
+            if (mover.getX() > ground.getX())
+            {
+                return CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT;
+            }
+            else if (mover.getX() < ground.getX())
+            {
+                return CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_RIGHT;
+            }
         }
 
         // System.out.println( "a = " + temp[1] + "** b =" + temp[2] +

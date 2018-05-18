@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.util.LinkedList;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class PlayerSprite extends Moveable
 {
     private boolean jumpKeyPressed = false;
@@ -65,23 +67,22 @@ public class PlayerSprite extends Moveable
             }
         }
 
-        if(collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND))
+        if(collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT))
         {
-            if(this.getHVelocity() > 0)
-            {
-                rightKeyPressed = false;
-                addLeft();
-            }
-            else if(this.getHVelocity() < 0)
-            {
-                leftKeyPressed = false;
-                addRight();
-            }
+            rightKeyPressed = false;
+            setHVelocity(0);
+            addLeft();
+        }
+        else if (collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_RIGHT))
+        {
+            leftKeyPressed = false;
+            setHVelocity(0);
+            addRight();
         }
         else
         {
-            addRight();
             addLeft();
+            addRight();
         }
         super.addGravity();
         setX(getX() + getHVelocity());
