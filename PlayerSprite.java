@@ -69,13 +69,11 @@ public class PlayerSprite extends Moveable
 
         if(collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT))
         {
-            rightKeyPressed = false;
             setHVelocity(0);
             addLeft();
         }
         else if (collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_RIGHT))
         {
-            leftKeyPressed = false;
             setHVelocity(0);
             addRight();
         }
@@ -152,7 +150,7 @@ public class PlayerSprite extends Moveable
 
     public void upKeyReleased()
     {
-        if (jumpKeyPressed == true && !(DecimalRounder.roundToHundreths(getVVelocity()) == 0.0))
+        if (jumpKeyPressed == true && !(GameMath.roundToHundreths(getVVelocity()) == 0.0))
         {
             jumpKeyPressed = false;
         }

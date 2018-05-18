@@ -79,11 +79,11 @@ public abstract class Moveable extends Sprite
         if ( applyGravity && verticalVelocity < MAX_V_VELOCITY )
         {
             verticalVelocity += 0.05;
-            if ( DecimalRounder.roundToHundreths( verticalVelocity ) == 0.0 )
+            if ( GameMath.roundToHundreths( verticalVelocity ) == 0.0 )
             {
                 verticalVelocity += 0.05;
             }
-            verticalVelocity = DecimalRounder.roundToHundreths( verticalVelocity );
+            verticalVelocity = GameMath.roundToHundreths( verticalVelocity );
         }
     }
 
@@ -210,24 +210,26 @@ public abstract class Moveable extends Sprite
         Object[] temp = checkCorners( mover, ground );
 
         System.out.println("//////////////////////////////////////////////////");
-        System.out.print("v = " + mover.getVVelocity() + "dc = " + DecimalRounder.roundToHundreths(mover.getVVelocity()));
+        System.out.print("v = " + mover.getVVelocity() + "dc = " + GameMath.roundToHundreths(mover.getVVelocity()));
         System.out.print("h = " + mover.getHVelocity() + "dist = " + (Float)temp[1]);
 
 
 
-        if ( DecimalRounder.roundToHundreths( mover.getVVelocity() ) == 0
-            && Math.abs( mover.getHVelocity())   >= (Float)temp[1] )
+        if ( GameMath.roundToHundreths( mover.getVVelocity() ) == 0
+            && Math.abs( mover.getHVelocity())   >= (Float)temp[1]
+            && (mover.getBotLeftCorner().y <= ground.getBotLeftCorner().y + mover.getHeight()
+                && mover.getY() >= ground.getY() - ground.getHeight() ))
         {
             System.out.println("\t\t\t straight horizontal");
             //mover.setHVelocity(0);
-            mover.setHVelocity((Float)temp[1] * ( mover.getHVelocity() / Math.abs( mover.getHVelocity() ) ) );
+            mover.setHVelocity((Float)temp[1] * GameMath.getSign(mover.getHVelocity()) );
             System.out.println(mover.getHVelocity() + "***************************");
             mover.setX(mover.getX() + mover.getHVelocity());
-            if (mover.getX() > ground.getX())
+            if (mover.getX() < ground.getX())
             {
                 return CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT;
             }
-            else if (mover.getX() < ground.getX())
+            else if (mover.getX() > ground.getX())
             {
                 return CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_RIGHT;
             }
@@ -235,7 +237,7 @@ public abstract class Moveable extends Sprite
 
         // System.out.println( "a = " + temp[1] + "** b =" + temp[2] +
         // "*************" );
-        if ( DecimalRounder.roundToHundreths( mover.getHVelocity() ) == 0
+        if ( GameMath.roundToHundreths( mover.getHVelocity() ) == 0
             && Math.abs( mover.getVVelocity() ) > (Float)temp[2] )
         {
             if ( !( ( mover.getX() - ground.getX() ) < ground.getWidth()

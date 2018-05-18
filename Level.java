@@ -26,7 +26,7 @@ public class Level
                     { { new PlayerSprite( 5, 5, 20, 20, Color.BLUE ),
                         new GroundSprite( 0, 400, 1000, 40 ),
                         new GroundSprite( 300, 200, 1000, 40 ),
-                        new GroundSprite( 200, 360, 1000, 40 ) },
+                        new GroundSprite( 400, 360, 1000, 40 ) },
                         { new PlayerSprite( 5, 5, 20, 20, Color.ORANGE ) } };
 
     /**
