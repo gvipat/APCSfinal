@@ -113,15 +113,18 @@ public abstract class Moveable extends Sprite
                     }
                     // bothMoveable = true;
 
-                    if ( s instanceof EnemySprite && this instanceof PlayerSprite )
+                    else if ( s instanceof EnemySprite && this instanceof PlayerSprite )
                     {
                         this.setContact( "PLAYER_ENEMY" );
                         list.add(
                             checkCollision_BothMoveable( (PlayerSprite)this, (EnemySprite)s ) );
                     }
 
-                    s.setContact( "PLAYER_ENEMY" );
-                    list.add( checkCollision_BothMoveable( (PlayerSprite)s, (EnemySprite)this ) );
+                    else
+                    {
+                        s.setContact( "PLAYER_ENEMY" );
+                        list.add( checkCollision_BothMoveable( (PlayerSprite)s, (EnemySprite)this ) );
+                    }
 
                 }
 
@@ -292,6 +295,7 @@ public abstract class Moveable extends Sprite
 
                     applyGravity = false;
                     mover.setVVelocity( vSign * (Float)temp[2] );
+                    mover.setY(mover.getY() + mover.getVVelocity());//TODO check for others
                     double slope_inverted = Math.abs( mover.getHVelocity() / mover.getVVelocity() );
                     // mover.setHVelocity((float)(slope_inverted*getHVelocity()));
                     mover.setHVelocity( 0 );

@@ -1,8 +1,6 @@
 import java.awt.Color;
 import java.util.LinkedList;
 
-import javax.lang.model.util.ElementScanner6;
-
 public class PlayerSprite extends Moveable
 {
     private boolean jumpKeyPressed = false;
