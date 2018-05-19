@@ -26,6 +26,8 @@ public class Engine
 
     private final int FPS = 30;
 
+    public boolean paused = false;
+
     private Timer timer;
 
     private Window window;
@@ -108,7 +110,10 @@ public class Engine
                 {
                     if ( s == player )
                     {
-                        timer.stop();
+                        if (!DEBUG_MODE)
+                        {
+                            timer.stop();
+                        }
                         openDeathScreen();
                     }
                     else
@@ -216,6 +221,24 @@ public class Engine
         window.setVisible( false );
         window.setEnabled( false );
         window.dispose();
+    }
+
+    public void pause()
+    {
+        if (!DEBUG_MODE)
+        {
+            timer.stop();
+            paused = true;
+        }
+    }
+
+    public void resume()
+    {
+        if (!DEBUG_MODE)
+        {
+            timer.start();
+            paused = false;
+        }
     }
 
 }

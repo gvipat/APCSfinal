@@ -394,23 +394,27 @@ public abstract class Moveable extends Sprite
             case TL_BR:
 
                 //System.out.println( "\t\t\t\td" );
-                hSign = (int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
-                vSign = (int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
+                hSign = GameMath.getSign(mover.getHVelocity());//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
+                vSign = GameMath.getSign(mover.getVVelocity());//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
                 if ( vSign < 0
                     && Math.abs( mover.getHVelocity() ) - mover.getWidth() > (Float)temp[1] )
                 { /////// maybe minus 1
                     mover.setHVelocity( hSign * ( (Float)temp[1] + mover.getWidth() ) );
-                    double slope = Math.abs( mover.getVVelocity() / mover.getHVelocity() );
+                    double slope = Math.abs( GameMath.roundToHundreths(mover.getVVelocity()) / GameMath.roundToHundreths(mover.getHVelocity() ));
                     mover.setVVelocity( vSign * (float)( slope * mover.getHVelocity() ) );
                     return CollisionType.HORIZONTAL_GROUND;
                 }
                 if ( hSign < 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2] )
                 {
-                    mover.setVVelocity( vSign * (Float)temp[2] );
-                    double slope_inverted = Math.abs( mover.getHVelocity() / mover.getVVelocity() );
-                    mover.setHVelocity( hSign * (float)( slope_inverted * getHVelocity() ) );
-                    return CollisionType.VERTICAL_GROUND;
+                    if ( ( mover.getX() - ground.getX() ) < ground.getWidth()
+                        && ( mover.getX() - ground.getX() ) > -mover.getWidth() )
+                    {
+                        mover.setVVelocity( vSign * (Float)temp[2] );
+                        double slopeInverted = Math.abs( GameMath.roundToHundreths(mover.getHVelocity()) / GameMath.roundToHundreths(mover.getVVelocity()) );
+                        mover.setHVelocity( hSign * (float)( slopeInverted * getHVelocity() ) );
+                        return CollisionType.VERTICAL_GROUND;
+                    }
                 }
                 break;
 
@@ -418,14 +422,14 @@ public abstract class Moveable extends Sprite
                        /////////////////////////////////////////////////////////////////////////////////////////////////// HERE!!!!!!!!!!!!!!!!!!!!!!!!
 
                 //System.out.println( "\t\t\t\te" );
-                hSign = (int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
-                vSign = (int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
+                hSign = GameMath.getSign(GameMath.roundToTenths(mover.getHVelocity()));//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
+                vSign = GameMath.getSign(GameMath.roundToTenths(mover.getVVelocity()));//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
                 if ( vSign > 0
-                    && Math.abs( mover.getHVelocity() ) - mover.getWidth() > (Float)temp[1] )
+                    && Math.abs( mover.getHVelocity() ) > (Float)temp[1] )
                 { /////// maybe minus 1
                     mover.setHVelocity( hSign * ( (Float)temp[1] + mover.getWidth() ) );
-                    double slope = Math.abs( mover.getVVelocity() / mover.getHVelocity() );
+                    double slope = Math.abs( GameMath.roundToHundreths(mover.getVVelocity()) / GameMath.roundToHundreths(mover.getHVelocity() ) );
                     mover.setVVelocity(
                         vSign * (float)( slope * Math.abs( mover.getHVelocity() ) ) );
                     //System.out.println( "BL_TR horiz ground ***********" );
@@ -433,12 +437,17 @@ public abstract class Moveable extends Sprite
                 }
                 if ( hSign < 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2] )
                 {
-                    mover.setVVelocity( vSign * (Float)temp[2] );
-                    double slope_inverted = Math.abs( mover.getHVelocity() / mover.getVVelocity() );
-                    mover.setHVelocity(
-                        hSign * (float)( slope_inverted * Math.abs( getHVelocity() ) ) );
-                    //System.out.println( "BL_TR vertical ground **********" );
-                    return CollisionType.VERTICAL_GROUND;
+                    if ( ( mover.getX() - ground.getX() ) < ground.getWidth()
+                        && ( mover.getX() - ground.getX() ) > -mover.getWidth() )
+                    {
+                        mover.setVVelocity( vSign * (Float)temp[2] );
+                        double slopeInverted = GameMath.roundToHundreths(mover.getHVelocity()) / GameMath.roundToHundreths(mover.getVVelocity() );
+                        mover.setHVelocity(
+                        hSign * (float)( slopeInverted * Math.abs( getHVelocity() ) ) );
+                        //System.out.println(mover.getVVelocity() + " " + GameMath.roundToHundreths(mover.getVVelocity() ));
+                        //System.out.println( "BL_TR vertical ground **********" );
+                        return CollisionType.VERTICAL_GROUND;
+                    }
                 }
 
                 break;

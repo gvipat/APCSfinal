@@ -45,6 +45,10 @@ public class EnemySprite extends Moveable
             setX(originalX);
             setY(originalY);
         }
+        if (getY() > Engine.WINDOW_HEIGHT)
+        {
+            removeMe();
+        }
         return false;
     }
 

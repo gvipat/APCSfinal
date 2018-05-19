@@ -20,6 +20,7 @@ public class Window extends JPanel
         frame.addKeyListener(new upKeyListener());
         frame.addKeyListener(new leftKeyListener());
         frame.addKeyListener(new rightKeyListener());
+        frame.addKeyListener(new PKeyListener());
         super.setVisible( true );
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +46,31 @@ public class Window extends JPanel
 
     public JFrame getFrame() {return frame;}
     
-    
+    private class PKeyListener implements KeyListener
+    {
+        public void keyTyped(KeyEvent e){}
+
+        public void keyPressed(KeyEvent e)
+        {
+            if (e.getKeyCode() == KeyEvent.VK_P)
+            {
+                if (engine.paused)
+                {
+                    engine.resume();
+                }
+                else
+                {
+                    engine.pause();
+                }
+            }
+        }
+
+        public void keyReleased(KeyEvent e)
+        {
+            
+        }
+    }
+
     private class upKeyListener implements KeyListener
     {
         public void keyTyped(KeyEvent e){}
