@@ -27,6 +27,9 @@ public class Window extends JPanel
         System.out.println( super.getSize().toString() );
         this.sprites = sprites;
         this.engine = engine;
+        
+        frame.addKeyListener(new AKeyListener());
+        frame.addKeyListener(new QKeyListener());
     }
     
     public void paintComponent(Graphics g)
@@ -53,11 +56,6 @@ public class Window extends JPanel
             {
                 engine.upKeyPressed();
             }
-            else if (e.getKeyCode() == KeyEvent.VK_Q) //TODO REMOVE WHEN DONE DEBUGGING
-            {
-                System.exit(0);
-            }
-            //System.out.println(e.getKeyCode());
         }
 
         public void keyReleased(KeyEvent e)
@@ -130,6 +128,39 @@ public class Window extends JPanel
     public void dispose()
     {
         frame.dispose();
+    }
+
+    private class AKeyListener implements KeyListener
+    {
+        public void keyTyped(KeyEvent e){}
+
+        public void keyPressed(KeyEvent e)
+        {
+            if (e.getKeyCode() == KeyEvent.VK_A)
+            {
+                engine.manualMove();;
+            }
+        }
+
+        public void keyReleased(KeyEvent e)
+        {
+            
+        }
+    }
+
+    private class QKeyListener implements KeyListener
+    {
+        public void keyTyped(KeyEvent e){}
+
+        public void keyPressed(KeyEvent e)
+        {
+            if (e.getKeyCode() == KeyEvent.VK_Q)
+            {
+                System.exit(0);
+            }
+        }
+
+        public void keyReleased(KeyEvent e){}
     }
 
 

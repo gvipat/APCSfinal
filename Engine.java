@@ -22,6 +22,8 @@ public class Engine
 
     public static final int WINDOW_HEIGHT = 600;
 
+    public static boolean DEBUG_MODE = false;
+
     private final int FPS = 30;
 
     private Timer timer;
@@ -65,18 +67,29 @@ public class Engine
     public void run()
     {
         window = new Window( WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this );
-        timer = new Timer( Math.round( ( 1 / FPS ) * 1000 ), new ActionListener()
+        if (!DEBUG_MODE)
         {
-            @Override
-            public void actionPerformed( ActionEvent e )
+            timer = new Timer( Math.round( ( 1 / FPS ) * 1000 ), new ActionListener()
             {
-                if ( move() == COMPLETED_LEVEL )
+                @Override
+                public void actionPerformed( ActionEvent e )
                 {
-                    levelComplete();
+                    if ( move() == COMPLETED_LEVEL )
+                    {
+                        levelComplete();
+                    }
                 }
-            }
-        } );
-        timer.start();
+            } );
+            timer.start();
+        }
+    }
+
+    public void manualMove()
+    {
+        if ( DEBUG_MODE && move() == COMPLETED_LEVEL )
+        {
+            levelComplete();
+        }
     }
 
 

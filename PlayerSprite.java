@@ -18,10 +18,10 @@ public class PlayerSprite extends Moveable
     public boolean move()
     {
         LinkedList<CollisionType> collideTypes = super.checkCollision();
-        System.out.println(collideTypes.toString());
+        System.out.println("Player: " + collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
         {
-            System.out.println("inside player's move et vvelociy 0");
+            //System.out.println("inside player's move et vvelociy 0");
             super.applyGravity = false;
             setVVelocity(0);
         }
@@ -65,7 +65,7 @@ public class PlayerSprite extends Moveable
             }
         }
 
-        if(collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT))
+        if (collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT))
         {
             setHVelocity(0);
             addLeft();
@@ -107,14 +107,14 @@ public class PlayerSprite extends Moveable
     {
         if (leftKeyPressed && getHVelocity() > -Moveable.MAX_H_VELOCITY)
         {
-            System.out.println("i work ***************************************************************");
+            //System.out.println("i work ***************************************************************");
             setHVelocity(getHVelocity() - 1);
         }
     }
 
     private void addJump()
     {
-        System.out.println("adding jump");
+        //System.out.println("adding jump");
         setVVelocity(-5);
         applyGravity = true;
     }

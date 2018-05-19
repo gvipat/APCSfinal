@@ -18,17 +18,24 @@ public class EnemySprite extends Moveable
         //Only begin rendering once off screen
         if (getX() <= Engine.camera + Engine.WINDOW_WIDTH)
         {
-            super.addGravity();
             LinkedList<CollisionType> collideTypes = checkCollision();
+            System.out.println("Enemy: " + collideTypes.toString() + "\n\n");
             if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
             {
                 super.applyGravity = false;
                 setVVelocity(0);
             }
-            if (collideTypes.contains(CollisionType.NO_COLLISION))
+            else if (collideTypes.contains(CollisionType.NO_COLLISION))
             {
                 super.applyGravity = true;
             }
+            if (collideTypes.contains(CollisionType.CONTACT))
+            {
+                super.applyGravity = false;
+                setVVelocity(0);
+            }
+            setHVelocity(-1);
+            super.addGravity();
             setX(getX() + getHVelocity());
             setY(getY() + getVVelocity());
         }
