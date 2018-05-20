@@ -19,7 +19,7 @@ public class PlayerSprite extends Moveable
     {
         LinkedList<CollisionType> collideTypes = super.checkCollision();
         System.out.print("Player: " + collideTypes.toString());
-        if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
+        if (collideTypes.contains(CollisionType.VERTICAL_GROUND_OVER))
         {
             //System.out.println("inside player's move et vvelociy 0");
             super.applyGravity = false;
@@ -29,9 +29,9 @@ public class PlayerSprite extends Moveable
         {
             super.applyGravity = true;
         }
-        if (collideTypes.contains(CollisionType.HORIZONTAL_GROUND))
+        if (collideTypes.contains(CollisionType.VERTICAL_GROUND_UNDER))
         {
-            setHVelocity(0);
+            setVVelocity(-1);
         }
         if (collideTypes.contains(CollisionType.HORIZONTAL_ENEMY))
         {
@@ -65,12 +65,12 @@ public class PlayerSprite extends Moveable
             }
         }
 
-        if (collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_LEFT))
+        if (collideTypes.contains(CollisionType.HORIZONTAL_GROUND_FROM_LEFT))
         {
             setHVelocity(0);
             addLeft();
         }
-        else if (collideTypes.contains(CollisionType.STRAIGHT_HORIZONTAL_GROUND_FROM_RIGHT))
+        else if (collideTypes.contains(CollisionType.HORIZONTAL_GROUND_FROM_RIGHT))
         {
             setHVelocity(0);
             addRight();
@@ -87,7 +87,7 @@ public class PlayerSprite extends Moveable
         {
             kms();
         }
-        System.out.println("X: " + getX() + " Y: " + getY());
+        System.out.println("X: " + getX() + " Y: " + getY() + "HVelocity " + getHVelocity());
         return false;
     }
 

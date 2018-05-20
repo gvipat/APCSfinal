@@ -20,12 +20,12 @@ public class Game
      */
     public static void main( String[] args )
     {
-        System.out.println(args[0]);
-        if (args[0].equals("-s"))
+        //System.out.println(args[0]);
+        if (args.length > 0 && args[0].equals("-s"))
         {
             playGame();
         }
-        else if (args[0].equals("-d"))
+        else if (args.length > 0 && args[0].equals("-d"))
         {
             Engine.DEBUG_MODE = true;
             playGame();

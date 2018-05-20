@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.PriorityQueue;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
@@ -279,6 +280,7 @@ public class Engine
      */
     private void openDeathScreen()
     {
+        JFrame frame = new JFrame("You Died...");
         JPopupMenu exitOption = new JPopupMenu();
         JButton exit = new JButton( "Exit" );
         exit.addActionListener( new ActionListener()
@@ -303,9 +305,17 @@ public class Engine
                 level.restart();
             }
         } );
+        exit.setMinimumSize(exitOption.getSize());
         exitOption.add( restart );
-        exitOption.setAlignmentX( (float)100 );
-        exitOption.setVisible( true );
+        exitOption.pack();
+        exitOption.setMinimumSize(exitOption.getSize());
+        frame.setVisible(true);
+        exitOption.setVisible(true);
+        frame.setAlwaysOnTop(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(exitOption);
+        frame.setLocationRelativeTo(window);
+        frame.pack();
 
     }
 

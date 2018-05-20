@@ -24,12 +24,14 @@ public class Level
     private final Sprite[][] sprites =
 
 
-                    { { new PlayerSprite( 5, 5, 20, 20, Color.BLUE ),
+                    { /*{ new PlayerSprite( 5, 5, 20, 20, Color.BLUE ),
                         new GroundSprite( 0, 400, 1000, 40 ),
                         new GroundSprite( 300, 200, 1000, 40 ),
                         new GroundSprite( 400, 360, 1000, 40 ),
-                        new EnemySprite(500, 100, 20, 20, Color.RED) },
-                        { new PlayerSprite( 5, 5, 20, 20, Color.ORANGE ) } };
+                        new EnemySprite(500, 100, 20, 20, Color.RED) },*/
+                        { new PlayerSprite( 5, 5, 20, 20, Color.ORANGE ),
+                        new GroundSprite(0, 400, 1000, 40),
+                        new GroundSprite(400, 320, 100, 40) } };
 
     /**
      * Represents what the current row to read when opening the level.

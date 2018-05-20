@@ -20,7 +20,7 @@ public class EnemySprite extends Moveable
         {
             LinkedList<CollisionType> collideTypes = checkCollision();
             System.out.println("Enemy: " + collideTypes.toString() + "\n\n");
-            if (collideTypes.contains(CollisionType.VERTICAL_GROUND))
+            if (collideTypes.contains(CollisionType.VERTICAL_GROUND_OVER))
             {
                 super.applyGravity = false;
                 setVVelocity(0);
