@@ -4,9 +4,9 @@ public class EnemySprite extends Moveable
 {
     private int originalX;
     private int originalY;
-    public EnemySprite(int x, int y, int width, int height, Color color)
+    public EnemySprite(int x, int y, int width, int height, Color color, String named)
     {
-        super(x, y, width, height, color);
+        super(x, y, width, height, color, named);
         originalX = x;
         originalY = y;
         setHVelocity((float)-0.5);
@@ -59,6 +59,6 @@ public class EnemySprite extends Moveable
 
     public Sprite copy()
     {
-        return new EnemySprite(getX(), getY(), getWidth(), getHeight(), getColor());
+        return new EnemySprite(getX(), getY(), getWidth(), getHeight(), getColor(), getName());
     }
 }

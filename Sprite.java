@@ -40,6 +40,9 @@ public abstract class Sprite implements Comparable<Sprite>
      */
     private Color color;
 
+    private String name;
+    
+    
     /**
      * 
      */
@@ -141,6 +144,10 @@ public abstract class Sprite implements Comparable<Sprite>
         return color;
     }
 
+    public String getName()
+    {
+        return name;
+    }
 
     /**
      * TODO Write your method description here.
@@ -152,6 +159,7 @@ public abstract class Sprite implements Comparable<Sprite>
         death = die;
     }
 
+    
 
     /**
      * TODO Write your method description here.
@@ -211,13 +219,14 @@ public abstract class Sprite implements Comparable<Sprite>
      * @param color
      *            the color of the new sprite
      */
-    public Sprite( int x, int y, int width, int height, Color color )
+    public Sprite( int x, int y, int width, int height, Color color, String named )
     {
         xPos = x;
         yPos = y;
         this.width = width;
         this.height = height;
         this.color = color;
+        name = named;
     }
 
 

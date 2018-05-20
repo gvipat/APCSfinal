@@ -9,9 +9,9 @@ public class PlayerSprite extends Moveable
 
     private boolean leftKeyPressed = false;
 
-    public PlayerSprite(int x, int y, int width, int height, Color color)
+    public PlayerSprite(int x, int y, int width, int height, Color color, String named)
     {
-        super(x, y, width, height, color);
+        super(x, y, width, height, color, named);
         this.compareValue++;
     }
 
@@ -31,7 +31,8 @@ public class PlayerSprite extends Moveable
         }
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND_UNDER))
         {
-            setVVelocity(-1);
+            setVVelocity(1);
+            
         }
         if (collideTypes.contains(CollisionType.HORIZONTAL_ENEMY))
         {
@@ -87,7 +88,7 @@ public class PlayerSprite extends Moveable
         {
             kms();
         }
-        System.out.println("X: " + getX() + " Y: " + getY() + "HVelocity " + getHVelocity());
+        System.out.println("X: " + getX() + "HVelocity " + getHVelocity());
         return false;
     }
 
@@ -157,6 +158,6 @@ public class PlayerSprite extends Moveable
 
     public Sprite copy()
     {
-        return new PlayerSprite(getX(), getY(), getWidth(), getHeight(), getColor());
+        return new PlayerSprite(getX(), getY(), getWidth(), getHeight(), getColor(), getName());
     }
 }

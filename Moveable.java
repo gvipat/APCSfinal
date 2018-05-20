@@ -2,7 +2,9 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.LinkedList;
 
-
+//Description of what print statements active
+//**** signifies going into (non-corner based) v collision stuff
+//followed by cornertype print statement
 public abstract class Moveable extends Sprite
 {
     private float horizontalVelocity;
@@ -41,9 +43,9 @@ public abstract class Moveable extends Sprite
     public abstract boolean move();
 
 
-    public Moveable( int x, int y, int width, int height, Color color )
+    public Moveable( int x, int y, int width, int height, Color color, String named )
     {
-        super( x, y, width, height, color );
+        super( x, y, width, height, color, named );
         this.compareValue++;
     }
 
@@ -185,7 +187,7 @@ public abstract class Moveable extends Sprite
         Sprite tempSprite = new GroundSprite( Math.round( enemy.getX() + enemy.getHVelocity() ),
             Math.round( enemy.getY() + enemy.getVVelocity() ),
             enemy.getWidth(),
-            enemy.getHeight() );
+            enemy.getHeight() , "tempSprite");
         CollisionType playerTempCollision = checkCollision_OneMoveable( player, tempSprite );
         if ( playerTempCollision == CollisionType.HORIZONTAL_GROUND_FROM_LEFT || playerTempCollision == CollisionType.HORIZONTAL_GROUND_FROM_RIGHT )
         {
@@ -214,11 +216,11 @@ public abstract class Moveable extends Sprite
     {
         Object[] temp = checkCorners( mover, ground );
 
-        //System.out.println("//////////////////////////////////////////////////");
+        //System.commented.out.println("//////////////////////////////////////////////////");
         //System.out.print("v = " + mover.getVVelocity() + "dc = " + GameMath.roundToHundreths(mover.getVVelocity()));
         //System.out.print("h = " + mover.getHVelocity() + "dist = " + (Float)temp[1]);
 
-
+        
 
         if (Math.abs( mover.getHVelocity())   >= (Float)temp[1]
             && (mover.getBotLeftCorner().y <= ground.getBotLeftCorner().y + mover.getHeight()
@@ -226,7 +228,7 @@ public abstract class Moveable extends Sprite
                 && mover.getY() - ground.getY() < ground.getHeight()
                 && mover.getY() - ground.getY() > -mover.getY()))
         {
-            //System.out.println("\t\t\t straight horizontal");
+            //System.commented.out.println("\t\t\t straight horizontal");
             //mover.setHVelocity(0);
             mover.setHVelocity((Float)temp[1] * GameMath.getSign(mover.getHVelocity()) );
            // System.out.println(mover.getHVelocity() + "***************************");
@@ -240,14 +242,20 @@ public abstract class Moveable extends Sprite
                 return CollisionType.HORIZONTAL_GROUND_FROM_RIGHT;
             }
         }
-
+        if (ground.getName().equals( "hanging 1" ))
+        {
+            System.out.println( "groundName : " + ground.getName() + "; V velocity = " 
+        + mover.getVVelocity() + " y distance = " + temp[2] + "Y__" + mover.getY() + " groundY+height" + (ground.getY() + ground.getHeight()));
+        }
+        
         // System.out.println( "a = " + temp[1] + "** b =" + temp[2] +
         // "*************" );
         if ( /*GameMath.roundToHundreths( mover.getHVelocity() ) == 0 &&*/
-             ((mover.getY() < ground.getY() && mover.getVVelocity()  > (Float)temp[2]) ||
-             (mover.getY()> ground.getY() && -mover.getVVelocity() > (Float)temp[2]) ) )
+             (mover.getY() < ground.getY() && mover.getVVelocity()  > (Float)temp[2]) ||
+             (mover.getY() >= (ground.getY()  + ground.getHeight()) && -mover.getVVelocity() > (Float)temp[2]) ) 
         {
-            System.out.println("************************************************");
+            
+            System.out.println(" ********************************** + "  + ground.getName());
             if ( !( ( mover.getX() - ground.getX() ) < ground.getWidth()
                 && ( mover.getX() - ground.getX() ) > -mover.getWidth() ) )
             {
@@ -258,15 +266,17 @@ public abstract class Moveable extends Sprite
                 applyGravity = false;
                 mover.setVVelocity(
                     (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) ) ;
-                //System.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
+                mover.setY( mover.getY() + mover.getVVelocity() );
+                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
                 return CollisionType.VERTICAL_GROUND_OVER;
             }
-            if ( mover.getY() > (ground.getY() + ground.getHeight()) )
+            if ( mover.getY() >= (ground.getY() + ground.getHeight()) )
             {
+                System.out.println( "\t\t\t\t\t\tinside STRAIGHT VERTICAL GROUND UNDER!" );
                 mover.setVVelocity(
                     (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) );
-                setY(mover.getY() + mover.getVVelocity());
-                //System.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
+                mover.setY(mover.getY() + mover.getVVelocity());
+                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
                 return CollisionType.VERTICAL_GROUND_UNDER;
             }
 
@@ -275,11 +285,11 @@ public abstract class Moveable extends Sprite
         int hSign;
         int vSign;
 
-        System.out.println( (CornerType)temp[0] + "corner type" );
+        System.out.println( "spriteName = " + ground.getName() + " corner type" + (CornerType)temp[0]  );
         switch ( (CornerType)temp[0] )
         {
             case PERF_CNTCT:
-                //System.out.println( "\t\t\t\tb" );
+                //System.commented.out.println( "\t\t\t\tb" );
                 return CollisionType.CONTACT;
 
             case BL_TL:
@@ -347,7 +357,7 @@ public abstract class Moveable extends Sprite
                 }
                 break;
             // case TL_BL:
-            // //System.out.println("TLBL************");
+            // //System.commented.out.println("TLBL************");
             // hSign = (int) (Math.abs(mover.getHVelocity()) /
             // mover.getHVelocity());
             // vSign = (int) (Math.abs(mover.getVVelocity()) /
@@ -374,7 +384,7 @@ public abstract class Moveable extends Sprite
             // break;
 
             case TR_BL: // doned
-                //System.out.println( "\t\t\t\tc" );
+                //System.commented.out.println( "\t\t\t\tc" );
                 hSign = GameMath.getSign(mover.getHVelocity());//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
                 vSign = GameMath.getSign(mover.getVVelocity());//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
@@ -409,7 +419,7 @@ public abstract class Moveable extends Sprite
 
             case TL_BR:
 
-                //System.out.println( "\t\t\t\td" );
+                //System.commented.out.println( "\t\t\t\td" );
                 hSign = GameMath.getSign(mover.getHVelocity());//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
                 vSign = GameMath.getSign(mover.getVVelocity());//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
@@ -445,7 +455,7 @@ public abstract class Moveable extends Sprite
             case BL_TR://///////////////////////////////////////////////////////////////////////////////////////////////// PROBLEM
                        /////////////////////////////////////////////////////////////////////////////////////////////////// HERE!!!!!!!!!!!!!!!!!!!!!!!!
 
-                //System.out.println( "\t\t\t\te" );
+                //System.commented.out.println( "\t\t\t\te" );
                 hSign = GameMath.getSign(GameMath.roundToTenths(mover.getHVelocity()));//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
                 vSign = GameMath.getSign(GameMath.roundToTenths(mover.getVVelocity()));//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
@@ -457,7 +467,7 @@ public abstract class Moveable extends Sprite
             //         //mover.setVVelocity(
             //         //    vSign * (float)( slope * Math.abs( mover.getHVelocity() ) ) );
             //         mover.setVVelocity(0);
-            //         //System.out.println( "BL_TR horiz ground ***********" );
+            //         //System.commented.out.println( "BL_TR horiz ground ***********" );
             //         if (mover.getX() < ground.getX())
             // {
             //     //return CollisionType.HORIZONTAL_GROUND_FROM_LEFT;
@@ -476,8 +486,8 @@ public abstract class Moveable extends Sprite
                         double slopeInverted = GameMath.roundToHundreths(mover.getHVelocity()) / GameMath.roundToHundreths(mover.getVVelocity() );
                         mover.setHVelocity(
                         hSign * (float)( slopeInverted * Math.abs( getHVelocity() ) ) );
-                        //System.out.println(mover.getVVelocity() + " " + GameMath.roundToHundreths(mover.getVVelocity() ));
-                        //System.out.println( "BL_TR vertical ground **********" );
+                        //System.commented.out.println(mover.getVVelocity() + " " + GameMath.roundToHundreths(mover.getVVelocity() ));
+                        //System.commented.out.println( "BL_TR vertical ground **********" );
                         return CollisionType.VERTICAL_GROUND_OVER;
                     }
                 }
@@ -486,7 +496,7 @@ public abstract class Moveable extends Sprite
 
             case BR_TL:
 
-                //System.out.println( "\t\t\t\tf" );
+                //System.commented.out.println( "\t\t\t\tf" );
                 hSign = GameMath.getSign(mover.getHVelocity());//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
                 vSign = GameMath.getSign(mover.getVVelocity());//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
@@ -527,7 +537,7 @@ public abstract class Moveable extends Sprite
                 break;
 
             case TL_BL:
-                //System.out.println( "\t\t\t\tq" );
+                //System.commented.out.println( "\t\t\t\tq" );
                 hSign = GameMath.getSign(mover.getHVelocity());//(int)( Math.abs( mover.getHVelocity() ) / mover.getHVelocity() );
                 vSign = GameMath.getSign(mover.getVVelocity());//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
@@ -565,7 +575,7 @@ public abstract class Moveable extends Sprite
 
         }
 
-        //System.out.println( "\t\t\t\tg" );
+        //System.commented.out.println( "\t\t\t\tg" );
         return CollisionType.NO_COLLISION;
 
     }
@@ -652,11 +662,11 @@ public abstract class Moveable extends Sprite
 
         // if(DecimalRounder.roundToTenths((float)a) == 1 ||
         // DecimalRounder.roundToTenths((float)b)==1){
-        // //System.out.println( "perfect contacting" );
+        // //System.commented.out.println( "perfect contacting" );
 
         // c = CornerType.PERF_CNTCT;
 
-        // //System.out.println( "check corners: perf_cnct" );
+        // //System.commented.out.println( "check corners: perf_cnct" );
 
         // // if (a > b)
         // // {
@@ -675,7 +685,7 @@ public abstract class Moveable extends Sprite
         {
             c = CornerType.PERF_CNTCT;
         }
-        //System.out.println( "THIS IS B: " + b );
+        //System.commented.out.println( "THIS IS B: " + b );
 
         Object[] thing = new Object[4];
         thing[0] = c;

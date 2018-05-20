@@ -29,9 +29,9 @@ public class Level
                         new GroundSprite( 300, 200, 1000, 40 ),
                         new GroundSprite( 400, 360, 1000, 40 ),
                         new EnemySprite(500, 100, 20, 20, Color.RED) },*/
-                        { new PlayerSprite( 5, 5, 20, 20, Color.ORANGE ),
-                        new GroundSprite(0, 400, 1000, 40),
-                        new GroundSprite(400, 320, 100, 40) } };
+                        { new PlayerSprite( 300, 300, 20, 20, Color.ORANGE, "player" ),
+                        new GroundSprite(0, 400, 1000, 40, "floor"),
+                        new GroundSprite(400, 280, 500, 40, "hanging 1") } };
 
     /**
      * Represents what the current row to read when opening the level.
