@@ -36,7 +36,7 @@ public class Level
                         new EnemySprite(1700, 100, 20, 20, Color.RED) },
                         { new PlayerSprite( 200, 300, 20, 20, Color.ORANGE, "player" ),
                         new GroundSprite(0, 400, 1000, 40, "floor"),
-                        new GroundSprite(400, 280, 500, 120, "hanging 1") } };
+                        new GroundSprite(400, 280, 500, 120, "hanging 1") }};
 
     /**
      * Represents what the current row to read when opening the level.
@@ -48,7 +48,7 @@ public class Level
      */
     private Engine engine;
 
-    private static final int[] levelEndZones = {2400, 500};
+    private static final int[] levelEndZones = {2400, 1000};
 
 
     /**
