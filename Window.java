@@ -31,6 +31,11 @@ public class Window extends JPanel
     private Engine engine;
 
     /**
+     * holds all non sprite entities
+     */
+    private StaticImage[] images;
+
+    /**
      * Constructor
      * @param height the height of the window
      * @param width the width of the window
@@ -71,6 +76,7 @@ public class Window extends JPanel
         for (Sprite s : sprites)
         {
             g.setColor(s.getColor());
+            g.drawLine();
             g.fillRect(s.getX() - Engine.camera, s.getY(),
                 s.getWidth(), s.getHeight());
         }
