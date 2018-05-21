@@ -298,7 +298,7 @@ public class Engine
      */
     private void openDeathScreen()
     {
-        JFrame frame = new JFrame("You Died...");
+        final JFrame frame = new JFrame("You Died...");
         JButton exit = new JButton( "Exit" );
         exit.addActionListener( new ActionListener()
         {
