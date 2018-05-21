@@ -1,7 +1,13 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -25,7 +31,7 @@ public class Level
 
 
                     { { new PlayerSprite( 5, 5, 20, 20, Color.BLUE ),
-                        new GroundSprite( 0, 400, 1000, 40 ),
+                        new GroundSprite( 0, 400, 1000, 40),
                         new GroundSprite( 300, 240, 2000, 40 ),
                         new GroundSprite( 400, 360, 2000, 40 ),
                         //new GroundSprite(300, 180, 20, 20),
@@ -88,7 +94,7 @@ public class Level
     /**
      * Opens the next level by making a new level. If there are no more levels, show the win screen.
      */
-    public void nextLevel(JFrame gameFrame)
+    public void nextLevel()
     {
         level++;
         if ( level < sprites.length )
@@ -114,7 +120,7 @@ public class Level
             } );
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(300, 200);
-            frame.setLocationRelativeTo(gameFrame);
+            frame.setLocationRelativeTo(null);
             frame.setVisible( true );
             button.setVisible( true );
             label.setVisible( true );
@@ -136,4 +142,19 @@ public class Level
     {
         return levelEndZones[level];
     }
+
+    // public static Image readImage(String path)
+    // {
+    //     Image img;
+    //     try 
+    //     {
+    //         img = ImageIO.read(new File(path));
+    //         return img;
+    //     }
+    //     catch (IOException e)
+    //     {
+	// 		e.printStackTrace();
+	// 	}
+    //     return null;
+    // }
 }

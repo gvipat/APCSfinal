@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 //name is only for default color sprite
 public class GroundSprite extends Sprite
 {

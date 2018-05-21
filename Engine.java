@@ -289,7 +289,7 @@ public class Engine
     private void levelComplete()
     {
         kill();
-        level.nextLevel(window.getFrame());
+        level.nextLevel();
     }
 
 

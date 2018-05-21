@@ -50,10 +50,6 @@ public class EnemySprite extends Moveable
                 direction *= -1;
                 setX(getX() + 2 * direction);
             }
-            if (Math.random() < 0.01)
-            {
-               // setVVelocity(-1);
-            }
             setHVelocity(1 * direction);
             super.addGravity();
             setX(getX() + getHVelocity());

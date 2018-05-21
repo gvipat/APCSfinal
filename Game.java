@@ -64,6 +64,7 @@ public class Game
             }
         });
         window.add( playButton );
+        window.setLocationRelativeTo(null);
         window.setVisible( true );
     }
 

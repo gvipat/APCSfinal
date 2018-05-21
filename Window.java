@@ -35,6 +35,8 @@ public class Window extends JPanel
      */
     private StaticImage[] images;
 
+
+
     /**
      * Constructor
      * @param height the height of the window
@@ -54,6 +56,7 @@ public class Window extends JPanel
         frame.addKeyListener(new leftKeyListener());
         frame.addKeyListener(new rightKeyListener());
         frame.addKeyListener(new PKeyListener());
+        frame.setLocationRelativeTo(null);
         super.setVisible( true );
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,13 +76,29 @@ public class Window extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        drawFlag(g);
         //g.drawLine();
+        //System.out.println(sprites);
         for (Sprite s : sprites)
         {
             g.setColor(s.getColor());
             g.fillRect(s.getX() - Engine.camera, s.getY(),
                 s.getWidth(), s.getHeight());
-        }
+        }     
+    }
+
+    private void drawFlag(Graphics g)
+    {
+        g.setColor(Color.ORANGE);
+        g.fillRect(Level.getLevelEndZone() - 50 - Engine.camera, 0, 50, Engine.WINDOW_HEIGHT);
+
+        int[] flagX = {Level.getLevelEndZone() - Engine.camera,
+            Level.getLevelEndZone() + 200 - Engine.camera,
+            Level.getLevelEndZone() - Engine.camera};
+        int[] flagY = {0, 49, 99};
+
+        g.setColor(Color.RED);
+        g.fillPolygon(flagX, flagY, 3);
     }
 
     /**
