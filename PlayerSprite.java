@@ -127,7 +127,7 @@ public class PlayerSprite extends Moveable
     private void addJump()
     {
         //System.out.println("adding jump");
-        setVVelocity(-5);
+        setVVelocity(-4);
         applyGravity = true;
     }
 

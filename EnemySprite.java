@@ -2,8 +2,9 @@ import java.awt.Color;
 import java.util.LinkedList;
 public class EnemySprite extends Moveable
 {
-    private int originalX;
-    private int originalY;
+    protected int originalX;
+    protected int originalY;
+    protected int direction = -1;
     public EnemySprite(int x, int y, int width, int height, Color color, String named)
     {
         super(x, y, width, height, color, named);
@@ -18,7 +19,7 @@ public class EnemySprite extends Moveable
         super(x, y, width, height, color, "");
         originalX = x;
         originalY = y;
-        setHVelocity((float)-0.5);
+        setHVelocity((float)(1 * direction));
         this.compareValue = 1;
     }
 
@@ -43,7 +44,13 @@ public class EnemySprite extends Moveable
                 super.applyGravity = false;
                 setVVelocity(0);
             }
-            setHVelocity(-1);
+            if (collideTypes.contains(CollisionType.HORIZONTAL_GROUND_FROM_LEFT)
+            || collideTypes.contains(CollisionType.HORIZONTAL_GROUND_FROM_RIGHT))
+            {
+                direction *= -1;
+                setX(getX() + direction);
+            }
+            setHVelocity(1 * direction);
             super.addGravity();
             setX(getX() + getHVelocity());
             setY(getY() + getVVelocity());
@@ -69,6 +76,7 @@ public class EnemySprite extends Moveable
     {
         setX(originalX);
         setY(originalY);
+        direction = -1;
         if (getX() <= Engine.camera + Engine.WINDOW_WIDTH)
         {
             return false;

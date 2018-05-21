@@ -66,7 +66,7 @@ public class Engine
     /**
      * Defines how many times per second to execute the move method for each sprite.
      */
-    private final int FPS = 480;
+    private final int FPS = 120;
 
     /**
      * Represents if the game is paused or not.
