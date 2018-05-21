@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Point;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 //Description of what print statements active
@@ -94,8 +95,10 @@ public abstract class Moveable extends Sprite
     {
         LinkedList<CollisionType> list = new LinkedList<CollisionType>();
 
-        for ( Sprite s : Engine.sprites )
+        Iterator<Sprite> iter = Engine.sprites.iterator();
+        while (iter.hasNext())
         {
+            Sprite s = iter.next();
             if ( s != this )
             {
                 // if (Math.abs(this.getX() - s.getX()) < 4 * MAX_H_VELOCITY + 1
@@ -202,7 +205,7 @@ public abstract class Moveable extends Sprite
             }
             if ( player.getVVelocity() > 0 )
             {
-                Engine.sprites.remove( enemy );
+                enemy.isDead = true;
                 return CollisionType.OVER_ENEMY;
             }
         }
@@ -221,6 +224,46 @@ public abstract class Moveable extends Sprite
         //System.out.print("h = " + mover.getHVelocity() + "dist = " + (Float)temp[1]);
 
         
+
+        if (ground.getName().equals( "hanging 1" ))
+        {
+            //System.out.println( "groundName : " + ground.getName() + "; V velocity = " 
+        //+ mover.getVVelocity() + " y distance = " + temp[2] + "Y__" + mover.getY() + " groundY+height" + (ground.getY() + ground.getHeight()));
+        }
+        
+        // System.out.println( "a = " + temp[1] + "** b =" + temp[2] +
+        // "*************" );
+        if ( /*GameMath.roundToHundreths( mover.getHVelocity() ) == 0 &&*/
+             (mover.getY() < ground.getY() && mover.getVVelocity()  > (Float)temp[2]) ||
+             (mover.getY() >= (ground.getY()  + ground.getHeight()) && -mover.getVVelocity() > (Float)temp[2]) ) 
+        {
+            
+            //System.out.println(" ********************************** + "  + ground.getName());
+            if ( !( ( mover.getX() - ground.getX() ) < ground.getWidth()
+                && ( mover.getX() - ground.getX() ) > -mover.getWidth() ) )
+            {
+                return CollisionType.NO_COLLISION;
+            } // Roshan explains
+            if ( mover.getY() < ground.getY() )
+            {
+                applyGravity = false;
+                mover.setVVelocity(
+                    (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) ) ;
+                mover.setY( mover.getY() + mover.getVVelocity() );
+                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
+                return CollisionType.VERTICAL_GROUND_OVER;
+            }
+            if ( mover.getY() >= (ground.getY() + ground.getHeight()) )
+            {
+                //System.out.println( "\t\t\t\t\t\tinside STRAIGHT VERTICAL GROUND UNDER!" );
+                mover.setVVelocity(
+                    (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) );
+                mover.setY(mover.getY() + mover.getVVelocity());
+                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
+                return CollisionType.VERTICAL_GROUND_UNDER;
+            }
+
+        }
 
         if (Math.abs( mover.getHVelocity())   >= (Float)temp[1]
             && (mover.getBotLeftCorner().y <= ground.getBotLeftCorner().y + mover.getHeight()
@@ -242,50 +285,11 @@ public abstract class Moveable extends Sprite
                 return CollisionType.HORIZONTAL_GROUND_FROM_RIGHT;
             }
         }
-        if (ground.getName().equals( "hanging 1" ))
-        {
-            System.out.println( "groundName : " + ground.getName() + "; V velocity = " 
-        + mover.getVVelocity() + " y distance = " + temp[2] + "Y__" + mover.getY() + " groundY+height" + (ground.getY() + ground.getHeight()));
-        }
-        
-        // System.out.println( "a = " + temp[1] + "** b =" + temp[2] +
-        // "*************" );
-        if ( /*GameMath.roundToHundreths( mover.getHVelocity() ) == 0 &&*/
-             (mover.getY() < ground.getY() && mover.getVVelocity()  > (Float)temp[2]) ||
-             (mover.getY() >= (ground.getY()  + ground.getHeight()) && -mover.getVVelocity() > (Float)temp[2]) ) 
-        {
-            
-            System.out.println(" ********************************** + "  + ground.getName());
-            if ( !( ( mover.getX() - ground.getX() ) < ground.getWidth()
-                && ( mover.getX() - ground.getX() ) > -mover.getWidth() ) )
-            {
-                return CollisionType.NO_COLLISION;
-            } // Roshan explains
-            if ( mover.getY() < ground.getY() )
-            {
-                applyGravity = false;
-                mover.setVVelocity(
-                    (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) ) ;
-                mover.setY( mover.getY() + mover.getVVelocity() );
-                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
-                return CollisionType.VERTICAL_GROUND_OVER;
-            }
-            if ( mover.getY() >= (ground.getY() + ground.getHeight()) )
-            {
-                System.out.println( "\t\t\t\t\t\tinside STRAIGHT VERTICAL GROUND UNDER!" );
-                mover.setVVelocity(
-                    (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) );
-                mover.setY(mover.getY() + mover.getVVelocity());
-                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
-                return CollisionType.VERTICAL_GROUND_UNDER;
-            }
-
-        }
 
         int hSign;
         int vSign;
 
-        System.out.println( "spriteName = " + ground.getName() + " corner type" + (CornerType)temp[0]  );
+        //System.out.println( "spriteName = " + ground.getName() + " corner type" + (CornerType)temp[0]  );
         switch ( (CornerType)temp[0] )
         {
             case PERF_CNTCT:
@@ -501,7 +505,7 @@ public abstract class Moveable extends Sprite
                 vSign = GameMath.getSign(mover.getVVelocity());//(int)( Math.abs( mover.getVVelocity() ) / mover.getVVelocity() );
 
 
-                System.out.println("hVelocity : " + mover.getHVelocity() + " x distance: "+ temp[1]);
+                //System.out.println("hVelocity : " + mover.getHVelocity() + " x distance: "+ temp[1]);
                 // if ( vSign > 0
                 //     && Math.abs( mover.getHVelocity() )  >= (Float)temp[1] )
                 // { /////// maybe minus 1

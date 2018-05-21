@@ -1,12 +1,22 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
+
+import javafx.scene.layout.Border;
 
 
 /**
@@ -91,6 +101,8 @@ public class Engine
      */
     private Level level;
 
+    private static ArrayList<EnemySprite> deadSprites = new ArrayList<EnemySprite>();
+
 
     /**
      * Constructor
@@ -165,8 +177,10 @@ public class Engine
      */
     private boolean move()
     {
-        for ( Sprite s : sprites )
+        Iterator<Sprite> aliveIter = Engine.sprites.iterator();
+        while (aliveIter.hasNext())
         {
+            Sprite s = aliveIter.next();
             if ( s instanceof Moveable )
             {
                 if ( ( (Moveable)s ).move() == COMPLETED_LEVEL )
@@ -186,7 +200,11 @@ public class Engine
                     }
                     else
                     {
-                        removeSprite( s );
+                        if (s instanceof EnemySprite)
+                        {
+                            deadSprites.add((EnemySprite)s);
+                            aliveIter.remove();
+                        }
                     }
                 }
 
@@ -196,18 +214,18 @@ public class Engine
         {
             camera = player.getX() - CAMERA_THRESHOLD;
         }
+        Iterator<EnemySprite> deadIter = deadSprites.iterator();
+        while (deadIter.hasNext())
+        {
+            EnemySprite temp = deadIter.next();
+            if (temp.reset())
+            {
+                sprites.add(temp);
+                deadIter.remove();
+            }
+        }
         window.getFrame().repaint();
         return false;
-    }
-
-
-    /**
-     * Removes a sprite from the priority queue so that it will no longer be in the level anymore.
-     * @param toBeRemoved
-     */
-    public void removeSprite( Sprite toBeRemoved )
-    {
-        sprites.remove( toBeRemoved );
     }
 
 
@@ -271,7 +289,7 @@ public class Engine
     private void levelComplete()
     {
         kill();
-        level.nextLevel();
+        level.nextLevel(window.getFrame());
     }
 
 
@@ -281,7 +299,6 @@ public class Engine
     private void openDeathScreen()
     {
         JFrame frame = new JFrame("You Died...");
-        JPopupMenu exitOption = new JPopupMenu();
         JButton exit = new JButton( "Exit" );
         exit.addActionListener( new ActionListener()
         {
@@ -291,8 +308,6 @@ public class Engine
                 System.exit( 0 );
             }
         } );
-        exitOption.add( exit );
-
         JButton restart = new JButton( "Restart" );
         restart.addActionListener( new ActionListener()
         {
@@ -300,22 +315,18 @@ public class Engine
             public void actionPerformed( ActionEvent e )
             {
                 kill();
-                exitOption.setVisible( false );
-                exitOption.setEnabled( false );
+                frame.dispose();
                 level.restart();
             }
         } );
-        exit.setMinimumSize(exitOption.getSize());
-        exitOption.add( restart );
-        exitOption.pack();
-        exitOption.setMinimumSize(exitOption.getSize());
+        frame.add(restart);
+        frame.add(exit , BorderLayout.AFTER_LAST_LINE);
+        frame.setMinimumSize(new Dimension(400, 200));
+        frame.setSize(400, 200);
         frame.setVisible(true);
-        exitOption.setVisible(true);
         frame.setAlwaysOnTop(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(exitOption);
         frame.setLocationRelativeTo(window);
-        frame.pack();
 
     }
 
@@ -326,6 +337,8 @@ public class Engine
     public void kill()
     {
         timer.stop();
+        Engine.sprites.removeAll(Engine.sprites);
+        Engine.deadSprites.removeAll(Engine.deadSprites);
         window.setVisible( false );
         window.setEnabled( false );
         window.dispose();

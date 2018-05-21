@@ -12,13 +12,19 @@ public class PlayerSprite extends Moveable
     public PlayerSprite(int x, int y, int width, int height, Color color, String named)
     {
         super(x, y, width, height, color, named);
-        this.compareValue++;
+        this.compareValue = 2;
+    }
+
+    public PlayerSprite(int x, int y, int width, int height, Color color)
+    {
+        super(x, y, width, height, color, "");
+        this.compareValue = 2;
     }
 
     public boolean move()
     {
         LinkedList<CollisionType> collideTypes = super.checkCollision();
-        System.out.print("Player: " + collideTypes.toString());
+        //System.out.print("Player: " + collideTypes.toString());
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND_OVER))
         {
             //System.out.println("inside player's move et vvelociy 0");
@@ -88,7 +94,11 @@ public class PlayerSprite extends Moveable
         {
             kms();
         }
-        System.out.println("X: " + getX() + "HVelocity " + getHVelocity());
+        //System.out.println("X: " + getX() + "HVelocity " + getHVelocity());
+        if (Level.getLevelEndZone() > 0 && getX() > Level.getLevelEndZone())
+        {
+            return true;
+        }
         return false;
     }
 
