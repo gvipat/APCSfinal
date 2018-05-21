@@ -121,6 +121,8 @@ public class Level
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(300, 200);
             frame.setLocationRelativeTo(null);
+            frame.setAlwaysOnTop(true);
+            frame.setResizable(false);
             frame.setVisible( true );
             button.setVisible( true );
             label.setVisible( true );

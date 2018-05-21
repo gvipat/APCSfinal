@@ -323,6 +323,7 @@ public class Engine
         frame.add(exit , BorderLayout.AFTER_LAST_LINE);
         frame.setMinimumSize(new Dimension(400, 200));
         frame.setSize(400, 200);
+        frame.setResizable(false);
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
