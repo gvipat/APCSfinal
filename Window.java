@@ -73,10 +73,10 @@ public class Window extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        //g.drawLine();
         for (Sprite s : sprites)
         {
             g.setColor(s.getColor());
-            g.drawLine();
             g.fillRect(s.getX() - Engine.camera, s.getY(),
                 s.getWidth(), s.getHeight());
         }

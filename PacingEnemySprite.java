@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.util.LinkedList;
 
-public class PacingEnemySprite extends EnemySprite {
+public class PacingEnemySprite extends EnemySprite
+{
 
    private int paceDistance;
 
@@ -17,8 +18,10 @@ public class PacingEnemySprite extends EnemySprite {
        paceDistance = dist;
    }
 
+   @Override
    public boolean move()
     {
+        System.out.println("i move");
         //Only begin rendering once off screen
         if (getX() <= Engine.camera + Engine.WINDOW_WIDTH)
         {
@@ -44,6 +47,7 @@ public class PacingEnemySprite extends EnemySprite {
             {
                 direction *= -1;
                 setX(getX() + direction);
+                System.out.println("i work");
             }
             setHVelocity(1 * direction);
             super.addGravity();

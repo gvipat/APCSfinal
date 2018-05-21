@@ -26,9 +26,9 @@ public class Level
 
                     { { new PlayerSprite( 5, 5, 20, 20, Color.BLUE ),
                         new GroundSprite( 0, 400, 1000, 40 ),
-                        new GroundSprite( 300, 200, 2000, 40 ),
+                        new GroundSprite( 300, 240, 2000, 40 ),
                         new GroundSprite( 400, 360, 2000, 40 ),
-                        new GroundSprite(300, 180, 20, 20),
+                        //new GroundSprite(300, 180, 20, 20),
                         new PacingEnemySprite(1500, 100, 20, 20, Color.ORANGE, 50),
                         new EnemySprite(1200, 100, 20, 20, Color.RED),
                         new EnemySprite(1300, 100, 20, 20, Color.RED),

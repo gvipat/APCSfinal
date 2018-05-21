@@ -48,7 +48,11 @@ public class EnemySprite extends Moveable
             || collideTypes.contains(CollisionType.HORIZONTAL_GROUND_FROM_RIGHT))
             {
                 direction *= -1;
-                setX(getX() + direction);
+                setX(getX() + 2 * direction);
+            }
+            if (Math.random() < 0.01)
+            {
+               // setVVelocity(-1);
             }
             setHVelocity(1 * direction);
             super.addGravity();
@@ -77,7 +81,9 @@ public class EnemySprite extends Moveable
         setX(originalX);
         setY(originalY);
         direction = -1;
-        if (getX() <= Engine.camera + Engine.WINDOW_WIDTH)
+        if (getX() <= Engine.camera + Engine.WINDOW_WIDTH 
+        && originalX > Engine.camera 
+        && originalX < Engine.camera + Engine.WINDOW_WIDTH )
         {
             return false;
         }

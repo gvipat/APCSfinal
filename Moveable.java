@@ -230,6 +230,30 @@ public abstract class Moveable extends Sprite
             //System.out.println( "groundName : " + ground.getName() + "; V velocity = " 
         //+ mover.getVVelocity() + " y distance = " + temp[2] + "Y__" + mover.getY() + " groundY+height" + (ground.getY() + ground.getHeight()));
         }
+
+
+        if ( /*GameMath.roundToHundreths( mover.getHVelocity() ) == 0 &&*/
+             (mover.getY() >= ground.getY() && -mover.getVVelocity()  >= (Float)temp[2]) ||
+             (mover.getY() >= (ground.getY()  + ground.getHeight()) && -mover.getVVelocity() >= (Float)temp[2]) ) 
+        {
+
+            if ( !( ( mover.getX() - ground.getX() ) < ground.getWidth()
+                && ( mover.getX() - ground.getX() ) > -mover.getWidth() ) )
+            {
+                return CollisionType.NO_COLLISION;
+            }
+            if ( mover.getY() >= (ground.getY() + ground.getHeight()-1) )
+            {
+                //System.out.println( "\t\t\t\t\t\tinside STRAIGHT VERTICAL GROUND UNDER!" );
+                mover.setVVelocity(
+                    (Float)temp[2] * GameMath.getSign(mover.getVVelocity()) );
+                mover.setY(mover.getY() + mover.getVVelocity());
+                //System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y distance " + temp[3] );
+                return CollisionType.VERTICAL_GROUND_UNDER;
+            }
+        }
+
+
         
         // System.out.println( "a = " + temp[1] + "** b =" + temp[2] +
         // "*************" );

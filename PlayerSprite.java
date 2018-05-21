@@ -38,7 +38,7 @@ public class PlayerSprite extends Moveable
         if (collideTypes.contains(CollisionType.VERTICAL_GROUND_UNDER))
         {
             setVVelocity(1);
-            
+            super.applyGravity = true;
         }
         if (collideTypes.contains(CollisionType.HORIZONTAL_ENEMY))
         {
