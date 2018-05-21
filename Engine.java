@@ -66,7 +66,7 @@ public class Engine
     /**
      * Defines how many times per second to execute the move method for each sprite.
      */
-    private final int FPS = 30;
+    private final int FPS = 480;
 
     /**
      * Represents if the game is paused or not.
@@ -144,7 +144,7 @@ public class Engine
         window = new Window( WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this );
         if (!DEBUG_MODE)
         {
-            timer = new Timer( (int) (Math.round( ( 1 / FPS ) * 1000 )), new ActionListener()
+            timer = new Timer( (int) (Math.round( ( 1 /(double) FPS ) * 1000 )), new ActionListener()
             {
                 @Override
                 public void actionPerformed( ActionEvent e )
