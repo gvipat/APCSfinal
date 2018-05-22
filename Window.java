@@ -32,11 +32,6 @@ public class Window extends JPanel
      */
     private Engine engine;
 
-    /**
-     * holds all non sprite entities
-     */
-    private StaticImage[] images;
-
 
     /**
      * Constructor

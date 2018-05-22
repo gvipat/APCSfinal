@@ -202,25 +202,6 @@ public abstract class Moveable extends Sprite
 
                 }
 
-                else if ( s instanceof CornerSprite )
-                {
-                    CornerSprite tempCorner = (CornerSprite)( s );
-
-                    if ( tempCorner.isRightSide()
-                        && ( this.getX() > tempCorner.getTopRightCorner().getX() ) )
-                    {
-                        list.add( CollisionType.NO_COLLISION );
-                        return list;
-                    }
-                    if ( !tempCorner.isRightSide()
-                        && ( this.getX() < (int)tempCorner.getTopLeftCorner().getX() ) )
-                    {
-                        list.add( CollisionType.NO_COLLISION );
-                        return list;
-                    }
-
-                }
-
                 else
                 {
                     list.add( checkCollision_OneMoveable( this, (GroundSprite)s ) );
