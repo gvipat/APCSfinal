@@ -167,4 +167,13 @@ public class Level
     {
         return levelEndZones[level];
     }
+
+    /**
+     * returns the current engine
+     * @return the current engine
+     */
+    public Engine getEngine()
+    {
+        return engine;
+    }
 }
