@@ -54,7 +54,7 @@ public class Level
                         //new EnemySprite( 1400, 100, 20, 20, Color.RED ),
                         //new EnemySprite( 1600, 100, 20, 20, Color.RED ),
                         /*new EnemySprite( 1700, 100, 20, 20, Color.RED )*/ },
-                        { new PlayerSprite( 200, 300, 20, 20, Color.ORANGE, "player" ),
+                        { new PlayerSprite( 200, 300, 20, 20, Color.BLUE, "player" ),
                             new GroundSprite( 0, 400, 1000, 40, "floor" ),
                             new GroundSprite( 400, 280, 500, 120, "hanging 1" ) } };
 

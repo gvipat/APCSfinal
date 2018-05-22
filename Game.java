@@ -17,7 +17,7 @@ public class Game
 {
     /**
      * Main method
-     * @param args command line arguments (s plays the game immediatley and d runs debu)
+     * @param args command line arguments (s plays the game immediatley and d runs debug)
      */
     public static void main( String[] args )
     {

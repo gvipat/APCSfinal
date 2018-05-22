@@ -364,4 +364,9 @@ public class Engine
         }
     }
 
+    public PlayerSprite getPlayer()
+    {
+        return player;
+    }
+
 }

@@ -101,11 +101,11 @@ public class Window extends JPanel
     private void drawFlag( Graphics g )
     {
         g.setColor( Color.ORANGE );
-        g.fillRect( Level.getLevelEndZone() - 50 - Engine.camera, 0, 50, Engine.WINDOW_HEIGHT );
+        g.fillRect( Level.getLevelEndZone() - Engine.camera + engine.getPlayer().getWidth(), 0, 50, Engine.WINDOW_HEIGHT );
 
-        int[] flagX = { Level.getLevelEndZone() - Engine.camera,
-            Level.getLevelEndZone() + 200 - Engine.camera,
-            Level.getLevelEndZone() - Engine.camera };
+        int[] flagX = { Level.getLevelEndZone() + 50 - Engine.camera + engine.getPlayer().getWidth(),
+            Level.getLevelEndZone() + 250 - Engine.camera + engine.getPlayer().getWidth(),
+            Level.getLevelEndZone() + 50 - Engine.camera + engine.getPlayer().getWidth() };
         int[] flagY = { 0, 49, 99 };
 
         g.setColor( Color.RED );
