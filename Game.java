@@ -1,3 +1,4 @@
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -65,6 +66,7 @@ public class Game
         });
         window.add( playButton );
         window.setLocationRelativeTo(null);
+        window.setIconImage(Toolkit.getDefaultToolkit().getImage("SlidingBloccIcon.png"));
         window.setResizable(false);
         window.setVisible( true );
     }

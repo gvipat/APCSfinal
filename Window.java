@@ -58,6 +58,7 @@ public class Window extends JPanel
         frame.addKeyListener( new rightKeyListener() );
         frame.addKeyListener( new PKeyListener() );
         frame.setLocationRelativeTo( null );
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("SlidingBloccIcon.png"));
         super.setVisible( true );
         frame.setVisible( true );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
