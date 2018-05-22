@@ -29,21 +29,20 @@ public class Level
      */
     private static final Sprite[][] sprites =
 
-
                     { { new PlayerSprite( 5, 5, 20, 20, Color.BLUE ),
-                        new GroundSprite( 0, 400, 1000, 40),
+                        new GroundSprite( 0, 400, 1000, 40 ),
                         new GroundSprite( 300, 240, 2000, 40 ),
                         new GroundSprite( 400, 360, 2000, 40 ),
-                        //new GroundSprite(300, 180, 20, 20),
-                        new PacingEnemySprite(1500, 100, 20, 20, Color.ORANGE, 50),
-                        new EnemySprite(1200, 100, 20, 20, Color.RED),
-                        new EnemySprite(1300, 100, 20, 20, Color.RED),
-                        new EnemySprite(1400, 100, 20, 20, Color.RED),
-                        new EnemySprite(1600, 100, 20, 20, Color.RED),
-                        new EnemySprite(1700, 100, 20, 20, Color.RED) },
+                        // new GroundSprite(300, 180, 20, 20),
+                        new PacingEnemySprite( 1500, 100, 20, 20, Color.ORANGE, 50 ),
+                        new EnemySprite( 1200, 100, 20, 20, Color.RED ),
+                        new EnemySprite( 1300, 100, 20, 20, Color.RED ),
+                        new EnemySprite( 1400, 100, 20, 20, Color.RED ),
+                        new EnemySprite( 1600, 100, 20, 20, Color.RED ),
+                        new EnemySprite( 1700, 100, 20, 20, Color.RED ) },
                         { new PlayerSprite( 200, 300, 20, 20, Color.ORANGE, "player" ),
-                        new GroundSprite(0, 400, 1000, 40, "floor"),
-                        new GroundSprite(400, 280, 500, 120, "hanging 1") }};
+                            new GroundSprite( 0, 400, 1000, 40, "floor" ),
+                            new GroundSprite( 400, 280, 500, 120, "hanging 1" ) } };
 
     /**
      * Represents what the current row to read when opening the level.
@@ -55,7 +54,11 @@ public class Level
      */
     private Engine engine;
 
-    private static final int[] levelEndZones = {2400, 1000};
+    /**
+     * Defines the ending mark for each level. levelEndZones[n] is the ending
+     * zone for the level represented by the sprites in sprites[n]
+     */
+    private static final int[] levelEndZones = { 2400, 1000 };
 
 
     /**
@@ -78,6 +81,7 @@ public class Level
 
     /**
      * Returns the sprites for the current level
+     * 
      * @return an array of sprites in the current level
      */
     public Sprite[] getSprites()
@@ -92,7 +96,8 @@ public class Level
 
 
     /**
-     * Opens the next level by making a new level. If there are no more levels, show the win screen.
+     * Opens the next level by making a new level. If there are no more levels,
+     * show the win screen.
      */
     public void nextLevel()
     {
@@ -118,11 +123,11 @@ public class Level
                     System.exit( 0 );
                 }
             } );
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(300, 200);
-            frame.setLocationRelativeTo(null);
-            frame.setAlwaysOnTop(true);
-            frame.setResizable(false);
+            frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            frame.setSize( 300, 200 );
+            frame.setLocationRelativeTo( null );
+            frame.setAlwaysOnTop( true );
+            frame.setResizable( false );
             frame.setVisible( true );
             button.setVisible( true );
             label.setVisible( true );
@@ -140,23 +145,13 @@ public class Level
         play();
     }
 
+
+    /**
+     * Returns the ending mark (ending x-position) for this level
+     * @return an x-value that represents the end mark
+     */
     public static int getLevelEndZone()
     {
         return levelEndZones[level];
     }
-
-    // public static Image readImage(String path)
-    // {
-    //     Image img;
-    //     try 
-    //     {
-    //         img = ImageIO.read(new File(path));
-    //         return img;
-    //     }
-    //     catch (IOException e)
-    //     {
-	// 		e.printStackTrace();
-	// 	}
-    //     return null;
-    // }
 }

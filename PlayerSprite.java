@@ -160,7 +160,7 @@ public class PlayerSprite extends Moveable
 
     public void upKeyReleased()
     {
-        if (jumpKeyPressed == true && !(GameMath.roundToHundreths(getVVelocity()) == 0.0))
+        if (jumpKeyPressed == true && !(GameMath.roundToHundredths(getVVelocity()) == 0.0))
         {
             jumpKeyPressed = false;
         }

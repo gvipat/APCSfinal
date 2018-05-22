@@ -1,22 +1,15 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPopupMenu;
 import javax.swing.Timer;
-
-import javafx.scene.layout.Border;
+import javax.swing.WindowConstants;
 
 
 /**
@@ -31,8 +24,6 @@ import javafx.scene.layout.Border;
  */
 public class Engine
 {
-    Color[][] stage;
-
     /**
      * Represents the position of the "camera." Defines where in the stage the window should be drawing.
      */
@@ -101,6 +92,9 @@ public class Engine
      */
     private Level level;
 
+    /**
+     * Holds the dead sprites so that they are ready to respawn later on
+     */
     private static ArrayList<EnemySprite> deadSprites = new ArrayList<EnemySprite>();
 
 
@@ -114,7 +108,6 @@ public class Engine
         Sprite[] levelSprites = lev.getSprites();
         sprites = new PriorityQueue<Sprite>( levelSprites.length );
         camera = 0;
-        stage = new Color[WINDOW_HEIGHT][/* TODO find number for level length */];
         for ( Sprite s : levelSprites )
         {
             addSprite( s );
@@ -326,7 +319,7 @@ public class Engine
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(window);
 
     }

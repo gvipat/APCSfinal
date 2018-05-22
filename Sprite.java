@@ -41,26 +41,10 @@ public abstract class Sprite implements Comparable<Sprite>
      */
     private Color color;
 
+    /**
+     * Name of the Sprite
+     */
     private String name;
-    
-    
-    /**
-     * 
-     */
-    private boolean death;
-
-
-    /**
-     *  
-     */
-    private enum ContactType {
-        PLAYER_GROUND, PLAYER_ENEMY, ENEMY_GROUND
-    }; // not sure if we need ENEMY_GROUND because they only move in 2D
-
-    /**
-     * 
-     */
-    private ContactType contact;
 
     /**
      * Defines the rendering priority
@@ -68,6 +52,31 @@ public abstract class Sprite implements Comparable<Sprite>
     public int compareValue = 0;
 
 
+    /**
+     * Constructor
+     * 
+     * @param x
+     *            the x position of the new sprite
+     * @param y
+     *            the y position of the new sprite
+     * @param width
+     *            the width of the new sprite
+     * @param height
+     *            the height of the new sprite
+     * @param color
+     *            the color of the new sprite
+     */
+    public Sprite( int x, int y, int width, int height, Color color, String named )
+    {
+        xPos = x;
+        yPos = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        name = named;
+    }
+    
+    
     /**
      * Returns the x position
      * 
@@ -148,86 +157,6 @@ public abstract class Sprite implements Comparable<Sprite>
     public String getName()
     {
         return name;
-    }
-
-    /**
-     * TODO Write your method description here.
-     * 
-     * @param die
-     */
-    public void setDeath( boolean die )
-    {
-        death = die;
-    }
-
-    
-
-    /**
-     * TODO Write your method description here.
-     * 
-     * @return
-     */
-    public boolean getDeath()
-    {
-        return death;
-    }
-
-
-    /**
-     * TODO Write your method description here.
-     * 
-     * @param con
-     */
-    public void setContact( String con )
-    {
-        if ( con.equals( "PLAYER_GROUND" ) )
-        {
-            contact = ContactType.PLAYER_GROUND;
-        }
-        else if ( con.equals( "PLAYER_ENEMY" ) )
-        {
-            contact = ContactType.PLAYER_ENEMY;
-        }
-        else if ( con.equals( "PLAYER_GROUND" ) )
-        {
-            contact = ContactType.PLAYER_GROUND;
-        }
-    }
-
-
-    /**
-     * TODO Write your method description here.
-     * 
-     * @return
-     */
-    public ContactType getContact()
-    {
-        return contact;
-    }
-
-
-    /**
-     * Constructor
-     * 
-     * @param x
-     *            the x position of the new sprite
-     * @param y
-     *            the y position of the new sprite
-     * @param width
-     *            the width of the new sprite
-     * @param height
-     *            the height of the new sprite
-     * @param color
-     *            the color of the new sprite
-     */
-    public Sprite( int x, int y, int width, int height, Color color, String named )
-    {
-        xPos = x;
-        yPos = y;
-        this.width = width;
-        this.height = height;
-        this.color = color;
-        name = named;
     }
 
 
