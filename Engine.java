@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -317,6 +318,7 @@ public class Engine
         frame.setMinimumSize(new Dimension(400, 200));
         frame.setSize(400, 200);
         frame.setResizable(false);
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("SlidingBloccIcon.png"));
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

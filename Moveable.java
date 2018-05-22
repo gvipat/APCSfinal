@@ -363,7 +363,7 @@ public abstract class Moveable extends Sprite
 
         if ( Math.abs( mover.getHVelocity() ) >= (Float)temp[1]
             && ( mover.getBotLeftCorner().y <= ground.getBotLeftCorner().y + mover.getHeight()
-                && mover.getY() >= ground.getY() - ground.getHeight()
+                && mover.getY() >= ground.getY() - mover.getHeight()
                 && mover.getY() - ground.getY() < ground.getHeight()
                 && mover.getY() - ground.getY() > -mover.getY() ) )
         {
