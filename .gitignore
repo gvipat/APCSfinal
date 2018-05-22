@@ -60,3 +60,16 @@
 /Engine$3.class
 /CornerSprite.class
 /Level$1.class
+/EnemySpriteTest.class
+/EngineTest.class
+/GameMath.class
+/GameMathTest.class
+/GameTest.class
+/GroundSpriteTest.class
+/LevelTest.class
+/MoveableTest.class
+/PlayerSpriteTest.class
+/Window$AKeyListener.class
+/Window$PKeyListener.class
+/Window$QKeyListener.class
+/WindowTest.class
