@@ -372,5 +372,21 @@ public class Engine
     {
         return player;
     }
+    
+    /**
+     * Returns an enemy sprite from the engine's sprites (testing use only)
+     * @return an enemy sprite (testing use only)
+     */
+    public EnemySprite getAnEnemy()
+    {
+        for (Sprite s : sprites)
+        {
+            if (s instanceof EnemySprite)
+            {
+                return (EnemySprite)s;
+            }
+        }
+        return null;
+    }
 
 }
