@@ -463,12 +463,32 @@ public class JUnitSlidingBloccTests
     @Test
     public void addGravity()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        float prev = playerTester.getVVelocity();
+        playerTester.addGravity();
+        assertTrue(prev < playerTester.getVVelocity());
     }
 
 
     @Test
     public void checkCollision()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        assertNotNull(playerTester.checkCollision());
     }
 
 

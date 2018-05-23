@@ -62,8 +62,8 @@ public class Window extends JPanel
         super.setVisible( true );
         frame.setVisible( true );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        System.out.println( getSize().toString() );
-        System.out.println( super.getSize().toString() );
+        //System.out.println( getSize().toString() );
+        //System.out.println( super.getSize().toString() );
         this.sprites = sprites;
         this.engine = engine;
 
