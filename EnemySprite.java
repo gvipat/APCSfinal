@@ -136,8 +136,8 @@ public class EnemySprite extends Moveable
         setX( originalX );
         setY( originalY );
         direction = -1;
-        if ( getX() <= Engine.camera + Engine.WINDOW_WIDTH && originalX > Engine.camera
-            && originalX < Engine.camera + Engine.WINDOW_WIDTH )
+        if ( getX() <= Engine.camera + Engine.WINDOW_WIDTH 
+            && getX() + getWidth() > Engine.camera )
         {
             return false;
         }
