@@ -19,20 +19,39 @@ import org.junit.Test;
 public class JUnitSlidingBlocc
 {
 
+    /**
+     * Used for testing Level
+     */
     private Level levelTester = new Level();
 
+    /**
+     * Used for testing Engine
+     */
     private Engine engineTester = levelTester.getEngine();
 
+    /**
+     * Used for testing PlayerSprite
+     */
     private PlayerSprite playerTester = engineTester.getPlayer();
 
+    /**
+     * Used for testing EnemySprite
+     */
     private EnemySprite enemyTester = engineTester.getAnEnemy();
 
+    /**
+     * Used for testing Window
+     */
     private Window windowTester;
 
     // Game can't be tested
 
 
     // Level tests
+
+    /**
+     * Tests Level's play method
+     */
     @Test
     public void levelPlay()
     {
@@ -46,6 +65,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Level's getSprites method
+     */
     @Test
     public void levelGetSprites()
     {
@@ -53,6 +75,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Level's nextLevel method
+     */
     @Test
     public void levelNextLevel()
     {
@@ -65,6 +90,10 @@ public class JUnitSlidingBlocc
     }
 
 
+
+    /**
+     * Tests Level's restart method
+     */
     @Test
     public void levelRestart()
     {
@@ -79,6 +108,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Level's getLevelEndZone method
+     */
     @Test
     public void levelGetLevelEndZone()
     {
@@ -86,6 +118,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Level's getEngine method
+     */
     @Test
     public void levelGetEngine()
     {
@@ -94,6 +129,9 @@ public class JUnitSlidingBlocc
 
 
     // Engine Tests
+    /**
+     * Tests Engine's run method
+     */
     @Test
     public void engineRun()
     {
@@ -106,6 +144,9 @@ public class JUnitSlidingBlocc
     // manualMove can't be tested
 
 
+    /**
+     * Tests Engine's rightKeyPressed method
+     */
     @Test
     public void engineRightKeyPressed()
     {
@@ -121,6 +162,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's leftKeyPressed method
+     */
     @Test
     public void engineLeftKeyPressed()
     {
@@ -136,6 +180,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's upKeyPressed method
+     */
     @Test
     public void engineUpKeyPressed()
     {
@@ -151,6 +198,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's rightKeyReleased method
+     */
     @Test
     public void engineRightKeyReleased()
     {
@@ -166,6 +216,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's leftKeyReleased method
+     */
     @Test
     public void engineLeftKeyReleased()
     {
@@ -181,6 +234,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's upKeyReleased method
+     */
     @Test
     public void engineUpKeyReleased()
     {
@@ -196,6 +252,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's kill method
+     */
     @Test
     public void engineKill()
     {
@@ -210,6 +269,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Engine's pause and resume methods
+     */
     @Test
     public void enginePauseResume()
     {
@@ -232,6 +294,9 @@ public class JUnitSlidingBlocc
     // paintComponent can't be tested.
 
 
+    /**
+     * Tests Window's getFrame method
+     */
     @Test
     public void windowGetFrame()
     {
@@ -245,6 +310,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Window's setEnabled method
+     */
     @Test
     public void windowSetEnabled()
     {
@@ -259,6 +327,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Window's setVisible method
+     */
     @Test
     public void windowSetVisible()
     {
@@ -273,6 +344,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Window's dispose method
+     */
     @Test
     public void windowDispose()
     {
@@ -289,6 +363,9 @@ public class JUnitSlidingBlocc
 
     // GroundSprite tests
 
+    /**
+     * Tests GroundSprite's copy method
+     */
     @Test
     public void groundSpriteCopy()
     {
@@ -303,20 +380,12 @@ public class JUnitSlidingBlocc
 
 
     // EnemySprite tests
-    /**
-     * Test move method
-     */
-    @Test
-    public void enemySpriteMove()
-    {
-        Engine e = new Engine( new Level() );
-        EnemySprite temp = new EnemySprite( 0, 0, 0, 0, Color.ORANGE );
-        assertTrue( !temp.move() );
-    }
+
+    //move cant be tested
 
 
     /**
-     * test copy method
+     * Tests EnemySprite's copy method
      */
     @Test
     public void enemySpriteCopy()
@@ -332,7 +401,7 @@ public class JUnitSlidingBlocc
 
 
     /**
-     * test reset method
+     * Tests EnemySprite's reset method
      */
     @Test
     public void reset()
@@ -354,6 +423,9 @@ public class JUnitSlidingBlocc
 
     // PlayerSprite Tests
 
+    /**
+     * Tests PlayerSprite's rightkeyPressed method
+     */
     @Test
     public void rightKeyPressedPlayerSprite()
     {
@@ -369,6 +441,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests PlayerSprite's leftKeyPressed method
+     */
     @Test
     public void leftKeyPressedPlayerSprite()
     {
@@ -384,6 +459,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests PlayerSprite's upKeyPressed method
+     */
     @Test
     public void upKeyPressedPlayerSprite()
     {
@@ -399,6 +477,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests PlayerSprite's rightKeyReleased method
+     */
     @Test
     public void rightKeyReleasedPlayerSprite()
     {
@@ -414,6 +495,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests PlayerSprite's leftKeyReleased method
+     */
     @Test
     public void leftKeyReleasedPlayerSprite()
     {
@@ -429,6 +513,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests PlayerSprite's upKeyReleased method
+     */
     @Test
     public void upKeyReleasedPlayerSprite()
     {
@@ -444,6 +531,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests PlayerSprite's copy method
+     */
     @Test
     public void copyPlayerSprite()
     {
@@ -461,6 +551,9 @@ public class JUnitSlidingBlocc
     // move can't be tested
 
 
+    /**
+     * Tests Moveable's getHVelocity method
+     */
     @Test
     public void getHVelocity()
     {
@@ -474,6 +567,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Moveable's getVVelocity method
+     */
     @Test
     public void getVVelocity()
     {
@@ -487,6 +583,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Moveable's setHVelocity method
+     */
     @Test
     public void setHVelocity()
     {
@@ -502,6 +601,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Moveable's setVVelocity method
+     */
     @Test
     public void setVVelocity()
     {
@@ -517,6 +619,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Moveable's addGravity method
+     */
     @Test
     public void addGravity()
     {
@@ -533,6 +638,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests Moveable's checkCollision method
+     */
     @Test
     public void checkCollision()
     {
@@ -548,6 +656,9 @@ public class JUnitSlidingBlocc
 
 
     // GameMath tests
+    /**
+     * Tests GameMath's roundToHundreths method
+     */
     @Test
     public void roundToHundredths()
     {
@@ -555,6 +666,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests GameMath's roundToTenths method
+     */
     @Test
     public void roundToTenths()
     {
@@ -562,6 +676,9 @@ public class JUnitSlidingBlocc
     }
 
 
+    /**
+     * Tests GameMath's getSign method
+     */
     @Test
     public void getSign()
     {
