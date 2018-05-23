@@ -319,6 +319,19 @@ public class JUnitSlidingBloccTests
     @Test
     public void reset()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        int x = enemyTester.getX();
+        int y = enemyTester.getY();
+        enemyTester.reset();
+        assertEquals(x, enemyTester.getX());
+        assertEquals( y, enemyTester.getY() );
     }
 
 
@@ -383,30 +396,67 @@ public class JUnitSlidingBloccTests
     @Test
     public void move()
     {
+        
     }
 
 
     @Test
     public void getHVelocity()
     {
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        assertNotNull(playerTester.getHVelocity());
     }
 
 
     @Test
     public void getVVelocity()
     {
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        assertNotNull(playerTester.getVVelocity());
     }
 
 
     @Test
     public void setHVelocity()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        playerTester.setHVelocity(2);
+        assertEquals(2.0, playerTester.getHVelocity(), 0.1);
     }
 
 
     @Test
     public void setVVelocity()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        playerTester.setVVelocity(2);
+        assertEquals(2.0, playerTester.getVVelocity(), 0.1);
     }
 
 
