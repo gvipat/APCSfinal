@@ -364,6 +364,10 @@ public class Engine
         }
     }
 
+    /**
+     * Returns the player
+     * @return the player
+     */
     public PlayerSprite getPlayer()
     {
         return player;
