@@ -37,12 +37,7 @@ public class JUnitSlidingBloccTests
     private GroundSprite groundTester = engineTester.getAGround();
     private Window windowTester;
 
-    // Game tests
-    @Test
-    public void gameTest()
-    {
-        //not sure if possible
-    }
+    // Game can't be tested
 
 
     // Level tests
@@ -98,7 +93,7 @@ public class JUnitSlidingBloccTests
     @Test
     public void levelGetLevelEndZone()
     {
-        assertNotNull(Level.getLevelEndZone() );//CHECK
+        assertNotNull(Level.getLevelEndZone() );
     }
 
     @Test
@@ -117,9 +112,11 @@ public class JUnitSlidingBloccTests
         assertNotNull(windowTester);
     }
 
+    //manualMove can't be tested
+
 
     @Test
-    public void engineManualMove()
+    public void engineRightKeyPressed()
     {
         Engine.DEBUG_MODE = true;
         levelTester = new Level();
@@ -129,50 +126,88 @@ public class JUnitSlidingBloccTests
         groundTester = engineTester.getAGround();
         engineTester.run();
         windowTester = engineTester.getWindow();
-        engineTester.manualMove();
-        assertTrue(true);//FIX
-    }
-
-
-    @Test
-    public void engineRightKeyPressed()
-    {
-        //testE.rightKeyPressed();
-        //assertTrue( testL.getSprites()[testL.getSprites().length - 1] );
+        engineTester.rightKeyPressed();
+        assertTrue(playerTester.getRightKeyPressed());
     }
 
 
     @Test
     public void engineLeftKeyPressed()
     {
-        //testE.leftKeyPressed();
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.leftKeyPressed();
+        assertTrue(playerTester.getLeftKeyPressed());
     }
 
 
     @Test
     public void engineUpKeyPressed()
     {
-        //testE.upKeyPressed();
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.upKeyPressed();
+        assertTrue(playerTester.getUpKeyPressed());
     }
 
 
     @Test
     public void engineRightKeyReleased()
     {
-        //testE.upKeyReleased();
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.rightKeyReleased();
+        assertFalse(playerTester.getRightKeyPressed());
     }
 
 
     @Test
     public void engineLeftKeyReleased()
     {
-        //testE.leftKeyReleased();
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.leftKeyReleased();
+        assertFalse(playerTester.getLeftKeyPressed());
     }
 
 
     @Test
     public void engineUpKeyReleased()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.upKeyReleased();
+        assertFalse(playerTester.getUpKeyPressed());
     }
 
 
@@ -210,11 +245,8 @@ public class JUnitSlidingBloccTests
 
 
     // Window Tests
-    @Test
-    public void windowPaintComponent()
-    {
-        //I dont think so
-    }
+
+    //paintComponent can't be tested.
 
 
     @Test
@@ -243,7 +275,6 @@ public class JUnitSlidingBloccTests
         windowTester = engineTester.getWindow();
         windowTester.setEnabled(false);
         assertFalse(windowTester.isEnabled());
-        windowTester.setEnabled(true);
     }
 
 
@@ -259,14 +290,14 @@ public class JUnitSlidingBloccTests
         windowTester = engineTester.getWindow();
         windowTester.setVisible(false);
         assertFalse(windowTester.isVisible());
-        windowTester.setVisible(true);
     }
 
 
     @Test
     public void windowDispose()
     {
-        //IDK HOW TO TEST
+        windowTester.dispose();
+        assertNull(windowTester);
     }
 
     // GroundSprite tests
@@ -336,12 +367,6 @@ public class JUnitSlidingBloccTests
 
 
     // PlayerSprite Tests
-    @Test
-    public void movePlayerSprite()
-    {
-        
-    }
-
 
     @Test
     public void rightKeyPressedPlayerSprite()
@@ -393,11 +418,8 @@ public class JUnitSlidingBloccTests
 
 
     // Moveable Test
-    @Test
-    public void move()
-    {
-        
-    }
+
+    //move can't be tested
 
 
     @Test

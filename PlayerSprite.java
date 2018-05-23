@@ -277,4 +277,32 @@ public class PlayerSprite extends Moveable
     {
         return new PlayerSprite( getX(), getY(), getWidth(), getHeight(), getColor(), getName() );
     }
+    
+    
+    /**
+     * Returns the right key pressed flag
+     * @return the right key pressed flag
+     */
+    public boolean getRightKeyPressed()
+    {
+        return rightKeyPressed;
+    }
+    
+    /**
+     * Returns the left key pressed flag
+     * @return the left key pressed flag
+     */
+    public boolean getLeftKeyPressed()
+    {
+        return leftKeyPressed;
+    }
+    
+    /**
+     * Returns the up key pressed flag
+     * @return the up key pressed flag
+     */
+    public boolean getUpKeyPressed()
+    {
+        return jumpKeyPressed;
+    }
 }
