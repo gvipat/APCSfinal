@@ -51,7 +51,7 @@ public class Game
      */
     private static void openTitleScreen()
     {
-        final JFrame window = new JFrame("Super Cool Game");
+        final JFrame window = new JFrame("Sliding Blocc");
         window.setSize( 400, 400 );
         window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         JButton playButton = new JButton("Play");
