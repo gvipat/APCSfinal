@@ -332,7 +332,10 @@ public class Engine
      */
     public void kill()
     {
-        timer.stop();
+        if (timer != null)
+        {
+            timer.stop();
+        }
         Engine.sprites.removeAll(Engine.sprites);
         Engine.deadSprites.removeAll(Engine.deadSprites);
         window.setVisible( false );
@@ -387,6 +390,31 @@ public class Engine
             }
         }
         return null;
+    }
+
+    /**
+     * Returns a ground sprite from the engine's sprites (testing use only)
+     * @return a ground sprite (testing use only)
+     */
+    public GroundSprite getAGround()
+    {
+        for (Sprite s : sprites)
+        {
+            if (s instanceof GroundSprite)
+            {
+                return (GroundSprite)s;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the window used for display (testing only)
+     * @return window (testing only)
+     */
+    public Window getWindow()
+    {
+        return window;
     }
 
 }

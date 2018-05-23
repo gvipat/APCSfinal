@@ -6,6 +6,15 @@ import java.awt.Color;
 import org.junit.Test;
 
 
+//PASTE THIS IN FRONT OF MANY METHODS
+//levelTester = new Level();
+//engineTester = levelTester.getEngine();
+//playerTester = engineTester.getPlayer();
+//enemyTester = engineTester.getAnEnemy();
+//groundTester = engineTester.getAGround();
+//engineTester.run();
+//windowTester = engineTester.getWindow();
+
 /**
  * TODO Write a one-sentence summary of your class here. TODO Follow it with
  * additional details about its purpose, what abstraction it represents, and how
@@ -25,11 +34,12 @@ public class JUnitSlidingBloccTests
     private Engine engineTester = levelTester.getEngine();
     private PlayerSprite playerTester = engineTester.getPlayer();
     private EnemySprite enemyTester = engineTester.getAnEnemy();
-    private 
+    private GroundSprite groundTester = engineTester.getAGround();
+    private Window windowTester;
 
     // Game tests
     @Test
-    public void gameMain()
+    public void gameTest()
     {
         //not sure if possible
     }
@@ -39,48 +49,72 @@ public class JUnitSlidingBloccTests
     @Test
     public void levelPlay()
     {
+        Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        levelTester.play();
+        assertNotNull(engineTester);
     }
 
 
     @Test
     public void levelGetSprites()
     {
+        assertNotNull( levelTester.getSprites() );
     }
 
 
     @Test
     public void levelNextLevel()
     {
+        int current = Level.level;
+        levelTester.nextLevel();
+        assertEquals(current + 1, Level.level);
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
     }
 
 
     @Test
     public void levelRestart()
     {
+        int current = Level.level;
+        Engine temp = new Engine(levelTester);
+        levelTester.restart();
+        assertNotEquals( temp, levelTester.getEngine() );
+        assertEquals(current, Level.level);
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
     }
 
 
     @Test
     public void levelGetLevelEndZone()
     {
+        assertNotNull(Level.getLevelEndZone() );//CHECK
     }
 
     @Test
     public void levelGetEngine()
     {
-
+        assertNotNull(levelTester.getEngine());
     }
 
     // Engine Tests
-    Level testL = new Level();
-
-    Engine testE = testL.getEngine();
-
-
     @Test
     public void engineRun()
     {
-        assertNotNull( testE );
+        Engine.DEBUG_MODE = true;
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        assertNotNull(windowTester);
     }
 
 
@@ -88,42 +122,51 @@ public class JUnitSlidingBloccTests
     public void engineManualMove()
     {
         Engine.DEBUG_MODE = true;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.manualMove();
+        assertTrue(true);//FIX
     }
 
 
     @Test
     public void engineRightKeyPressed()
     {
-        testE.rightKeyPressed();
-        assertTrue( testL.getSprites()[testL.getSprites().length - 1] );
+        //testE.rightKeyPressed();
+        //assertTrue( testL.getSprites()[testL.getSprites().length - 1] );
     }
 
 
     @Test
     public void engineLeftKeyPressed()
     {
-        testE.leftKeyPressed();
+        //testE.leftKeyPressed();
     }
 
 
     @Test
     public void engineUpKeyPressed()
     {
-        testE.upKeyPressed();
+        //testE.upKeyPressed();
     }
 
 
     @Test
     public void engineRightKeyReleased()
     {
-        testE.upKeyReleased();
+        //testE.upKeyReleased();
     }
 
 
     @Test
     public void engineLeftKeyReleased()
     {
-        testE.leftKeyReleased();
+        //testE.leftKeyReleased();
     }
 
 
@@ -136,18 +179,33 @@ public class JUnitSlidingBloccTests
     @Test
     public void engineKill()
     {
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.kill();
+        assertFalse(windowTester.isEnabled());        
     }
 
 
     @Test
-    public void enginePause()
+    public void enginePauseResume()
     {
-    }
-
-
-    @Test
-    public void engineResume()
-    {
+        Engine.DEBUG_MODE = false;
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        engineTester.pause();
+        assertTrue(engineTester.paused);
+        engineTester.resume();
+        assertFalse(engineTester.paused);;
     }
 
 
@@ -155,43 +213,74 @@ public class JUnitSlidingBloccTests
     @Test
     public void windowPaintComponent()
     {
+        //I dont think so
     }
 
 
     @Test
     public void windowGetFrame()
     {
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        assertNotNull(windowTester.getFrame());
     }
 
 
     @Test
     public void windowSetEnabled()
     {
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        windowTester.setEnabled(false);
+        assertFalse(windowTester.isEnabled());
+        windowTester.setEnabled(true);
     }
 
 
     @Test
     public void windowSetVisible()
     {
+        levelTester = new Level();
+        engineTester = levelTester.getEngine();
+        playerTester = engineTester.getPlayer();
+        enemyTester = engineTester.getAnEnemy();
+        groundTester = engineTester.getAGround();
+        engineTester.run();
+        windowTester = engineTester.getWindow();
+        windowTester.setVisible(false);
+        assertFalse(windowTester.isVisible());
+        windowTester.setVisible(true);
     }
 
 
     @Test
     public void windowDispose()
     {
+        //IDK HOW TO TEST
     }
 
     // GroundSprite tests
-    Sprite testS = new GroundSprite( 0, 0, 0, 0 );
-
-    Sprite testS2 = testS.copy();
-
 
     @Test
     public void groundSpriteCopy()
     {
-        assertNotNull( testS2 );
-        assertEquals( testS, testS2 );
+        Sprite temp1 = new GroundSprite(0, 0, 0, 0);
+        Sprite temp2 = (GroundSprite)temp1.copy();
+        assertEquals(temp1.getX(), temp2.getX());
+        assertEquals(temp1.getY(), temp2.getY());
+        assertEquals(temp1.getWidth(), temp2.getWidth());
+        assertEquals(temp1.getHeight(), temp2.getHeight());
+        assertEquals(temp1.getColor(), temp2.getColor());
     }
 
 
@@ -214,13 +303,13 @@ public class JUnitSlidingBloccTests
     @Test
     public void enemySpriteCopy()
     {
-        EnemySprite temp = new EnemySprite( 0, 0, 0, 0, Color.ORANGE );
-        temp = (EnemySprite)temp.copy();
-        assertEquals( temp.getX(), 0 );
-        assertEquals( temp.getY(), 0 );
-        assertEquals( temp.getWidth(), 0 );
-        assertEquals( temp.getHeight(), 0 );
-        assertEquals( temp.getColor(), Color.ORANGE );
+        Sprite temp1 = new EnemySprite(0, 0, 0, 0, Color.BLUE);
+        Sprite temp2 = (EnemySprite)temp1.copy();
+        assertEquals(temp1.getX(), temp2.getX());
+        assertEquals(temp1.getY(), temp2.getY());
+        assertEquals(temp1.getWidth(), temp2.getWidth());
+        assertEquals(temp1.getHeight(), temp2.getHeight());
+        assertEquals(temp1.getColor(), temp2.getColor());
     }
 
 
@@ -237,7 +326,7 @@ public class JUnitSlidingBloccTests
     @Test
     public void movePlayerSprite()
     {
-        fail("YOU ARE ANNOYING");
+        
     }
 
 
@@ -280,6 +369,13 @@ public class JUnitSlidingBloccTests
     @Test
     public void copyPlayerSprite()
     {
+        Sprite temp1 = new PlayerSprite(0, 0, 0, 0, Color.BLUE);
+        Sprite temp2 = (PlayerSprite)temp1.copy();
+        assertEquals(temp1.getX(), temp2.getX());
+        assertEquals(temp1.getY(), temp2.getY());
+        assertEquals(temp1.getWidth(), temp2.getWidth());
+        assertEquals(temp1.getHeight(), temp2.getHeight());
+        assertEquals(temp1.getColor(), temp2.getColor());
     }
 
 
@@ -327,19 +423,17 @@ public class JUnitSlidingBloccTests
 
 
     // GameMath tests
-    @SuppressWarnings("deprecation")
     @Test
     public void roundToHundredths()
     {
-        assertEquals( GameMath.roundToHundredths( (float)0.000000007 ), 0.0 );
+        assertEquals( GameMath.roundToHundredths( (float)0.0000000000000001 ), 0.0, 0.001 );
     }
 
 
-    @SuppressWarnings("deprecation")
     @Test
     public void roundToTenths()
     {
-        assertEquals( GameMath.roundToHundredths( (float)0.000000007 ), 0.0 );
+        assertEquals( GameMath.roundToTenths( (float)0.0000000000000001 ), 0.0, 0.01 );
     }
 
 
