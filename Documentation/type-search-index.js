@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"<Unnamed>","l":"Sprite"}]
+typeSearchIndex = [{"p":"<Unnamed>","l":"EnemySprite"},{"p":"<Unnamed>","l":"Engine"},{"p":"<Unnamed>","l":"Game"},{"p":"<Unnamed>","l":"GameMath"},{"p":"<Unnamed>","l":"GroundSprite"},{"p":"<Unnamed>","l":"JUnitSlidingBlocc"},{"p":"<Unnamed>","l":"Level"},{"p":"<Unnamed>","l":"Moveable"},{"p":"<Unnamed>","l":"Moveable.CollisionType"},{"p":"<Unnamed>","l":"PlayerSprite"},{"p":"<Unnamed>","l":"Sprite"},{"p":"<Unnamed>","l":"Window"}]
