@@ -64,6 +64,8 @@ public abstract class Sprite implements Comparable<Sprite>
      *            the height of the new sprite
      * @param color
      *            the color of the new sprite
+     * @param named
+     *            the name of the sprite
      */
     public Sprite( int x, int y, int width, int height, Color color, String named )
     {
@@ -114,6 +116,7 @@ public abstract class Sprite implements Comparable<Sprite>
      * Sets a new y position
      * 
      * @param newY
+     *            the new y position
      */
     public void setY( float newY )
     {
