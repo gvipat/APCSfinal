@@ -1,8 +1,6 @@
 import java.awt.Color;
-import java.awt.Image;
 
 
-// name is only for default color sprite
 /**
  * A ground sprite is a simple sprite that does nothing.
  *
@@ -11,7 +9,7 @@ import java.awt.Image;
  * @author Period: 4
  * @author Assignment: APCSfinal
  *
- * @author Sources: none
+ * @author Sources: Roshan Sevalia, Gaurav Vipat
  */
 public class GroundSprite extends Sprite
 {
@@ -98,6 +96,7 @@ public class GroundSprite extends Sprite
 
     /**
      * Returns a copy of this sprite
+     * 
      * @return a copy of this sprite
      * 
      * @see Sprite#copy()

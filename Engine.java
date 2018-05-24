@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -14,29 +13,33 @@ import javax.swing.WindowConstants;
 
 
 /**
- *  An engine is the actual game. It opens a window, and tells all the sprites to move at an increment defined in the FPS variable
+ * An engine is the back end of the game. It opens a window, and tells all the
+ * sprites to move at an increment defined in the FPS variable.
  *
- *  @author  Roshan Sevalia
- *  @version May 18, 2018
- *  @author  Period: 4
- *  @author  Assignment: APCSfinal
+ * @author Roshan Sevalia
+ * @version May 18, 2018
+ * @author Period: 4
+ * @author Assignment: APCSfinal
  *
- *  @author  Sources: Charles Huang, Gaurav Vipat
+ * @author Sources: Charles Huang, Gaurav Vipat
  */
 public class Engine
 {
     /**
-     * Represents the position of the "camera." Defines where in the stage the window should be drawing.
+     * Represents the position of the "camera." Defines where in the stage the
+     * window should be drawing.
      */
     public static int camera;
 
     /**
-     * Used for readability in the move method. If a sprite returns true, then the level is completed.
+     * Used for readability in the move method. If a sprite returns true, then
+     * the level is completed.
      */
     private final boolean COMPLETED_LEVEL = true;
 
     /**
-     * Defines how far right into the window the player has to move before the camera begins following the player.
+     * Defines how far right into the window the player has to move before the
+     * camera begins following the player.
      */
     private final int CAMERA_THRESHOLD = 800 / 3;
 
@@ -51,12 +54,14 @@ public class Engine
     public static final int WINDOW_HEIGHT = 600;
 
     /**
-     * If true, the engine will not start the timer that moves the players automatically.
+     * If true, the engine will not start the timer that moves the players
+     * automatically.
      */
     public static boolean DEBUG_MODE = false;
 
     /**
-     * Defines how many times per second to execute the move method for each sprite.
+     * Defines how many times per second to execute the move method for each
+     * sprite.
      */
     private final int FPS = 120;
 
@@ -81,7 +86,8 @@ public class Engine
     private PlayerSprite player;
 
     /**
-     * Holds the level's sprites with the ones to be rendered last having the lowest priority.
+     * Holds the level's sprites with the ones to be rendered last having the
+     * lowest priority.
      */
     public static PriorityQueue<Sprite> sprites;
     // Sprite types will override their compare value specified in the sprite
@@ -89,7 +95,8 @@ public class Engine
     // This will allow sprites to be drawn
 
     /**
-     * Holds the level that created the engine to communicate when to switch or restart levels.
+     * Holds the level that created the engine to communicate when to switch or
+     * restart levels.
      */
     private Level level;
 
@@ -101,7 +108,9 @@ public class Engine
 
     /**
      * Constructor
-     * @param lev the level that created this engine
+     * 
+     * @param lev
+     *            the level that created this engine
      */
     public Engine( Level lev )
     {
@@ -117,8 +126,11 @@ public class Engine
 
 
     /**
-     * Adds the sprite to the sprites priority queue. If the sprite is a player, it registers the sprite as the player
-     * @param sprite the sprite to be added
+     * Adds the sprite to the sprites priority queue. If the sprite is a player,
+     * it registers the sprite as the player
+     * 
+     * @param sprite
+     *            the sprite to be added
      */
     private void addSprite( Sprite sprite )
     {
@@ -131,27 +143,30 @@ public class Engine
 
 
     /**
-     * Opens the window and initializes the timer. If the engine is not in debug mode, it begins the timer to call move as well.
+     * Opens the window and initializes the timer. If the engine is not in debug
+     * mode, it begins the timer to call move as well.
      */
     public void run()
     {
         window = new Window( WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this );
-        if (!DEBUG_MODE)
+        if ( !DEBUG_MODE )
         {
-            timer = new Timer( (int) (Math.round( ( 1 /(double) FPS ) * 1000 )), new ActionListener()
-            {
-                @Override
-                public void actionPerformed( ActionEvent e )
+            timer = new Timer( (int)( Math.round( ( 1 / (double)FPS ) * 1000 ) ),
+                new ActionListener()
                 {
-                    if ( move() == COMPLETED_LEVEL )
+                    @Override
+                    public void actionPerformed( ActionEvent e )
                     {
-                        levelComplete();
+                        if ( move() == COMPLETED_LEVEL )
+                        {
+                            levelComplete();
+                        }
                     }
-                }
-            } );
+                } );
             timer.start();
         }
     }
+
 
     /**
      * Used to manually call move in debug mode
@@ -166,13 +181,15 @@ public class Engine
 
 
     /**
-     * Moves every sprite. If the player is past the finish line, the level is completed and it returns true.
+     * Moves every sprite. If the player is past the finish line, the level is
+     * completed and it returns true.
+     * 
      * @return true if the level is complete.
      */
     private boolean move()
     {
         Iterator<Sprite> aliveIter = Engine.sprites.iterator();
-        while (aliveIter.hasNext())
+        while ( aliveIter.hasNext() )
         {
             Sprite s = aliveIter.next();
             if ( s instanceof Moveable )
@@ -186,7 +203,7 @@ public class Engine
                 {
                     if ( s == player )
                     {
-                        if (!DEBUG_MODE)
+                        if ( !DEBUG_MODE )
                         {
                             timer.stop();
                         }
@@ -194,9 +211,9 @@ public class Engine
                     }
                     else
                     {
-                        if (s instanceof EnemySprite)
+                        if ( s instanceof EnemySprite )
                         {
-                            deadSprites.add((EnemySprite)s);
+                            deadSprites.add( (EnemySprite)s );
                             aliveIter.remove();
                         }
                     }
@@ -209,12 +226,12 @@ public class Engine
             camera = player.getX() - CAMERA_THRESHOLD;
         }
         Iterator<EnemySprite> deadIter = deadSprites.iterator();
-        while (deadIter.hasNext())
+        while ( deadIter.hasNext() )
         {
             EnemySprite temp = deadIter.next();
-            if (temp.reset())
+            if ( temp.reset() )
             {
-                sprites.add(temp);
+                sprites.add( temp );
                 deadIter.remove();
             }
         }
@@ -288,11 +305,12 @@ public class Engine
 
 
     /**
-     * Opens the death dialog box that gives the option to either restart the level or quit the game.
+     * Opens the death dialog box that gives the option to either restart the
+     * level or quit the game.
      */
     private void openDeathScreen()
     {
-        final JFrame frame = new JFrame("You Died...");
+        final JFrame frame = new JFrame( "You Died..." );
         JButton exit = new JButton( "Exit" );
         exit.addActionListener( new ActionListener()
         {
@@ -313,16 +331,16 @@ public class Engine
                 level.restart();
             }
         } );
-        frame.add(restart);
-        frame.add(exit , BorderLayout.AFTER_LAST_LINE);
-        frame.setMinimumSize(new Dimension(400, 200));
-        frame.setSize(400, 200);
-        frame.setResizable(false);
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("SlidingBloccIcon.png"));
-        frame.setVisible(true);
-        frame.setAlwaysOnTop(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(window);
+        frame.add( restart );
+        frame.add( exit, BorderLayout.AFTER_LAST_LINE );
+        frame.setMinimumSize( new Dimension( 400, 200 ) );
+        frame.setSize( 400, 200 );
+        frame.setResizable( false );
+        frame.setIconImage( Toolkit.getDefaultToolkit().getImage( "SlidingBloccIcon.png" ) );
+        frame.setVisible( true );
+        frame.setAlwaysOnTop( true );
+        frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+        frame.setLocationRelativeTo( window );
 
     }
 
@@ -332,59 +350,65 @@ public class Engine
      */
     public void kill()
     {
-        if (timer != null)
+        if ( timer != null )
         {
             timer.stop();
         }
-        Engine.sprites.removeAll(Engine.sprites);
-        Engine.deadSprites.removeAll(Engine.deadSprites);
+        Engine.sprites.removeAll( Engine.sprites );
+        Engine.deadSprites.removeAll( Engine.deadSprites );
         window.setVisible( false );
         window.setEnabled( false );
         window.dispose();
     }
+
 
     /**
      * Pauses the timer to pause the game
      */
     public void pause()
     {
-        if (!DEBUG_MODE)
+        if ( !DEBUG_MODE )
         {
             timer.stop();
             paused = true;
         }
     }
 
+
     /**
      * Restarts the timer to resume the game.
      */
     public void resume()
     {
-        if (!DEBUG_MODE)
+        if ( !DEBUG_MODE )
         {
             timer.start();
             paused = false;
         }
     }
 
+
     /**
      * Returns the player
+     * 
      * @return the player
      */
     public PlayerSprite getPlayer()
     {
         return player;
     }
-    
+
+
     /**
      * Returns an enemy sprite from the engine's sprites (testing use only)
+     * 
      * @return an enemy sprite (testing use only)
      */
     public EnemySprite getAnEnemy()
     {
-        for (Sprite s : sprites)
+        for ( Sprite s : sprites )
         {
-            if (s instanceof EnemySprite)
+            if ( s instanceof EnemySprite )
             {
                 return (EnemySprite)s;
             }
@@ -392,15 +416,17 @@ public class Engine
         return null;
     }
 
+
     /**
      * Returns a ground sprite from the engine's sprites (testing use only)
+     * 
      * @return a ground sprite (testing use only)
      */
     public GroundSprite getAGround()
     {
-        for (Sprite s : sprites)
+        for ( Sprite s : sprites )
         {
-            if (s instanceof GroundSprite)
+            if ( s instanceof GroundSprite )
             {
                 return (GroundSprite)s;
             }
@@ -408,8 +434,10 @@ public class Engine
         return null;
     }
 
+
     /**
      * Returns the window used for display (testing only)
+     * 
      * @return window (testing only)
      */
     public Window getWindow()

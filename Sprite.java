@@ -75,8 +75,8 @@ public abstract class Sprite implements Comparable<Sprite>
         this.color = color;
         name = named;
     }
-    
-    
+
+
     /**
      * Returns the x position
      * 
@@ -153,6 +153,7 @@ public abstract class Sprite implements Comparable<Sprite>
     {
         return color;
     }
+
 
     public String getName()
     {

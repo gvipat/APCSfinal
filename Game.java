@@ -3,30 +3,34 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+
 /**
- *  The game class opens a title screen and opens the game.
+ * The game class opens a title screen and opens the game.
  *
- *  @author  Roshan Sevalia
- *  @version May 18, 2018
- *  @author  Period: 4
- *  @author  Assignment: APCSfinal
+ * @author Roshan Sevalia
+ * @version May 18, 2018
+ * @author Period: 4
+ * @author Assignment: APCSfinal
  *
- *  @author  Sources: Gaurav Vipat, Charlie Huang
+ * @author Sources: Gaurav Vipat, Charles Huang
  */
 public class Game
 {
     /**
      * Main method
-     * @param args command line arguments (s plays the game immediatley and d runs debug)
+     * 
+     * @param args
+     *            command line arguments (s plays the game immediatley and d
+     *            runs debug)
      */
     public static void main( String[] args )
     {
-        //System.out.println(args[0]);
-        if (args.length > 0 && args[0].equals("-s"))
+        // System.out.println(args[0]);
+        if ( args.length > 0 && args[0].equals( "-s" ) )
         {
             playGame();
         }
-        else if (args.length > 0 && args[0].equals("-d"))
+        else if ( args.length > 0 && args[0].equals( "-d" ) )
         {
             Engine.DEBUG_MODE = true;
             playGame();
@@ -36,7 +40,8 @@ public class Game
             openTitleScreen();
         }
     }
-    
+
+
     /**
      * Plays the game.
      */
@@ -45,29 +50,30 @@ public class Game
         Level level = new Level();
         level.play();
     }
-    
+
+
     /**
      * Opens the title screen which has a button to play the game.
      */
     private static void openTitleScreen()
     {
-        final JFrame window = new JFrame("Sliding Blocc");
+        final JFrame window = new JFrame( "Sliding Blocc" );
         window.setSize( 400, 400 );
         window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        JButton playButton = new JButton("Play");
-        playButton.addActionListener(new ActionListener()
+        JButton playButton = new JButton( "Play" );
+        playButton.addActionListener( new ActionListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed( ActionEvent e )
             {
-                window.setEnabled(false);
-                window.setVisible(false);
+                window.setEnabled( false );
+                window.setVisible( false );
                 playGame();
             }
-        });
+        } );
         window.add( playButton );
-        window.setLocationRelativeTo(null);
-        window.setIconImage(Toolkit.getDefaultToolkit().getImage("SlidingBloccIcon.png"));
-        window.setResizable(false);
+        window.setLocationRelativeTo( null );
+        window.setIconImage( Toolkit.getDefaultToolkit().getImage( "SlidingBloccIcon.png" ) );
+        window.setResizable( false );
         window.setVisible( true );
     }
 

@@ -244,7 +244,6 @@ public abstract class Moveable extends Sprite
                                                                                                 ///////// AND
                                                                                                 ///////// RENDERED
     {
-        Object[] temp = checkCorners( player, enemy );
         Sprite tempSprite = new GroundSprite( Math.round( enemy.getX() + enemy.getHVelocity() ),
             Math.round( enemy.getY() + enemy.getVVelocity() ),
             enemy.getWidth(),
@@ -431,11 +430,7 @@ public abstract class Moveable extends Sprite
 
                     applyGravity = false;
                     mover.setVVelocity( vSign * (Float)temp[2] );
-                    mover.setY( mover.getY() + mover.getVVelocity() );// TODO
-                                                                      // check
-                                                                      // for
-                                                                      // others
-                    double slope_inverted = Math.abs( mover.getHVelocity() / mover.getVVelocity() );
+                    mover.setY( mover.getY() + mover.getVVelocity() );
                     // mover.setHVelocity((float)(slope_inverted*getHVelocity()));
                     mover.setHVelocity( 0 );
 
@@ -480,8 +475,6 @@ public abstract class Moveable extends Sprite
 
                     applyGravity = false;
                     mover.setVVelocity( vSign * (Float)temp[2] );
-                    double slope_inverted = Math.abs( mover.getHVelocity() / mover.getVVelocity() );
-                    // mover.setHVelocity((float)(slope_inverted*getHVelocity()));
                     mover.setHVelocity( 0 );
 
                     return CollisionType.VERTICAL_GROUND_OVER;
@@ -774,6 +767,8 @@ public abstract class Moveable extends Sprite
                         return CollisionType.VERTICAL_GROUND_OVER;
                     }
                 }
+                break;
+            default:
                 break;
 
         }

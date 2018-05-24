@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * @author Period: 4
  * @author Assignment: APCSfinal
  *
- * @author Sources: none
+ * @author Sources: Charles Huang, Gaurav Vipat
  */
 public class EnemySprite extends Moveable
 {
@@ -33,12 +33,19 @@ public class EnemySprite extends Moveable
 
     /**
      * Constructor
-     * @param x the initial x position of the sprite
-     * @param y the initial y position of the sprite
-     * @param width the width of the sprite
-     * @param height the height of the sprite
-     * @param color the color of the sprite
-     * @param named the name of the sprite
+     * 
+     * @param x
+     *            the initial x position of the sprite
+     * @param y
+     *            the initial y position of the sprite
+     * @param width
+     *            the width of the sprite
+     * @param height
+     *            the height of the sprite
+     * @param color
+     *            the color of the sprite
+     * @param named
+     *            the name of the sprite
      */
     public EnemySprite( int x, int y, int width, int height, Color color, String named )
     {
@@ -52,11 +59,17 @@ public class EnemySprite extends Moveable
 
     /**
      * Constructor
-     * @param x the initial x position of the sprite
-     * @param y the initial y position of the sprite
-     * @param width the width of the sprite
-     * @param height the height of the sprite
-     * @param color the color of the sprite
+     * 
+     * @param x
+     *            the initial x position of the sprite
+     * @param y
+     *            the initial y position of the sprite
+     * @param width
+     *            the width of the sprite
+     * @param height
+     *            the height of the sprite
+     * @param color
+     *            the color of the sprite
      */
     public EnemySprite( int x, int y, int width, int height, Color color )
     {
@@ -70,6 +83,7 @@ public class EnemySprite extends Moveable
 
     /**
      * Moves the sprite
+     * 
      * @see Moveable#move()
      */
     public boolean move()
@@ -119,6 +133,7 @@ public class EnemySprite extends Moveable
 
     /**
      * Returns a copy of the sprite
+     * 
      * @see Sprite#copy()
      */
     public Sprite copy()
@@ -129,6 +144,7 @@ public class EnemySprite extends Moveable
 
     /**
      * Resets the position of the sprite.
+     * 
      * @return true if the sprite is ready to be rendered again.
      */
     public boolean reset()
@@ -136,8 +152,7 @@ public class EnemySprite extends Moveable
         setX( originalX );
         setY( originalY );
         direction = -1;
-        if ( getX() <= Engine.camera + Engine.WINDOW_WIDTH 
-            && getX() + getWidth() > Engine.camera )
+        if ( getX() <= Engine.camera + Engine.WINDOW_WIDTH )
         {
             return false;
         }

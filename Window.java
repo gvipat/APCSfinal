@@ -58,12 +58,12 @@ public class Window extends JPanel
         frame.addKeyListener( new rightKeyListener() );
         frame.addKeyListener( new PKeyListener() );
         frame.setLocationRelativeTo( null );
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("SlidingBloccIcon.png"));
+        frame.setIconImage( Toolkit.getDefaultToolkit().getImage( "SlidingBloccIcon.png" ) );
         super.setVisible( true );
         frame.setVisible( true );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        //System.out.println( getSize().toString() );
-        //System.out.println( super.getSize().toString() );
+        // System.out.println( getSize().toString() );
+        // System.out.println( super.getSize().toString() );
         this.sprites = sprites;
         this.engine = engine;
 
@@ -101,9 +101,13 @@ public class Window extends JPanel
     private void drawFlag( Graphics g )
     {
         g.setColor( Color.ORANGE );
-        g.fillRect( Level.getLevelEndZone() - Engine.camera + engine.getPlayer().getWidth(), 0, 50, Engine.WINDOW_HEIGHT );
+        g.fillRect( Level.getLevelEndZone() - Engine.camera + engine.getPlayer().getWidth(),
+            0,
+            50,
+            Engine.WINDOW_HEIGHT );
 
-        int[] flagX = { Level.getLevelEndZone() + 50 - Engine.camera + engine.getPlayer().getWidth(),
+        int[] flagX = {
+            Level.getLevelEndZone() + 50 - Engine.camera + engine.getPlayer().getWidth(),
             Level.getLevelEndZone() + 250 - Engine.camera + engine.getPlayer().getWidth(),
             Level.getLevelEndZone() + 50 - Engine.camera + engine.getPlayer().getWidth() };
         int[] flagY = { 0, 49, 99 };

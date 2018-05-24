@@ -90,7 +90,6 @@ public class JUnitSlidingBlocc
     }
 
 
-
     /**
      * Tests Level's restart method
      */
@@ -378,10 +377,9 @@ public class JUnitSlidingBlocc
         assertEquals( temp1.getColor(), temp2.getColor() );
     }
 
-
     // EnemySprite tests
 
-    //move cant be tested
+    // move cant be tested
 
 
     /**
