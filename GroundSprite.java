@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 
 
 /**
@@ -28,9 +29,9 @@ public class GroundSprite extends Sprite
      * @param named
      *            the name of the sprite
      */
-    public GroundSprite( int x, int y, int width, int height, String named )
+    public GroundSprite( int x, int y, int width, int height, String named, Image img )
     {
-        super( x, y, width, height, Color.GREEN, named );
+        super( x, y, width, height, Color.GREEN, named, img );
     }
 
 
@@ -46,9 +47,9 @@ public class GroundSprite extends Sprite
      * @param height
      *            the height of the sprite
      */
-    public GroundSprite( int x, int y, int width, int height )
+    public GroundSprite( int x, int y, int width, int height, Image img )
     {
-        super( x, y, width, height, Color.GREEN, "" );
+        super( x, y, width, height, Color.GREEN, "", img );
     }
 
 
@@ -68,9 +69,9 @@ public class GroundSprite extends Sprite
      * @param named
      *            the name of the sprite
      */
-    public GroundSprite( int x, int y, int width, int height, Color color, String named )
+    public GroundSprite( int x, int y, int width, int height, Color color, String named, Image img )
     {
-        super( x, y, width, height, color, named );
+        super( x, y, width, height, color, named, img );
     }
 
 
@@ -88,9 +89,9 @@ public class GroundSprite extends Sprite
      * @param color
      *            the color of the sprite
      */
-    public GroundSprite( int x, int y, int width, int height, Color color )
+    public GroundSprite( int x, int y, int width, int height, Color color, Image img )
     {
-        super( x, y, width, height, color, "" );
+        super( x, y, width, height, color, "", img );
     }
 
 
@@ -103,7 +104,7 @@ public class GroundSprite extends Sprite
      */
     public Sprite copy()
     {
-        return new GroundSprite( getX(), getY(), getWidth(), getHeight(), getColor(), getName() );
+        return new GroundSprite( getX(), getY(), getWidth(), getHeight(), getColor(), getName(), getImage() );
     }
 
 }

@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.util.LinkedList;
 
 
@@ -46,9 +47,9 @@ public class PlayerSprite extends Moveable
      * @param named
      *            the name of the sprite
      */
-    public PlayerSprite( int x, int y, int width, int height, Color color, String named )
+    public PlayerSprite( int x, int y, int width, int height, Color color, String named, Image img )
     {
-        super( x, y, width, height, color, named );
+        super( x, y, width, height, color, named, img );
         this.compareValue = 2;
     }
 
@@ -67,9 +68,9 @@ public class PlayerSprite extends Moveable
      * @param color
      *            the color of the sprite
      */
-    public PlayerSprite( int x, int y, int width, int height, Color color )
+    public PlayerSprite( int x, int y, int width, int height, Color color, Image img )
     {
-        super( x, y, width, height, color, "" );
+        super( x, y, width, height, color, "", img );
         this.compareValue = 2;
     }
 
@@ -271,7 +272,7 @@ public class PlayerSprite extends Moveable
      */
     public Sprite copy()
     {
-        return new PlayerSprite( getX(), getY(), getWidth(), getHeight(), getColor(), getName() );
+        return new PlayerSprite( getX(), getY(), getWidth(), getHeight(), getColor(), getName(), getImage() );
     }
 
 

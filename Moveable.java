@@ -249,7 +249,8 @@ public abstract class Moveable extends Sprite
             Math.round( enemy.getY() + enemy.getVVelocity() ),
             enemy.getWidth(),
             enemy.getHeight(),
-            "tempSprite" );
+            "tempSprite",
+            null );
         CollisionType playerTempCollision = checkCollision_OneMoveable( player, tempSprite );
         if ( playerTempCollision == CollisionType.HORIZONTAL_GROUND_FROM_LEFT
             || playerTempCollision == CollisionType.HORIZONTAL_GROUND_FROM_RIGHT )

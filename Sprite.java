@@ -53,6 +53,8 @@ public abstract class Sprite implements Comparable<Sprite>
 
     private Image image;
 
+    public static final int TEXTURE_SIZE = 40;
+
 
     /**
      * Constructor
@@ -226,5 +228,10 @@ public abstract class Sprite implements Comparable<Sprite>
      * @return a copy of the sprite
      */
     public abstract Sprite copy();
+
+    public Image getImage()
+    {
+        return image;
+    }
 
 }
