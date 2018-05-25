@@ -53,7 +53,7 @@ public abstract class Sprite implements Comparable<Sprite>
 
     private Image image;
 
-    public static final int TEXTURE_SIZE = 40;
+    public static final int TEXTURE_SIZE = 20;
 
 
     /**

@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.PriorityQueue;
+
+import javax.lang.model.util.ElementScanner6;
 import javax.swing.*;
 
 
@@ -87,7 +89,7 @@ public class Window extends JPanel
         for ( Sprite s : sprites )
         {
             g.setColor( s.getColor() );
-            if (s.getImage() == null)
+            if (s.getImage() == null || s.getWidth() < Sprite.TEXTURE_SIZE)
             {
                 g.fillRect( s.getX() - Engine.camera, s.getY(), s.getWidth(), s.getHeight() );
             }
@@ -95,9 +97,12 @@ public class Window extends JPanel
             {
                 for (int row = s.getX() - Engine.camera; row < s.getX() + s.getWidth() - Engine.camera; row += Sprite.TEXTURE_SIZE)
                 {
-                    for (int col = s.getY() - Engine.camera; col < s.getY() + s.getHeight() - Engine.camera; col += Sprite.TEXTURE_SIZE)
+                    for (int col = s.getY(); col < s.getY() + s.getHeight(); col += Sprite.TEXTURE_SIZE)
                     {
-                        g.drawImage(s.getImage(), row, col, Sprite.TEXTURE_SIZE, Sprite.TEXTURE_SIZE, s.getColor(), null);
+                        if (!(Sprite.TEXTURE_SIZE > s.getHeight() + s.getY() - col || Sprite.TEXTURE_SIZE > s.getWidth() + s.getX() - Engine.camera - row))
+                        {
+                            g.drawImage(s.getImage(), row, col, Sprite.TEXTURE_SIZE, Sprite.TEXTURE_SIZE, s.getColor(), null);
+                        }
                     }
                 }
             }
