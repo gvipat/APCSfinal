@@ -89,7 +89,7 @@ public class Window extends JPanel
         for ( Sprite s : sprites )
         {
             g.setColor( s.getColor() );
-            if (s.getImage() == null || s.getWidth() < Sprite.TEXTURE_SIZE)
+            if (s.getImage() == null || s.getWidth() < Sprite.TEXTURE_SIZE || s.getHeight() % Sprite.TEXTURE_SIZE != 0 || s.getWidth() % 20 != 0)
             {
                 g.fillRect( s.getX() - Engine.camera, s.getY(), s.getWidth(), s.getHeight() );
             }
