@@ -151,7 +151,7 @@ public class Engine
         window = new Window( WINDOW_HEIGHT, WINDOW_WIDTH, sprites, this );
         if ( !DEBUG_MODE )
         {
-            timer = new Timer( (int)( Math.round( ( 1 / (double)FPS ) * 1000 ) ),
+            timer = new Timer( (int)( Math.round( ( 1 / (double) FPS ) * 1000 ) ),
                 new ActionListener()
                 {
                     @Override

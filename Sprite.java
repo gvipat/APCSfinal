@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Point;
 
 
@@ -50,6 +51,8 @@ public abstract class Sprite implements Comparable<Sprite>
      */
     public int compareValue = 0;
 
+    private Image image;
+
 
     /**
      * Constructor
@@ -67,7 +70,7 @@ public abstract class Sprite implements Comparable<Sprite>
      * @param named
      *            the name of the sprite
      */
-    public Sprite( int x, int y, int width, int height, Color color, String named )
+    public Sprite( int x, int y, int width, int height, Color color, String named, Image img )
     {
         xPos = x;
         yPos = y;
@@ -75,6 +78,7 @@ public abstract class Sprite implements Comparable<Sprite>
         this.height = height;
         this.color = color;
         name = named;
+        image = img;
     }
 
 

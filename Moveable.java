@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -93,9 +94,9 @@ public abstract class Moveable extends Sprite
      * @param color the color of the sprite
      * @param named the name of the sprite
      */
-    public Moveable( int x, int y, int width, int height, Color color, String named )
+    public Moveable( int x, int y, int width, int height, Color color, String named, Image img )
     {
-        super( x, y, width, height, color, named );
+        super( x, y, width, height, color, named, img );
         this.compareValue++;
     }
 
