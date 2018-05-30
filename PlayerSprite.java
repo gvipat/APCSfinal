@@ -30,6 +30,8 @@ public class PlayerSprite extends Moveable
      */
     private boolean leftKeyPressed = false;
 
+    private final int JUMP_SPEED = -8;
+
 
     /**
      * Constructor
@@ -150,6 +152,9 @@ public class PlayerSprite extends Moveable
         {
             kms();
         }
+
+        updateImage();
+
         // System.out.println("X: " + getX() + "HVelocity " + getHVelocity());
         if ( Level.getLevelEndZone() > 0 && getX() > Level.getLevelEndZone() )
         {
@@ -158,6 +163,11 @@ public class PlayerSprite extends Moveable
         return false;
     }
 
+
+    private void updateImage()
+    {
+        
+    }
 
     /**
      * Kills this sprite
@@ -200,7 +210,7 @@ public class PlayerSprite extends Moveable
     private void addJump()
     {
         // System.out.println("adding jump");
-        setVVelocity( -4 );
+        setVVelocity( JUMP_SPEED );
         applyGravity = true;
     }
 

@@ -34,12 +34,12 @@ public abstract class Moveable extends Sprite
     /**
      * Defines the max speed a sprite can move in the y direction
      */
-    public static final int MAX_V_VELOCITY = 5;
+    public static final int MAX_V_VELOCITY = 10;
 
     /**
      * Defines the max speed a sprite can move in the x direction
      */
-    public static final int MAX_H_VELOCITY = 2;
+    public static final int MAX_H_VELOCITY = 4;
 
     /**
      * Represents if gravity should be applied or not.
@@ -50,6 +50,8 @@ public abstract class Moveable extends Sprite
      * Represents if this sprite is dead
      */
     public boolean isDead = false;
+
+    private final float GRAVITATIONAL_PULL = (float) 0.2;
 
 
     /**
@@ -148,10 +150,10 @@ public abstract class Moveable extends Sprite
     {
         if ( applyGravity && verticalVelocity < MAX_V_VELOCITY )
         {
-            verticalVelocity += 0.05;
+            verticalVelocity += GRAVITATIONAL_PULL;
             if ( GameMath.roundToHundredths( verticalVelocity ) == 0.0 )
             {
-                verticalVelocity += 0.05;
+                verticalVelocity += GRAVITATIONAL_PULL;
             }
             verticalVelocity = GameMath.roundToHundredths( verticalVelocity );
         }
