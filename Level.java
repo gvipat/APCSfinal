@@ -28,7 +28,7 @@ public class Level
      */
     private static final Sprite[][] sprites =
 
-        {   {   new PlayerSprite( 5, 5, 20, 20, Color.BLUE, null ),
+        {   {   new PlayerSprite( 5, 5, 20, 20, new Color(255, 255, 255, 0), readImage("Assets\\pecc.jpg") ),
                 new GroundSprite( 0, 400, 100, 40, readImage("Assets\\grass.jpg") ),
                 new GroundSprite( 300, 400, 40, 40, readImage("Assets\\grass.jpg") ),
                 new GroundSprite( 400, 400, 440, 40, readImage("Assets\\grass.jpg") ),
@@ -45,13 +45,13 @@ public class Level
                 new EnemySprite( 780, 100, 20, 20, Color.RED, null )
             },
             { 
-                new PlayerSprite( 200, 300, 20, 20, Color.BLUE, "player", null ),
+                new PlayerSprite( 200, 300, 20, 20, new Color(255, 255, 255, 0), readImage("Assets\\pecc.jpg") ),
                 new GroundSprite( 0, 400, 1000, 40, "floor", readImage("Assets\\grass.jpg") ),
                 new GroundSprite( 400, 280, 500, 120, "hanging 1", readImage("Assets\\grass.jpg") ),
                 new EnemySprite(810, 230, 20, 20, Color.RED, null)
             },
             {
-                new PlayerSprite( 5, 300, 20, 20, Color.BLUE, null ),
+                new PlayerSprite( 5, 300, 20, 20, new Color(255, 255, 255, 0), readImage("Assets\\pecc.jpg") ),
                 new GroundSprite(0, 500, 800, 100, "ground start", readImage("Assets\\grass.jpg")),
                 new GroundSprite(400, 450, 145, 50, "tower base", readImage("Assets\\grass.jpg")),
                 new GroundSprite(500, 100, 50, 400, "tower stand", readImage("Assets\\grass.jpg")),

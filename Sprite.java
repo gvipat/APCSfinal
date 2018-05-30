@@ -234,4 +234,9 @@ public abstract class Sprite implements Comparable<Sprite>
         return image;
     }
 
+    public void setImage(Image img)
+    {
+        image = img;
+    }
+
 }
