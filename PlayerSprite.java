@@ -153,7 +153,6 @@ public class PlayerSprite extends Moveable
             kms();
         }
 
-        updateImage();
 
         // System.out.println("X: " + getX() + "HVelocity " + getHVelocity());
         if ( Level.getLevelEndZone() > 0 && getX() > Level.getLevelEndZone() )
@@ -161,12 +160,6 @@ public class PlayerSprite extends Moveable
             return true;
         }
         return false;
-    }
-
-
-    private void updateImage()
-    {
-        
     }
 
     /**
