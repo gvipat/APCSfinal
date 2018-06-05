@@ -32,6 +32,8 @@ public class Window extends JPanel
      */
     private Engine engine;
 
+    private final Color TRANSPARENT = new Color(255, 255, 255, 0);
+
 
     /**
      * Constructor
@@ -87,7 +89,7 @@ public class Window extends JPanel
         for ( Sprite s : sprites )
         {
             g.setColor( s.getColor() );
-            if (s.getImage() == null || s.getWidth() < Sprite.TEXTURE_SIZE || s.getHeight() % Sprite.TEXTURE_SIZE != 0 || s.getWidth() % 20 != 0)
+            if (s.getImage() == null || s.getWidth() < Sprite.TEXTURE_SIZE || s.getHeight() % Sprite.TEXTURE_SIZE != 0 || s.getWidth() % 20 != 0 || !Engine.TEXTURES_ENABLED)
             {
                 g.fillRect( s.getX() - Engine.camera, s.getY(), s.getWidth(), s.getHeight() );
             }
@@ -99,7 +101,7 @@ public class Window extends JPanel
                     {
                         if (!(Sprite.TEXTURE_SIZE > s.getHeight() + s.getY() - col || Sprite.TEXTURE_SIZE > s.getWidth() + s.getX() - Engine.camera - row))
                         {
-                            g.drawImage(s.getImage(), row, col, Sprite.TEXTURE_SIZE, Sprite.TEXTURE_SIZE, s.getColor(), null);
+                            g.drawImage(s.getImage(), row, col, Sprite.TEXTURE_SIZE, Sprite.TEXTURE_SIZE, this.TRANSPARENT, null);
                         }
                     }
                 }

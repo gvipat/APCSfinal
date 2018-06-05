@@ -1,6 +1,7 @@
 import java.awt.Toolkit;
 import java.awt.event.*;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 
 
@@ -25,14 +26,17 @@ public class Game
      */
     public static void main( String[] args )
     {
-        // System.out.println(args[0]);
-        if ( args.length > 0 && args[0].equals( "-s" ) )
-        {
-            playGame();
-        }
-        else if ( args.length > 0 && args[0].equals( "-d" ) )
+        ArrayList<String> arrrgs = new ArrayList<String>(Arrays.asList(args));
+        if ( arrrgs.contains( "-d" ) )
         {
             Engine.DEBUG_MODE = true;
+        }
+        if (arrrgs.contains("-t"))
+        {
+            Engine.TEXTURES_ENABLED = false;
+        }
+        if ( arrrgs.contains( "-s" ) )
+        {
             playGame();
         }
         else

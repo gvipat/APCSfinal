@@ -105,6 +105,8 @@ public class Engine
      */
     private static ArrayList<EnemySprite> deadSprites = new ArrayList<EnemySprite>();
 
+    public static boolean TEXTURES_ENABLED = true;
+
 
     /**
      * Constructor

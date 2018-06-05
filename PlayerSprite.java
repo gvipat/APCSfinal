@@ -49,9 +49,9 @@ public class PlayerSprite extends Moveable
      * @param named
      *            the name of the sprite
      */
-    public PlayerSprite( int x, int y, int width, int height, Color color, String named, Image img )
+    public PlayerSprite( int x, int y, int width, int height, String named, Image img )
     {
-        super( x, y, width, height, color, named, img );
+        super( x, y, width, height, Color.BLUE, named, img );
         this.compareValue = 2;
     }
 
@@ -70,9 +70,9 @@ public class PlayerSprite extends Moveable
      * @param color
      *            the color of the sprite
      */
-    public PlayerSprite( int x, int y, int width, int height, Color color, Image img )
+    public PlayerSprite( int x, int y, int width, int height, Image img )
     {
-        super( x, y, width, height, color, "", img );
+        super( x, y, width, height, Color.BLUE, "", img );
         this.compareValue = 2;
     }
 
@@ -275,7 +275,7 @@ public class PlayerSprite extends Moveable
      */
     public Sprite copy()
     {
-        return new PlayerSprite( getX(), getY(), getWidth(), getHeight(), getColor(), getName(), getImage() );
+        return new PlayerSprite( getX(), getY(), getWidth(), getHeight(), getName(), getImage() );
     }
 
 
