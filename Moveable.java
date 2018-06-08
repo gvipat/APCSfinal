@@ -345,7 +345,7 @@ public abstract class Moveable extends Sprite
             if ( mover.getY() < ground.getY() )
             {
                 applyGravity = false;
-                mover.setVVelocity( (Float)temp[2] * GameMath.getSign( mover.getVVelocity() ) );
+                mover.setVVelocity( (Float)temp[2] * GameMath.getSign( mover.getVVelocity() ) - 1 );
                 mover.setY( mover.getY() + mover.getVVelocity() );
                 // System.commented.out.println( "STRAIGHT VERTICAL" + "unabs y
                 // distance " + temp[3] );
@@ -376,6 +376,7 @@ public abstract class Moveable extends Sprite
             // System.out.println(mover.getHVelocity() +
             // "***************************");
             mover.setX( mover.getX() + mover.getHVelocity() );
+
             if ( mover.getX() < ground.getX() )
             {
                 return CollisionType.HORIZONTAL_GROUND_FROM_LEFT;
@@ -433,7 +434,7 @@ public abstract class Moveable extends Sprite
                 {
 
                     applyGravity = false;
-                    mover.setVVelocity( vSign * (Float)temp[2] );
+                    mover.setVVelocity( vSign * (Float)temp[2] - 1);
                     mover.setY( mover.getY() + mover.getVVelocity() );
                     // mover.setHVelocity((float)(slope_inverted*getHVelocity()));
                     mover.setHVelocity( 0 );
@@ -478,7 +479,7 @@ public abstract class Moveable extends Sprite
                 {
 
                     applyGravity = false;
-                    mover.setVVelocity( vSign * (Float)temp[2] );
+                    mover.setVVelocity( vSign * (Float)temp[2] - 1);
                     mover.setHVelocity( 0 );
 
                     return CollisionType.VERTICAL_GROUND_OVER;
@@ -549,7 +550,7 @@ public abstract class Moveable extends Sprite
                 // }
                 if ( hSign > 0 && mover.getVVelocity() > (Float)temp[2] )
                 {
-                    mover.setVVelocity( vSign * (Float)temp[2] );
+                    mover.setVVelocity( vSign * (Float)temp[2] - 1 );
                     double slopeInverted = Math.abs( mover.getHVelocity() / mover.getVVelocity() );
                     mover.setHVelocity( (float)( slopeInverted * getHVelocity() ) );
                     return CollisionType.VERTICAL_GROUND_OVER;
@@ -596,7 +597,7 @@ public abstract class Moveable extends Sprite
                     if ( ( mover.getX() - ground.getX() ) < ground.getWidth()
                         && ( mover.getX() - ground.getX() ) > -mover.getWidth() )
                     {
-                        mover.setVVelocity( vSign * (Float)temp[2] );
+                        mover.setVVelocity( vSign * (Float)temp[2] - 1);
                         double slopeInverted = Math
                             .abs( GameMath.roundToHundredths( mover.getHVelocity() )
                                 / GameMath.roundToHundredths( mover.getVVelocity() ) );
@@ -653,7 +654,7 @@ public abstract class Moveable extends Sprite
                     if ( ( mover.getX() - ground.getX() ) < ground.getWidth()
                         && ( mover.getX() - ground.getX() ) > -mover.getWidth() )
                     {
-                        mover.setVVelocity( vSign * (Float)temp[2] );
+                        mover.setVVelocity( vSign * (Float)temp[2] - 1 );
                         double slopeInverted = GameMath.roundToHundredths( mover.getHVelocity() )
                             / GameMath.roundToHundredths( mover.getVVelocity() );
                         mover.setHVelocity(
@@ -712,7 +713,7 @@ public abstract class Moveable extends Sprite
                 {
                     if ( hSign > 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2] )
                     {
-                        mover.setVVelocity( vSign * (Float)temp[2] );
+                        mover.setVVelocity( vSign * (Float)temp[2] - 1 );
                         double slope_inverted = Math
                             .abs( mover.getHVelocity() / mover.getVVelocity() );
                         mover.setHVelocity(
@@ -763,7 +764,7 @@ public abstract class Moveable extends Sprite
                 {
                     if ( hSign > 0 && Math.abs( mover.getVVelocity() ) > (Float)temp[2] )
                     {
-                        mover.setVVelocity( vSign * (Float)temp[2] );
+                        mover.setVVelocity( vSign * (Float)temp[2] - 1 );
                         double slope_inverted = Math
                             .abs( mover.getHVelocity() / mover.getVVelocity() );
                         mover.setHVelocity(
@@ -904,7 +905,7 @@ public abstract class Moveable extends Sprite
         // DecimalRounder.roundToTenths((float)b)==1 && (og.getX() -
         // other.getX()) < other.getWidth() && (og.getX() - other.getX()) >
         // -og.getWidth()) )
-        if ( (int)b == 0 && ( og.getX() - other.getX() ) < other.getWidth()
+        if ( (int)b == 1 && ( og.getX() - other.getX() ) < other.getWidth()
             && ( og.getX() - other.getX() ) > -og.getWidth() && og.getY() < other.getY() )
         {
             c = CornerType.PERF_CNTCT;
