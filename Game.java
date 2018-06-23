@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.*;
 
+import net.arikia.dev.drpc.*;
+
 
 /**
  * The game class opens a title screen and opens the game.
@@ -26,6 +28,7 @@ public class Game
      */
     public static void main( String[] args )
     {
+        connectToDiscord();
         ArrayList<String> arrrgs = new ArrayList<String>(Arrays.asList(args));
         if ( arrrgs.contains( "-d" ) )
         {
@@ -61,6 +64,7 @@ public class Game
      */
     private static void openTitleScreen()
     {
+        updatePresence("Waiting at title screen.", "Player doesn't want to press play.");
         final JFrame window = new JFrame( "Sliding Blocc" );
         window.setSize( 400, 400 );
         window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -75,10 +79,36 @@ public class Game
             }
         } );
         window.add( playButton );
+        window.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
+        window.addWindowListener( new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event)
+            {
+                Game.exit();
+            }
+        });
         window.setLocationRelativeTo( null );
         window.setIconImage( Toolkit.getDefaultToolkit().getImage( "SlidingBloccIcon.png" ) );
         window.setResizable( false );
         window.setVisible( true );
+    }
+
+    private static void connectToDiscord()
+    {
+        DiscordRPC.discordInitialize("460197024680378369", new DiscordEventHandlers() , true );
+        
+    }
+
+    public static void updatePresence(String header, String details)
+    {
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder(header).setDetails(details).build());
+    }
+
+    public static void exit()
+    {
+        System.out.println( "Exiting." );
+        DiscordRPC.discordShutdown();
+        System.exit(0);
     }
 
 }

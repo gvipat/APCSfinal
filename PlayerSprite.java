@@ -86,7 +86,7 @@ public class PlayerSprite extends Moveable
     public boolean move()
     {
         LinkedList<CollisionType> collideTypes = super.checkCollision();
-         System.out.println("Player: " + collideTypes.toString());
+        //System.out.println("Player: " + collideTypes.toString());
         if ( collideTypes.contains( CollisionType.VERTICAL_GROUND_OVER ) )
         {
             // System.out.println("inside player's move et vvelociy 0");

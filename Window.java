@@ -63,7 +63,14 @@ public class Window extends JPanel
         frame.setIconImage( Toolkit.getDefaultToolkit().getImage( "SlidingBloccIcon.png" ) );
         super.setVisible( true );
         frame.setVisible( true );
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
+        frame.addWindowListener( new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event)
+            {
+                Game.exit();
+            }
+        });
         // System.out.println( getSize().toString() );
         // System.out.println( super.getSize().toString() );
         this.sprites = sprites;
