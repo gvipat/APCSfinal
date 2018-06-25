@@ -312,6 +312,7 @@ public class Engine
      */
     private void openDeathScreen()
     {
+        Game.updatePresence("Player Dead.", "RIP");
         final JFrame frame = new JFrame( "You Died..." );
         JButton exit = new JButton( "Exit" );
         exit.addActionListener( new ActionListener()
@@ -319,7 +320,7 @@ public class Engine
             @Override
             public void actionPerformed( ActionEvent e )
             {
-                System.exit( 0 );
+                Game.exit();
             }
         } );
         JButton restart = new JButton( "Restart" );

@@ -3,11 +3,16 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordUser;
 
 
 /**
@@ -113,6 +118,7 @@ public class Level
      */
     public void play()
     {
+        Game.updatePresence("Playing level " + (level + 1), "Trying not do die.");
         engine.run();
     }
 
@@ -158,10 +164,17 @@ public class Level
                 @Override
                 public void actionPerformed( ActionEvent e )
                 {
-                    System.exit( 0 );
+                    Game.exit();
                 }
             } );
-            frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            frame.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
+            frame.addWindowListener( new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent event)
+                {
+                    Game.exit();
+                }
+            });
             frame.setSize( 300, 200 );
             frame.setLocationRelativeTo( null );
             frame.setAlwaysOnTop( true );
