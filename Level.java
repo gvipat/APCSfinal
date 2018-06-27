@@ -33,7 +33,7 @@ public class Level
      */
     private static final Sprite[][] sprites =
 
-        {   {   new PlayerSprite( 5, 5, 20, 20, readImage("Assets\\pizzel.png") ),
+        {   {   new PlayerSprite( 5, 5, 20, 20, "it works", readImage("Assets\\pizzel.png") ),
                 new GroundSprite( 0, 400, 100, 40, readImage("Assets\\grass.jpg") ),
                 new GroundSprite( 300, 400, 40, 40, readImage("Assets\\grass.jpg") ),
                 new GroundSprite( 400, 400, 440, 40, readImage("Assets\\grass.jpg") ),

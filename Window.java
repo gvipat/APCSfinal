@@ -78,6 +78,7 @@ public class Window extends JPanel
 
         frame.addKeyListener( new AKeyListener() );
         frame.addKeyListener( new QKeyListener() );
+        this.addMouseListener( new MouseClickListener() );
     }
 
 
@@ -473,6 +474,58 @@ public class Window extends JPanel
         public void keyReleased( KeyEvent e )
         {
         }
+    }
+    
+    private class MouseClickListener implements MouseListener
+    {
+
+        @Override
+        public void mouseClicked( MouseEvent arg0 )
+        {
+            for (Sprite s : Engine.sprites)
+            {
+                for (int x = s.getX(); x < s.getWidth() + s.getX(); x++)
+                {
+                    for (int y = s.getY(); y < s.getHeight() + s.getY(); y++)
+                    {
+                        if (arg0.getX() == x - Engine.camera && arg0.getY() == y)
+                        {
+                            System.out.println( s.getName() );
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        @Override
+        public void mouseEntered( MouseEvent arg0 )
+        {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void mouseExited( MouseEvent arg0 )
+        {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void mousePressed( MouseEvent arg0 )
+        {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void mouseReleased( MouseEvent arg0 )
+        {
+            // TODO Auto-generated method stub
+            
+        }
+        
     }
 
 }

@@ -19,6 +19,7 @@ import net.arikia.dev.drpc.*;
  */
 public class Game
 {
+    public static boolean DISCORD_CONNECTED = true;
     /**
      * Main method
      * 
@@ -28,6 +29,7 @@ public class Game
      */
     public static void main( String[] args )
     {
+
         connectToDiscord();
         ArrayList<String> arrrgs = new ArrayList<String>(Arrays.asList(args));
         if ( arrrgs.contains( "-d" ) )
@@ -93,21 +95,26 @@ public class Game
         window.setVisible( true );
     }
 
-    private static void connectToDiscord()
+    private static void connectToDiscord() throws UnsatisfiedLinkError
     {
         DiscordRPC.discordInitialize("460197024680378369", new DiscordEventHandlers() , true );
-        
     }
 
     public static void updatePresence(String header, String details)
     {
-        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder(header).setDetails(details).build());
+        if (Game.DISCORD_CONNECTED)
+        {
+            DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder(header).setDetails(details).build());
+        }
     }
 
     public static void exit()
     {
         System.out.println( "Exiting." );
-        DiscordRPC.discordShutdown();
+        if (Game.DISCORD_CONNECTED)
+        {
+            DiscordRPC.discordShutdown();
+        }
         System.exit(0);
     }
 
