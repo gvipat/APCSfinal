@@ -29,8 +29,14 @@ public class Game
      */
     public static void main( String[] args )
     {
-
-        connectToDiscord();
+        try
+        {
+            connectToDiscord();
+        }
+        catch (Exception e)
+        {
+            DISCORD_CONNECTED = false;
+        }
         ArrayList<String> arrrgs = new ArrayList<String>(Arrays.asList(args));
         if ( arrrgs.contains( "-d" ) )
         {
@@ -97,7 +103,7 @@ public class Game
 
     private static void connectToDiscord() throws UnsatisfiedLinkError
     {
-        DiscordRPC.discordInitialize("460197024680378369", new DiscordEventHandlers() , true );
+        //DiscordRPC.discordInitialize("460197024680378369", new DiscordEventHandlers() , true );
     }
 
     public static void updatePresence(String header, String details)
