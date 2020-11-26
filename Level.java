@@ -220,7 +220,7 @@ public class Level
     {
         try
         {
-            Image img = ImageIO.read(new File(path.replaceAll("/", File.separator)));
+            Image img = ImageIO.read(new File(path));
             return img;
         }
         catch (IOException ex)
